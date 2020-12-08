@@ -40,14 +40,14 @@ import firebase from 'firebase'
 import store from "./store"
 
 const routes = [
-    {
-        path: "/",
-        component: Portfolio,
-        name: "home"
-    },
+    // {
+    //     path: "/",
+    //     component: Portfolio,
+    //     name: "home"
+    // },
 
     {
-        path: "/m-home",
+        path: "/",
         component: MHome,
         name: "mHome",
         // protezione della rotta se non loggato
