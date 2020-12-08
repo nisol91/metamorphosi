@@ -2,201 +2,7 @@
   <!-- nell index è comodo mettere la navigazione dell'app -->
   <div>
     <v-app>
-      <div
-        class="my-navbar d-flex justify-content-between align-items-center"
-        :class="[{ 'my-navbar-hidden': getOffsetNav }]"
-        v-if="!isMetamorphosis"
-      >
-        <div>
-          <!-- <router-link class="navbar-brand mr-auto" v-bind:to="{ name: 'home' }"
-            >Logo nsz</router-link
-          > -->
-          <div
-            class="nav-children"
-            v-if="this.$store.state.isHomePage"
-            @click="
-              $vuetify.goTo('#home', options);
-              selectedEl = '';
-            "
-          >
-            <img
-              class="logoImg"
-              :src="'https://firebasestorage.googleapis.com/v0/b/portfolio-f8a45.appspot.com/o/logo_nsz.png?alt=media&token=af711a53-d6d5-46ce-85a0-06ace2c7e62d'"
-            />
-          </div>
-          <div v-if="!this.$store.state.isHomePage" class="nav-children">
-            <router-link :to="{ name: 'home' }"
-              ><img
-                class="logoImg"
-                :src="'https://firebasestorage.googleapis.com/v0/b/portfolio-f8a45.appspot.com/o/logo_nsz.png?alt=media&token=af711a53-d6d5-46ce-85a0-06ace2c7e62d'"
-            /></router-link>
-          </div>
-        </div>
-        <!-- hamburger menu -->
-        <div
-          v-if="this.$store.state.isHomePage"
-          class="nav-dx-menu d-flex justify-content-end"
-          @click="toggleMenuMobile"
-        >
-          <i class="fas fa-bars"></i>
-        </div>
-        <!--  -->
-        <div
-          v-if="!this.$store.state.isHomePage"
-          class="nav-children"
-          id="backToHome"
-        >
-          <router-link :to="{ name: 'home' }">back to home</router-link>
-        </div>
-        <div
-          class="d-flex justify-content-between align-items-center dxBoxNavbar"
-          v-if="this.$store.state.isHomePage"
-        >
-          <div
-            class="nav-children nav-children-dx"
-            @click="
-              $vuetify.goTo('#projects', options);
-              selectedEl = 'projects';
-            "
-            :class="[{ active: selectedEl == 'projects' }]"
-          >
-            Projects
-          </div>
-          <div
-            class="nav-children nav-children-dx"
-            @click="
-              $vuetify.goTo('#about', options);
-              selectedEl = 'about';
-            "
-            :class="[{ active: selectedEl == 'about' }]"
-          >
-            About
-          </div>
-          <div
-            class="nav-children nav-children-dx"
-            @click="
-              $vuetify.goTo('#skills', options);
-              selectedEl = 'skills';
-            "
-            :class="[{ active: selectedEl == 'skills' }]"
-          >
-            Skills
-          </div>
-          <div
-            class="nav-children nav-children-dx"
-            @click="
-              $vuetify.goTo('#contact', options);
-              selectedEl = 'contact';
-            "
-            :class="[{ active: selectedEl == 'contact' }]"
-          >
-            Contact
-          </div>
-
-          <!-- mobile menu -->
-          <div
-            class="d-flex justify-content-between align-items-center flex-column mobile-menu"
-            :class="[{ 'mobile-menu-show': menuOpen == true }]"
-          >
-            <div
-              class="nav-children nav-children-mobile"
-              @click="
-                $vuetify.goTo('#projects', options);
-                selectedEl = 'projects';
-                toggleMenuMobile();
-              "
-              :class="[{ active: selectedEl == 'projects' }]"
-            >
-              Projects
-            </div>
-            <div
-              class="nav-children nav-children-mobile"
-              @click="
-                $vuetify.goTo('#about', options);
-                selectedEl = 'about';
-                toggleMenuMobile();
-              "
-              :class="[{ active: selectedEl == 'about' }]"
-            >
-              About
-            </div>
-            <div
-              class="nav-children nav-children-mobile"
-              @click="
-                $vuetify.goTo('#skills', options);
-                selectedEl = 'skills';
-                toggleMenuMobile();
-              "
-              :class="[{ active: selectedEl == 'skills' }]"
-            >
-              Skills
-            </div>
-            <div
-              class="nav-children nav-children-mobile"
-              @click="
-                $vuetify.goTo('#contact', options);
-                selectedEl = 'contact';
-                toggleMenuMobile();
-              "
-              :class="[{ active: selectedEl == 'contact' }]"
-            >
-              Contact
-            </div>
-          </div>
-          <!--  -->
-
-          <!-- <router-link
-            class="nav-children btn nav-button"
-            :to="{ name: 'toccaVinoHome' }"
-            >toccaVinoHome</router-link
-          >
-          <router-link
-            class="nav-children btn nav-button"
-            :to="{ name: 'laravelBnB' }"
-            >LaravelBnB</router-link
-          > -->
-
-          <!-- <router-link class="btn nav-button" :to="{ name: 'basket' }">
-            Basket
-            <span v-if="itemsInBasket" class="badge badge-secondary">{{
-              itemsInBasket
-            }}</span>
-          </router-link>
-          
-          <router-link
-            v-if="isUserAdmin"
-            class="btn nav-button"
-            :to="{ name: 'adminDashboard' }"
-            >AdminDashboard</router-link
-          > -->
-          <router-link
-            v-if="!isLoggedIn"
-            class="btn nav-button"
-            :to="{ name: 'login' }"
-            >login</router-link
-          >
-          <v-chip class="ma-2" v-if="isLoggedIn">
-            Hey, {{ this.$store.state.user.displayName }}
-          </v-chip>
-          <router-link
-            v-if="!isLoggedIn"
-            class="btn nav-button"
-            :to="{ name: 'register' }"
-            >register</router-link
-          >
-          <router-link
-            class="userIndexIcon"
-            v-if="isLoggedIn"
-            :to="{ name: 'userProfile' }"
-            ><v-icon class="userIndexIcon"
-              >mdi-account-circle</v-icon
-            ></router-link
-          >
-          <div v-if="isLoggedIn" class="btn nav-button" @click.prevent="logout">
-            logout
-          </div>
-        </div>
-      </div>
+      
       <div class="mainBox" v-scroll="onScroll">
         <!--  -->
         <transition name="fade">
@@ -211,14 +17,14 @@
         ></global-message>
 
         <!--  -->
-        <div v-if="!loaded" class="splash-box">
+        <!-- <div v-if="!loaded" class="splash-box">
           <v-progress-circular
             :size="70"
             color="primary"
             indeterminate
             class="splash-box-progress"
           ></v-progress-circular>
-        </div>
+        </div> -->
         <div
           id="footer"
           class="d-flex justify-content-center align-items-center flex-column"
@@ -226,29 +32,9 @@
         >
           <select-locale class="langVSelect"></select-locale>
           <select-locale class="langVSelectMobile"></select-locale>
-
-          <div
-            class="icons-box d-flex justify-content-between align-items-center mb-2"
-          >
-            <a href="https://github.com/nisol91?tab=repositories"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a href="https://www.instagram.com/0nic1/?hl=it"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="https://www.linkedin.com/in/nicola-solzi-07767614a/"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-          </div>
           <div class="footer">
-            App made with Firebase
-            <img
-              class="footerFirebaseImg"
-              src="https://firebasestorage.googleapis.com/v0/b/portfolio-f8a45.appspot.com/o/firebase-icon.png?alt=media&token=d4a6745f-e655-46c7-8e38-3c0c3724d193"
-              alt=""
-            />
-            and VueJs
-            <i class="fab fa-vuejs"></i>
+            Metamorphosis 2020
+            
           </div>
         </div>
       </div>
