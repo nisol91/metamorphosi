@@ -5,9 +5,9 @@
 // import ForgotPassword from "./components/auth/ForgotPassword";
 // import ResetPassword from "./components/auth/ResetPassword";
 // import AdminDashboard from "./components/admin/AdminDashboard";
-// import App from "./App.vue";
 // import Review from "./components/review/Review";
 
+import App from "./App.vue";
 
 import MHome from "./components/metamorphosis/MHome.vue";
 import MAbout from "./components/metamorphosis/MAbout.vue";
@@ -40,11 +40,11 @@ import firebase from 'firebase'
 import store from "./store"
 
 const routes = [
-    // {
-    //     path: "/",
-    //     component: Portfolio,
-    //     name: "home"
-    // },
+    {
+        path: "/quasarEx",
+        component: App,
+        name: "exampleQuasar"
+    },
 
     {
         path: "/",

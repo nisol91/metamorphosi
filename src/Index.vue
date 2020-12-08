@@ -25,7 +25,7 @@
             class="splash-box-progress"
           ></v-progress-circular>
         </div> -->
-        <div
+        <!-- <div
           id="footer"
           class="d-flex justify-content-center align-items-center flex-column"
           v-if="!isMetamorphosis"
@@ -36,7 +36,7 @@
             Metamorphosis 2020
             
           </div>
-        </div>
+        </div> -->
       </div>
     </v-app>
   </div>
@@ -52,8 +52,8 @@ import store from "./store";
 export default {
   // this can be used alternatively to the meta in the head of welcome.blade.php page, for seo purpose
   metaInfo: {
-    title: "NsZ Developer Portfolio Site",
-    titleTemplate: "%s - Web and Mobile developer!",
+    title: "Metamorphosi",
+    titleTemplate: "%s - Digital Agency",
     htmlAttrs: {
       lang: "en",
       amp: true,
