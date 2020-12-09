@@ -7,7 +7,7 @@
       <div class="">settings</div>
     </div>
 
-    <div class="superAdmin" v-if="user && user.role == '03744'">
+    <div class="superAdmin" v-if="user && user.role == adminCode">
       <div class="role">role: superAdmin</div>
     </div>
     <v-form
@@ -186,6 +186,7 @@ import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      adminCode: null,
       env: "",
       loading: false,
       uploading: false,
@@ -214,7 +215,7 @@ export default {
   },
   async mounted() {
     this.$store.commit("toggleHomePage", false);
-    this.getUser();
+    this.getAdminCode();
   },
 
   methods: {
@@ -249,6 +250,12 @@ export default {
           // params: { eventName: this.event.name },
         });
       }
+    },
+    getAdminCode() {
+      this.$store.dispatch("getEnvVariables").then((env) => {
+        this.adminCode = env[0].superAdmin;
+        this.getUser();
+      });
     },
     getUser() {
       this.loading = true;
