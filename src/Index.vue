@@ -346,7 +346,7 @@ export default {
       display: none;
     }
     .menuEl {
-      font-size: 14px !important;
+      font-size: 14px;
       margin: 0 3px;
     }
   }
@@ -403,17 +403,44 @@ export default {
   .showMenu,
   .showMenuLong {
     transition: 0.5s;
-    right: 170px;
+    right: 50px;
   }
-  .menuEl {
-    font-size: 10px;
-    margin: 0 3px;
-    .menuLine {
-      top: -3px;
+  .mTop {
+    .mMenu {
+      .menuEl {
+        font-size: 10px;
+        margin: 0 3px;
+        .menuLine {
+          top: -3px;
+        }
+      }
     }
   }
+
   .menuElDivider {
     display: none;
+  }
+}
+// ##
+@media (max-width: 400px) {
+  .menuOpen {
+    width: 200px;
+  }
+  .showMenu,
+  .showMenuLong {
+    transition: 0.5s;
+    right: 70px;
+  }
+  .mTop {
+    .mMenu {
+      .menuEl {
+        font-size: 8px;
+        margin: 0 2px;
+        .menuLine {
+          top: -3px;
+        }
+      }
+    }
   }
 }
 </style>
