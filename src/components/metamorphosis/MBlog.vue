@@ -9,6 +9,9 @@
         <div class="pSx">
           <div class="pCategory">
             {{ post.category }}
+            <v-icon v-if="userRole && userRole == adminCode" class="editPost"
+              >mdi-playlist-edit</v-icon
+            >
           </div>
           <div class="pTitle">
             {{ post.title }}
@@ -54,16 +57,18 @@
 import { db, Timestamp, GeoPoint } from "../../main";
 import firebase from "firebase";
 import VueMoment from "vue-moment";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       blogPosts: {},
       env: process.env.VUE_APP_DB_ENV,
+      adminCode: null,
     };
   },
   created() {
-    this.getPosts();
+    this.getAdminCode();
   },
   methods: {
     getPosts() {
@@ -82,6 +87,18 @@ export default {
           this.blogPosts = posts;
         });
     },
+    getAdminCode() {
+      this.$store.dispatch("getEnvVariables").then((env) => {
+        this.adminCode = env[0].superAdmin;
+        this.getPosts();
+      });
+    },
+  },
+  computed: {
+    ...mapState({
+      user: "user",
+      userRole: "userRole",
+    }),
   },
 };
 </script>
@@ -99,7 +116,7 @@ export default {
 }
 .blogPosts {
   width: 80%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,6 +178,11 @@ export default {
 }
 .pCategory {
   font-style: italic;
+  width: 100%;
+}
+.editPost {
+  margin: 0 30px;
+  cursor: pointer;
 }
 .pDate {
   font-weight: 700;
@@ -172,5 +194,17 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+// ##
+@media (max-width: 800px) {
+  .blogPost {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+  }
+  .pSx,
+  .pDx {
+    width: 100%;
+  }
 }
 </style>

@@ -354,17 +354,12 @@ export default {
                         .doc(user.uid)
                         .set({ displayName: user.displayName, email: user.email }, { merge: true });
 
-
-
                     commit('setUser', {
                         displayName: firebase.auth().currentUser.displayName,
                         email: firebase.auth().currentUser.email,
                         id: firebase.auth().currentUser.uid,
-
                     })
                     commit('setLoggedIn')
-
-
 
                     router.replace({ name: "mHome" });
                     commit('setGlobalMessage', 'successfully logged in')
@@ -478,6 +473,7 @@ export default {
                 location: new GeoPoint(payload.location.latitude, payload.location.longitude),
             }).then(() => commit('setGlobalMessage', 'successfully updated new cellar'))
         },
+
 
     },
     // sono come le computed properties del componente vue
