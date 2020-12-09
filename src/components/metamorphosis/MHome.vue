@@ -10,13 +10,11 @@
       })`,
     }"
   >
+    <!-- splash -->
     <div v-if="splash" class="splash pulsate-fwd">METAMORPHOSI</div>
+
+    <!-- desktop tripartition -->
     <div v-if="!splash" class="mHome">
-      <!-- <img
-        class="mImgBackground"
-        src="https://firebasestorage.googleapis.com/v0/b/portfolio-f8a45.appspot.com/o/home_1.jpg?alt=media&token=3cac5c30-12cc-47cb-ae90-0de367b74369"
-        alt=""
-      /> -->
       <div class="mImgBackgroundOverlay"></div>
       <div v-if="menu" class="mBackgroundOverlay fade-in fade-out"></div>
 
@@ -100,149 +98,15 @@
         <div class="mTripMobile">CONTENTS</div>
         <div class="mTripMobile">BLOG</div>
       </div>
-
-      <!-- header bar -->
-
-      <div class="mTop">
-        <div class="mTopEl mCont">
-          <div class="mLine"></div>
-          <div class="mContText">CONTACTS</div>
-        </div>
-        <div class="mTopEl mLogo">中文</div>
-        <div class="mTopEl mMenu">
-          <div class="menuOpen" :class="[{ showMenu: menu }]">
-            <router-link
-              :to="{ name: 'mHome' }"
-              class="menuEl"
-              @click="selectEl('home')"
-              style="color: white"
-            >
-              <div
-                class="menuLine"
-                :class="[{ menuLineShow: menuEl.home.val }]"
-              ></div>
-              <div style="color: white">HOME</div>
-            </router-link>
-            <div class="menuElDivider">/</div>
-            <router-link
-              :to="{ name: 'mAbout' }"
-              class="menuEl"
-              @click="selectEl('about')"
-              style="color: white"
-            >
-              <div
-                class="menuLine"
-                :class="[{ menuLineShow: menuEl.about.val }]"
-              ></div>
-              <div style="color: white">ABOUT</div>
-            </router-link>
-            <div class="menuElDivider">/</div>
-            <router-link
-              :to="{ name: 'mContents' }"
-              class="menuEl"
-              @click="selectEl('contents')"
-              style="color: white"
-            >
-              <div
-                class="menuLine"
-                :class="[{ menuLineShow: menuEl.contents.val }]"
-              ></div>
-              <div style="color: white">CONTENTS</div>
-            </router-link>
-            <div class="menuElDivider">/</div>
-            <router-link
-              :to="{ name: 'mBlog' }"
-              class="menuEl"
-              @click="selectEl('blog')"
-              style="color: white"
-            >
-              <div
-                class="menuLine"
-                :class="[{ menuLineShow: menuEl.blog.val }]"
-              ></div>
-              <div style="color: white">BLOG</div>
-            </router-link>
-            <div class="menuElDivider">/</div>
-            <router-link
-              :to="{ name: 'mShop' }"
-              class="menuEl"
-              @click="selectEl('shop')"
-              style="color: white"
-            >
-              <div
-                class="menuLine"
-                :class="[{ menuLineShow: menuEl.shop.val }]"
-              ></div>
-              <div style="color: white">SHOP</div>
-            </router-link>
-            <div class="menuElDivider">/</div>
-            <router-link
-              :to="{ name: 'mContacts' }"
-              class="menuEl"
-              @click="selectEl('contacts')"
-              style="color: white"
-            >
-              <div
-                class="menuLine"
-                :class="[{ menuLineShow: menuEl.contacts.val }]"
-              ></div>
-              <div style="color: white">CONTACTS</div>
-            </router-link>
-          </div>
-          <div class="mMenuText fade-in fade-out" :class="[{ hideMenu: menu }]">
-            MENU
-          </div>
-
-          <div
-            v-if="!menu"
-            class="mLineMenu fade-in fade-out"
-            @click="toggleMenu"
-          >
-            <div class="mLineMenuCenterLine"></div>
-          </div>
-          <v-icon
-            v-if="menu"
-            @click="toggleMenu"
-            class="menuCross fade-in fade-out"
-            >mdi-close</v-icon
-          >
-        </div>
-      </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      menuEl: {
-        home: {
-          val: true,
-          slug: "home",
-        },
-        about: {
-          val: false,
-          slug: "about",
-        },
-        contents: {
-          val: false,
-          slug: "contents",
-        },
-        blog: {
-          val: false,
-          slug: "blog",
-        },
-        shop: {
-          val: false,
-          slug: "shop",
-        },
-        contacts: {
-          val: false,
-          slug: "contacts",
-        },
-      },
       splash: true,
-      menu: false,
       mTripCenterHover: false,
       mTripDxHover: false,
       mTripSxHover: false,
@@ -250,8 +114,7 @@ export default {
       backgrounds: [
         "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/t4.jpg?alt=media&token=65c4464d-b30d-4dd7-a30c-7c5506cd5350",
         "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/t3.jpg?alt=media&token=fe69ab91-af45-4a09-9adc-047ad3c76994",
-        'https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/home_2.jpg?alt=media&token=67c1662f-daf8-4521-80f2-caeecae6f923',
-        
+        "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/home_2.jpg?alt=media&token=67c1662f-daf8-4521-80f2-caeecae6f923",
       ],
       img: null,
     };
@@ -271,23 +134,10 @@ export default {
         });
       }, 2000);
     },
-    selectEl(value) {
-      var menu = this.menuEl;
-      for (const el in menu) {
-        if (menu[el].slug != value) {
-          menu[el].val = false;
-        } else {
-          menu[el].val = true;
-        }
-      }
-    },
     setSplash() {
       setTimeout(() => {
         this.splash = false;
-      }, 3000);
-    },
-    toggleMenu() {
-      this.menu = !this.menu;
+      }, 2000);
     },
     backImgs() {
       setInterval(() => {
@@ -297,7 +147,15 @@ export default {
       }, 1000);
     },
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      isLoggedIn: "isLoggedIn",
+      userRole: "userRole",
+      globalMessage: "globalMessage",
+      isMetamorphosis: "isMetamorphosis",
+      menu: "menu",
+    }),
+  },
 };
 </script>
 <style lang="scss">
@@ -313,12 +171,7 @@ export default {
   background-position: center;
   background-size: cover;
 }
-// .mImgBackground {
-//   position: absolute;
-//   top: 0px;
-//   height: 110vh;
-//   z-index: 8000;
-// }
+
 .mImgBackgroundOverlay {
   position: absolute;
   top: 0px;
@@ -505,88 +358,13 @@ export default {
   height: 100vh;
   z-index: 9996;
 }
-.mTop {
-  width: 100vw;
-  height: 100px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  .mTopEl {
-    width: 33%;
-    display: flex;
-    align-items: center;
-  }
-  .mLogo {
-    justify-content: center;
-    color: red;
-    font-weight: bold;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 9994;
-  }
-  .mCont {
-    justify-content: flex-start;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    z-index: 9999;
-    .mContText {
-      margin-left: 10px;
-    }
-  }
-  .mMenu {
-    justify-content: flex-end;
-    z-index: 9999;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
 
-    .mMenuText {
-      margin-right: 10px;
-    }
-    .hideMenu {
-      display: none;
-    }
-  }
-}
-
-.menuOpen {
-  position: fixed;
-  top: 40px;
-  right: -300px;
-  transition: 0.5s;
-  display: flex;
-  justify-content: space-between;
-  width: 300px;
-}
-.showMenu {
-  transition: 0.5s;
-  right: 220px;
-}
-.menuCross {
-  margin-right: 10px;
-  font-size: 40px !important;
-  color: white !important;
-}
 .mLine {
   width: 50px;
   height: 1px;
   border-bottom: 2px solid white;
 }
-.mLineMenu {
-  width: 50px;
-  height: 20px;
-  border-top: 2px solid white;
-  border-bottom: 2px solid white;
-  position: relative;
-  .mLineMenuCenterLine {
-    position: absolute;
-    height: 1px;
-    width: 100%;
-    top: 7px;
-    border-bottom: 2px solid white;
-  }
-}
+
 .splash {
   color: white;
   font-weight: bold;
@@ -620,9 +398,7 @@ export default {
   animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
-// #######################################
-// ############## media ##################
-// #######################################
+// ##
 @media (max-width: 1300px) {
   .mTripartition {
     .mTripText {
@@ -655,31 +431,6 @@ export default {
     justify-content: center;
     align-items: center;
     height: 33%;
-  }
-  .mTop {
-    background: rgba(255, 255, 255, 0.329);
-  }
-}
-// ##
-@media (max-width: 800px) {
-  .menuOpen {
-    width: 300px;
-    top: 80px;
-  }
-
-  .showMenu {
-    transition: 0.5s;
-    right: 20px;
-  }
-  .menuEl {
-    font-size: 10px;
-    margin: 0 3px;
-    .menuLine {
-      top: -3px;
-    }
-  }
-  .menuElDivider {
-    display: none;
   }
 }
 </style>

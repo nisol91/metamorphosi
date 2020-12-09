@@ -2,41 +2,125 @@
   <!-- nell index è comodo mettere la navigazione dell'app -->
   <div>
     <v-app>
-      
-      <div class="mainBox" v-scroll="onScroll">
+      <div class="mainBox">
+        <!-- header menu -->
+        <div class="mTop" v-if="loaded">
+          <div class="mTopEl mCont">
+            <div class="mLine"></div>
+            <div class="mContText">CONTACTS</div>
+          </div>
+          <div class="mTopEl mLogo">中文</div>
+          <div class="mTopEl mMenu">
+            <div class="menuOpen" :class="[{ showMenu: menu }]">
+              <router-link
+                :to="{ name: 'mHome' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.home.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('home')">HOME</div>
+              </router-link>
+              <div class="menuElDivider">/</div>
+              <router-link
+                :to="{ name: 'mAbout' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.about.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('about')">ABOUT</div>
+              </router-link>
+              <div class="menuElDivider">/</div>
+              <router-link
+                :to="{ name: 'mContents' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.contents.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('contents')">
+                  CONTENTS
+                </div>
+              </router-link>
+              <div class="menuElDivider">/</div>
+              <router-link
+                :to="{ name: 'mBlog' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.blog.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('blog')">BLOG</div>
+              </router-link>
+              <div class="menuElDivider">/</div>
+              <router-link
+                :to="{ name: 'mShop' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.shop.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('shop')">SHOP</div>
+              </router-link>
+              <div class="menuElDivider">/</div>
+              <router-link
+                :to="{ name: 'mContacts' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.contacts.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('contacts')">
+                  CONTACTS
+                </div>
+              </router-link>
+            </div>
+            <div
+              class="mMenuText fade-in fade-out"
+              :class="[{ hideMenu: menu }]"
+            >
+              MENU
+            </div>
+
+            <div
+              v-if="!menu"
+              class="mLineMenu fade-in fade-out"
+              @click="toggleMenu"
+            >
+              <div class="mLineMenuCenterLine"></div>
+            </div>
+            <v-icon
+              v-if="menu"
+              @click="toggleMenu"
+              class="menuCross fade-in fade-out"
+              >mdi-close</v-icon
+            >
+          </div>
+        </div>
         <!--  -->
         <transition name="fade">
-          <router-view v-if="loaded"></router-view>
+          <router-view></router-view>
         </transition>
 
-        <!--  -->
+        <!-- for some type of notification -->
         <global-message
           v-if="globalMessage"
           :globalMex="globalMessage"
           :error="false"
         ></global-message>
-
-        <!--  -->
-        <!-- <div v-if="!loaded" class="splash-box">
-          <v-progress-circular
-            :size="70"
-            color="primary"
-            indeterminate
-            class="splash-box-progress"
-          ></v-progress-circular>
-        </div> -->
-        <!-- <div
-          id="footer"
-          class="d-flex justify-content-center align-items-center flex-column"
-          v-if="!isMetamorphosis"
-        >
-          <select-locale class="langVSelect"></select-locale>
-          <select-locale class="langVSelectMobile"></select-locale>
-          <div class="footer">
-            Metamorphosis 2020
-            
-          </div>
-        </div> -->
       </div>
     </v-app>
   </div>
@@ -61,21 +145,39 @@ export default {
   },
   data() {
     return {
+      menuEl: {
+        home: {
+          val: true,
+          slug: "home",
+        },
+        about: {
+          val: false,
+          slug: "about",
+        },
+        contents: {
+          val: false,
+          slug: "contents",
+        },
+        blog: {
+          val: false,
+          slug: "blog",
+        },
+        shop: {
+          val: false,
+          slug: "shop",
+        },
+        contacts: {
+          val: false,
+          slug: "contacts",
+        },
+      },
       // lastSearch: this.$store.state.lastSearch,
       menuOpen: false,
       loaded: false,
-      offsetTop: 0,
-      selectedEl: "",
-      scrollOptions: {
-        duration: 800,
-        offset: 90,
-        easing: "easeInOutCubic",
-      },
     };
   },
   async created() {
     this.loaded = false;
-    // console.log(process.env.VUE_APP_TITLE);
     console.log(process.env.NODE_ENV);
     console.log(process.env.VUE_APP_DB_ENV);
 
@@ -89,110 +191,152 @@ export default {
     // prendo l userRole nello storage
     this.$store.commit("getUserRole");
 
-    // console.log("====");
-    // console.log(this.lastSearch);
-    // console.log(this.lastSearchComputed);
-    // console.log(this.itemsInBasket);
-
-    // console.log("ruolo index " + this.userRole);
     setTimeout(() => {
       this.loaded = true;
-    }, 1000);
+    }, 2000);
   },
+  methods: {
+    // menu
+    selectEl(value) {
+      console.log("select el");
+      var menu = this.menuEl;
+      for (const el in menu) {
+        if (menu[el].slug != value) {
+          menu[el].val = false;
+        } else {
+          menu[el].val = true;
+        }
+      }
+      this.toggleMenu();
+    },
+    toggleMenu() {
+      this.$store.commit("toggleMenu");
+    },
+
+    async logout() {
+      this.$store.dispatch("signOut");
+    },
+  },
+
   computed: {
     ...mapState({
       isLoggedIn: "isLoggedIn",
       userRole: "userRole",
       globalMessage: "globalMessage",
       isMetamorphosis: "isMetamorphosis",
+      menu: "menu",
     }),
-
     ...mapGetters({ itemsInBasket: "itemsInBasket" }),
-
-    // globalMessage: {
-    //   get() {
-    //     return this.globalMessage;
-    //   },
-    //   set(globalMessage) {
-    //     this.globalMessage = globalMessage;
-    //   },
-    // },
-
-    isUserAdmin() {
-      if (this.userRole === "developer" || this.userRole === "admin") {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    // scroll
-    options() {
-      return {
-        duration: this.scrollOptions.duration,
-        offset: this.scrollOptions.offset,
-        easing: this.scrollOptions.easing,
-      };
-    },
-
-    getOffsetNav() {
-      if (this.offsetTop > 80) {
-        return true;
-      }
-      return false;
-    },
-  },
-
-  methods: {
-    onClickOutside() {
-      if (this.menuOpen == true) {
-        this.menuOpen = false;
-      }
-    },
-    toggleMenuMobile() {
-      this.menuOpen = !this.menuOpen;
-      // console.log(this.menuOpen);
-    },
-    onScroll(e) {
-      this.offsetTop = e.target.scrollingElement.scrollTop;
-      //   console.log("====================================");
-      //   console.log(e.target.scrollingElement.scrollTop);
-      //   console.log("====================================");
-    },
-    async logout() {
-      this.$store.dispatch("signOut");
-    },
   },
 };
 </script>
 <style lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-#footer {
-  width: 100%;
-  border-bottom: 1px solid grey;
-  padding: 20px 35px;
-  background: rgb(107, 109, 114);
-}
-.footerFirebaseImg {
-  width: 30px;
-}
-.loginName {
-  width: 100px;
-  margin: 0 10px;
-}
-.userIndexIcon {
-  &:hover {
-    text-decoration: none !important;
-    border: 2px !important;
-    color: rgb(85, 89, 109) !important;
+.mTop {
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  z-index: 9800;
+  .mTopEl {
+    width: 33%;
+    display: flex;
+    align-items: center;
+  }
+  .mLogo {
+    justify-content: center;
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 9994;
+  }
+  .mCont {
+    justify-content: flex-start;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    z-index: 9999;
+    .mContText {
+      margin-left: 10px;
+    }
+  }
+  .mMenu {
+    justify-content: flex-end;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    .mMenuText {
+      margin-right: 10px;
+    }
+    .hideMenu {
+      display: none;
+    }
   }
 }
-.indexSnack {
-  margin-top: 100px !important;
+
+.menuOpen {
+  position: fixed;
+  top: 40px;
+  right: -300px;
+  transition: 0.5s;
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+.showMenu {
+  transition: 0.5s;
+  right: 220px;
+}
+.menuCross {
+  margin-right: 10px;
+  font-size: 40px !important;
+  color: white !important;
+}
+.mLineMenu {
+  width: 50px;
+  height: 20px;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  position: relative;
+  .mLineMenuCenterLine {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 7px;
+    border-bottom: 2px solid white;
+  }
+}
+// ##
+@media (max-width: 1050px) {
+  .mTop {
+    background: rgba(255, 255, 255, 0.329);
+  }
+}
+// ##
+@media (max-width: 800px) {
+  .menuOpen {
+    width: 300px;
+    top: 80px;
+  }
+
+  .showMenu {
+    transition: 0.5s;
+    right: 20px;
+  }
+  .menuEl {
+    font-size: 10px;
+    margin: 0 3px;
+    .menuLine {
+      top: -3px;
+    }
+  }
+  .menuElDivider {
+    display: none;
+  }
 }
 </style>

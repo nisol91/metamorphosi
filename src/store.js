@@ -8,6 +8,7 @@ import router from "./routes";
 export default {
     // vuex store
     state: {
+        menu: false,
         env: '',
         isHomePage: true,
         isMetamorphosis: false,
@@ -27,6 +28,9 @@ export default {
     // le mutations hanno solo il compito di mutare lo stato dell'app, sono
     // come semplici funzioni
     mutations: {
+        toggleMenu(state) {
+            state.menu = !state.menu;
+        },
         isMetamorphosis(state, payload) {
             state.isMetamorphosis = payload
         },
