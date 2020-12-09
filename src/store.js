@@ -31,6 +31,9 @@ export default {
         toggleMenu(state) {
             state.menu = !state.menu;
         },
+        closeMenu(state) {
+            state.menu = false;
+        },
         isMetamorphosis(state, payload) {
             state.isMetamorphosis = payload
         },
@@ -165,62 +168,6 @@ export default {
             commit('setBasket', { items: [] });
             localStorage.setItem('basket', JSON.stringify(state.basket))
         },
-        // it loads the user and the auth state in the state
-        async loadUser({ commit, dispatch }, payload) {
-            if (isLoggedIn()) {
-                try {
-                    //se auth va a buon fine allora prendo utente
-                    const user = (await axios.get('/api/user')).data
-
-                    //  ma prima verifico che la mail sia verificata
-                    if (user.user_data.email_verified_at != null) {
-
-                        commit('setUser', user.user_data)
-
-                        // questo avviene quando tutto va a buon fine, e se ricarico la pagina,
-                        // isLoggedIn() va a verificare che l utente sia gia loggato
-                        commit('setLoggedIn', true)
-                        commit('setEmailVerified', true);
-
-                    } else {
-                        dispatch('logout')
-                        // se la mail non e verificata
-                        commit('setEmailVerified', false);
-
-                    }
-                } catch (error) {
-                    // se ho errore allora logout
-                    dispatch('logout')
-                }
-            }
-        },
-
-        async logout({ commit, dispatch }) {
-            // laravel endpoint
-            await axios.post("/api/logout");
-            // commit 2 actions
-            commit('setUser', {})
-            commit('setLoggedIn', false)
-            // rimuove logged in dal local storage
-            logOut()
-            // rimuovo il ruolo per sicurezza
-            commit('setUserRole', "")
-            // azzero token
-            localStorage.setItem("token", "");
-
-        },
-        async verifyEmail({ dispatch }, payload) {
-            try {
-                //  console.log(payload)
-                await axios
-                    .get('/api/email-verification', {
-                        params: payload
-                    })
-            } catch (error) {
-                dispatch('logout')
-            }
-        },
-
         // ################################################
         //######################## firebase  ##################
         // ################################################
@@ -252,7 +199,7 @@ export default {
 
                     if (router.currentRoute.name !== 'home') {
                         router.replace({
-                            name: "home"
+                            name: "mHome"
                         });
                     }
                 });
@@ -304,54 +251,6 @@ export default {
                 // An error happened.
             });
         },
-        async googleLogin({ commit, dispatch }, payload) {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider).then(function (result) {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                var token = result.credential.accessToken;
-                // The signed-in user info.
-                var user = result.user;
-
-
-                // salvo su db
-                // const user = firebase.auth().currentUser
-
-
-                // se non ho ancora creato l user nel db, lo creo al primo login
-                db.collection("users")
-                    .doc(user.uid)
-                    .set({ displayName: user.displayName, email: user.email }, { merge: true });
-
-
-
-                commit('setUser', {
-                    displayName: firebase.auth().currentUser.displayName,
-                    email: firebase.auth().currentUser.email,
-                })
-                commit('setLoggedIn')
-
-
-                router.replace({ name: "home" });
-                commit('setGlobalMessage', 'successfully logged in')
-                setTimeout(() => {
-                    commit('setGlobalMessage', '')
-                }, 3000)
-            }).then(() => {
-                // ruolo utente
-                dispatch("getUserRole");
-
-
-            }).catch(function (error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
-                // ...
-            });
-        },
         registration({ commit, dispatch }, payload) {
 
             const err = firebase
@@ -378,7 +277,7 @@ export default {
                     }, 3000)
 
                     router.replace({
-                        name: "home"
+                        name: "mHome"
                     });
                 }).then(() => dispatch('signOut'))
                 .catch((err) => {
@@ -387,6 +286,57 @@ export default {
                 });
             return err
         },
+        async googleLogin({ commit, dispatch }, payload) {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+
+
+                // salvo su db
+                // const user = firebase.auth().currentUser
+
+
+                // se non ho ancora creato l user nel db, lo creo al primo login
+                db.collection("users")
+                    .doc(user.uid)
+                    .set({ displayName: user.displayName, email: user.email }, { merge: true });
+
+
+
+                commit('setUser', {
+                    displayName: firebase.auth().currentUser.displayName,
+                    email: firebase.auth().currentUser.email,
+                    id: firebase.auth().currentUser.uid,
+
+                })
+                commit('setLoggedIn')
+
+
+                router.replace({ name: "mHome" });
+                commit('setGlobalMessage', 'successfully logged in')
+                setTimeout(() => {
+                    commit('setGlobalMessage', '')
+                }, 3000)
+            }).then(() => {
+                // ruolo utente
+                dispatch("getUserRole");
+
+
+            }).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+        },
+
         login({ commit, dispatch }, payload) {
             const err = firebase
                 .auth()
@@ -409,12 +359,14 @@ export default {
                     commit('setUser', {
                         displayName: firebase.auth().currentUser.displayName,
                         email: firebase.auth().currentUser.email,
+                        id: firebase.auth().currentUser.uid,
+
                     })
                     commit('setLoggedIn')
 
 
 
-                    router.replace({ name: "home" });
+                    router.replace({ name: "mHome" });
                     commit('setGlobalMessage', 'successfully logged in')
                     setTimeout(() => {
                         commit('setGlobalMessage', '')

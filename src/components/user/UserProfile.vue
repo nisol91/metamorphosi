@@ -1,13 +1,13 @@
 <template>
-  <div class="userSettingsBox">
+  <div class="userSettingsBox" v-if="!loading">
     <div class="userTitle">
-      <router-link class="btn nav-button" :to="{ name: 'toccaVinoHome' }">
+      <router-link class="btn nav-button" :to="{ name: 'mHome' }">
         <i class="fas fa-arrow-left"></i>
       </router-link>
       <div class="">settings</div>
     </div>
 
-    <div class="role" v-if="user && user.role == '03746'">role: superAdmin</div>
+    <div class="role" v-if="user && user.role == '03744'">role: superAdmin</div>
     <v-form
       action="#"
       @submit.prevent="editUser"
@@ -179,6 +179,7 @@
 import { db } from "../../main";
 import firebase from "firebase";
 import router from "../../routes";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -187,7 +188,6 @@ export default {
       loading: false,
       uploading: false,
       user: null,
-      firebaseUser: null,
       valid: true,
       rules: [
         (v) => !!v || "field is required",
@@ -210,11 +210,11 @@ export default {
       },
     };
   },
-  mounted() {
+  async mounted() {
     this.$store.commit("toggleHomePage", false);
-
-    this.getUser(firebase.auth().currentUser.uid);
+    this.getUser();
   },
+
   methods: {
     async removeUser() {
       this.errors = await this.$store.dispatch("removeUser");
@@ -243,18 +243,17 @@ export default {
 
         this.loading = false;
         router.push({
-          name: "toccaVinoHome",
+          name: "mHome",
           // params: { eventName: this.event.name },
         });
       }
     },
-    getUser(id) {
+    getUser() {
       this.loading = true;
-      this.firebaseUser = firebase.auth().currentUser;
-      this.form.id = this.firebaseUser.uid;
+      this.form.id = this.$store.state.user.id;
 
       db.collection(`users${this.env}`)
-        .doc(id)
+        .doc(this.$store.state.user.id)
         .get()
         .then((querySnapshot) => {
           // console.log(querySnapshot);
@@ -331,6 +330,7 @@ export default {
 }
 .userSettingsBox {
   padding: 20px;
+  padding-top: 100px;
   min-height: 100vh;
 }
 .role {

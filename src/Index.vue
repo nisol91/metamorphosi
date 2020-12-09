@@ -11,7 +11,10 @@
           </div>
           <div class="mTopEl mLogo">中文</div>
           <div class="mTopEl mMenu">
-            <div class="menuOpen" :class="[{ showMenu: menu }]">
+            <div
+              class="menuOpen"
+              :class="[{ showMenu: menu, showMenuLong: isLoggedIn && menu }]"
+            >
               <router-link
                 :to="{ name: 'mHome' }"
                 class="menuEl"
@@ -19,9 +22,9 @@
               >
                 <div
                   class="menuLine"
-                  :class="[{ menuLineShow: menuEl.home.val }]"
+                  :class="[{ menuLineShow: menuEl.mHome.val }]"
                 ></div>
-                <div style="color: white" @click="selectEl('home')">HOME</div>
+                <div style="color: white" @click="selectEl('mHome')">HOME</div>
               </router-link>
               <div class="menuElDivider">/</div>
               <router-link
@@ -31,9 +34,11 @@
               >
                 <div
                   class="menuLine"
-                  :class="[{ menuLineShow: menuEl.about.val }]"
+                  :class="[{ menuLineShow: menuEl.mAbout.val }]"
                 ></div>
-                <div style="color: white" @click="selectEl('about')">ABOUT</div>
+                <div style="color: white" @click="selectEl('mAbout')">
+                  ABOUT
+                </div>
               </router-link>
               <div class="menuElDivider">/</div>
               <router-link
@@ -43,9 +48,9 @@
               >
                 <div
                   class="menuLine"
-                  :class="[{ menuLineShow: menuEl.contents.val }]"
+                  :class="[{ menuLineShow: menuEl.mContents.val }]"
                 ></div>
-                <div style="color: white" @click="selectEl('contents')">
+                <div style="color: white" @click="selectEl('mContents')">
                   CONTENTS
                 </div>
               </router-link>
@@ -57,9 +62,9 @@
               >
                 <div
                   class="menuLine"
-                  :class="[{ menuLineShow: menuEl.blog.val }]"
+                  :class="[{ menuLineShow: menuEl.mBlog.val }]"
                 ></div>
-                <div style="color: white" @click="selectEl('blog')">BLOG</div>
+                <div style="color: white" @click="selectEl('mBlog')">BLOG</div>
               </router-link>
               <div class="menuElDivider">/</div>
               <router-link
@@ -69,9 +74,9 @@
               >
                 <div
                   class="menuLine"
-                  :class="[{ menuLineShow: menuEl.shop.val }]"
+                  :class="[{ menuLineShow: menuEl.mShop.val }]"
                 ></div>
-                <div style="color: white" @click="selectEl('shop')">SHOP</div>
+                <div style="color: white" @click="selectEl('mShop')">SHOP</div>
               </router-link>
               <div class="menuElDivider">/</div>
               <router-link
@@ -81,12 +86,52 @@
               >
                 <div
                   class="menuLine"
-                  :class="[{ menuLineShow: menuEl.contacts.val }]"
+                  :class="[{ menuLineShow: menuEl.mContacts.val }]"
                 ></div>
-                <div style="color: white" @click="selectEl('contacts')">
+                <div style="color: white" @click="selectEl('mContacts')">
                   CONTACTS
                 </div>
               </router-link>
+              <div class="menuElDivider">/</div>
+
+              <router-link
+                v-if="!isLoggedIn"
+                :to="{ name: 'login' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.login.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('login')">Login</div>
+              </router-link>
+
+              <router-link
+                v-if="isLoggedIn"
+                :to="{ name: 'mHome' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div style="color: white" @click="logout">Logout</div>
+              </router-link>
+              <div class="menuElDivider" v-if="isLoggedIn">/</div>
+
+              <router-link
+                v-if="isLoggedIn"
+                :to="{ name: 'userProfile' }"
+                class="menuEl"
+                style="color: white"
+              >
+                <div
+                  class="menuLine"
+                  :class="[{ menuLineShow: menuEl.userProfile.val }]"
+                ></div>
+                <div style="color: white" @click="selectEl('userProfile')">
+                  Settings
+                </div>
+              </router-link>
+              <!--  -->
             </div>
             <div
               class="mMenuText fade-in fade-out"
@@ -146,29 +191,37 @@ export default {
   data() {
     return {
       menuEl: {
-        home: {
+        mHome: {
           val: true,
-          slug: "home",
+          slug: "mHome",
         },
-        about: {
+        mAbout: {
           val: false,
-          slug: "about",
+          slug: "mAbout",
         },
-        contents: {
+        mContents: {
           val: false,
-          slug: "contents",
+          slug: "mContents",
         },
-        blog: {
+        mBlog: {
           val: false,
-          slug: "blog",
+          slug: "mBlog",
         },
-        shop: {
+        mShop: {
           val: false,
-          slug: "shop",
+          slug: "mShop",
         },
-        contacts: {
+        mContacts: {
           val: false,
-          slug: "contacts",
+          slug: "mContacts",
+        },
+        login: {
+          val: false,
+          slug: "login",
+        },
+        userProfile: {
+          val: false,
+          slug: "userProfile",
         },
       },
       // lastSearch: this.$store.state.lastSearch,
@@ -207,17 +260,33 @@ export default {
           menu[el].val = true;
         }
       }
-      this.toggleMenu();
     },
     toggleMenu() {
       this.$store.commit("toggleMenu");
     },
-
+    closeMenu() {
+      this.$store.commit("closeMenu");
+    },
     async logout() {
       this.$store.dispatch("signOut");
     },
   },
-
+  watch: {
+    $route(to, from) {
+      console.log(this.$route);
+      var value = this.$route.name;
+      console.log("select el");
+      var menu = this.menuEl;
+      for (const el in menu) {
+        if (menu[el].slug.includes(value)) {
+          menu[el].val = true;
+        } else {
+          menu[el].val = false;
+        }
+      }
+      this.closeMenu();
+    },
+  },
   computed: {
     ...mapState({
       isLoggedIn: "isLoggedIn",
@@ -276,6 +345,10 @@ export default {
     .hideMenu {
       display: none;
     }
+    .menuEl {
+      font-size: 14px !important;
+      margin: 0 3px;
+    }
   }
 }
 
@@ -290,7 +363,10 @@ export default {
 }
 .showMenu {
   transition: 0.5s;
-  right: 220px;
+  right: 210px;
+}
+.showMenuLong {
+  right: 260px;
 }
 .menuCross {
   margin-right: 10px;
@@ -324,9 +400,10 @@ export default {
     top: 80px;
   }
 
-  .showMenu {
+  .showMenu,
+  .showMenuLong {
     transition: 0.5s;
-    right: 20px;
+    right: 170px;
   }
   .menuEl {
     font-size: 10px;

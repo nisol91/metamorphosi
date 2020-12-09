@@ -189,11 +189,14 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 }
 
 .containerFormAuth {
-    height: 80vh;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .formAuth {
-        margin: 50px;
-    }
+    // .formAuth {
+    //     margin: 50px;
+    // }
 }
 
 // vuetify overrides
