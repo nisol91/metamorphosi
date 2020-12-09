@@ -9,7 +9,9 @@
             <div class="mLine"></div>
             <div class="mContText">CONTACTS</div>
           </div>
-          <div class="mTopEl mLogo">中文</div>
+          <router-link :to="{ name: 'mHome' }" class="mTopEl mLogo"
+            ><div style="color: red">中文</div></router-link
+          >
           <div class="mTopEl mMenu">
             <div
               class="menuOpen"
@@ -113,6 +115,7 @@
                 class="menuEl"
                 style="color: white"
               >
+                <div class="menuLine"></div>
                 <div style="color: white" @click="logout">Logout</div>
               </router-link>
               <div class="menuElDivider" v-if="isLoggedIn">/</div>
@@ -321,6 +324,9 @@ export default {
     font-size: 30px;
     cursor: pointer;
     z-index: 9994;
+    &:hover {
+      text-decoration: none !important;
+    }
   }
   .mCont {
     justify-content: flex-start;

@@ -7,7 +7,9 @@
       <div class="">settings</div>
     </div>
 
-    <div class="role" v-if="user && user.role == '03744'">role: superAdmin</div>
+    <div class="superAdmin" v-if="user && user.role == '03744'">
+      <div class="role">role: superAdmin</div>
+    </div>
     <v-form
       action="#"
       @submit.prevent="editUser"
