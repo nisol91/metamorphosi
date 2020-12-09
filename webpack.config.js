@@ -18,12 +18,6 @@ module.exports = {
 			// AND `<style lang="scss">` blocks in `.vue` files
 			{
 				test: /\.scss$/,
-				// use: [
-				// 	'vue-style-loader',
-				// 	'css-loader',
-				// 	'sass-loader'
-				// ]
-				// 
 				use: [
 					{
 						loader: 'vue-style-loader',
@@ -41,7 +35,8 @@ module.exports = {
 						loader: 'sass-loader',
 						options: {
 							sourceMap: true,
-							sourceMapContents: false
+							sourceMapContents: false,
+							// data: "@import './src/sass/_variables.scss'"
 						}
 					},
 					{
