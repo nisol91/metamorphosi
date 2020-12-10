@@ -13,9 +13,15 @@
               >mdi-playlist-edit</v-icon
             >
           </div>
-          <div class="pTitle">
-            {{ post.title }}
-          </div>
+          <router-link
+            class="pTitle"
+            :to="{
+              name: 'mBlogPost',
+              params: { id: post.id },
+            }"
+            >{{ post.title }}</router-link
+          >
+
           <div class="pSubTitle">
             {{ post.subtitle }}
           </div>

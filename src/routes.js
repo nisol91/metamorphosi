@@ -15,6 +15,8 @@ import MContents from "./components/metamorphosis/MContents.vue";
 import MBlog from "./components/metamorphosis/MBlog.vue";
 import MShop from "./components/metamorphosis/MShop.vue";
 import MContacts from "./components/metamorphosis/MContacts.vue";
+import MBlogPost from "./components/metamorphosis/MBlogPost.vue";
+
 
 
 
@@ -75,6 +77,16 @@ const routes = [
             if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
             else next()
         }
+    },
+    {
+        path: "/m-blog/:id",
+        component: MBlogPost,
+        name: "mBlogPost",
+        // protezione della rotta se non loggato
+        // beforeEnter: (to, from, next) => {
+        //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
+        //     else next()
+        // }
     },
     {
         path: "/m-blog",
