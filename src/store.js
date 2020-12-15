@@ -9,7 +9,7 @@ export default {
     // vuex store
     state: {
         menu: false,
-        env: '',
+        env: process.env.VUE_APP_DB_ENV,
         isHomePage: true,
         isMetamorphosis: false,
         lastSearch: {
@@ -472,6 +472,25 @@ export default {
                 media: payload.media,
                 location: new GeoPoint(payload.location.latitude, payload.location.longitude),
             }).then(() => commit('setGlobalMessage', 'successfully updated new cellar'))
+        },
+
+
+        async savePost({ commit, dispatch, state }, payload) {
+            console.log(payload)
+            // return db.collection(`blogPosts${state.env}`).add({
+            //     userId: firebase.auth().currentUser.uid,
+            //     createdTimestamp: firebase.firestore.Timestamp.fromDate(new Date()),
+            //     title: payload.title,
+            //     cellar: payload.cellar,
+            //     description: payload.description,
+            //     city: payload.city,
+            //     address: payload.address,
+            //     price: payload.price,
+            //     media: payload.media,
+            //     date: payload.date,
+            //     // date: Timestamp.fromDate(new Date(payload.date)),
+            //     location: new GeoPoint(payload.location.latitude, payload.location.longitude),
+            // }).then(() => commit('setGlobalMessage', 'successfully created new post'))
         },
 
 
