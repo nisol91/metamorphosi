@@ -8,7 +8,7 @@
       >
         <div class="pSx">
           <div class="pCategory">
-            {{ post.category }}
+            {{ post.title.rendered }}
             <v-icon v-if="userRole && userRole == adminCode" class="editPost"
               >mdi-playlist-edit</v-icon
             >
@@ -19,26 +19,23 @@
               name: 'mBlogPost',
               params: { id: post.id },
             }"
-            >{{ post.title }}</router-link
+            >{{ post.title.rendered }}</router-link
           >
 
           <div class="pSubTitle">
-            {{ post.subtitle }}
+            {{ post.slug }}
           </div>
           <div class="pDate">
-            {{
-              new Date(post.createdTimestamp.seconds * 1000)
-                | moment("dddd, MMMM Do YYYY")
-            }}
+            {{ new Date(post.date) | moment("dddd, MMMM Do YYYY") }}
           </div>
-          <div class="pTags">
+          <!-- <div class="pTags">
             <div class="pTag" v-for="(tag, i) in post.tags" :key="i + `_tag`">
               {{ tag }}
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="pDx">
-          <v-img
+          <!-- <v-img
             v-if="post.media"
             :src="post.media[0]"
             class="grey lighten-2 pMedia"
@@ -52,7 +49,7 @@
                 ></v-progress-circular>
               </v-row>
             </template>
-          </v-img>
+          </v-img> -->
         </div>
       </div>
     </div>
@@ -64,6 +61,7 @@ import { db, Timestamp, GeoPoint } from "../../main";
 import firebase from "firebase";
 import VueMoment from "vue-moment";
 import { mapState, mapGetters } from "vuex";
+import axios from "axios";
 
 export default {
   data() {
@@ -77,22 +75,32 @@ export default {
     this.getAdminCode();
   },
   methods: {
-    getPosts() {
-      console.log("ok");
-      db.collection(`blogPosts${this.env}`)
-        .get()
-        .then((querySnapshot) => {
-          console.log(querySnapshot);
-          const posts = querySnapshot.docs.map((doc) => {
-            console.log(doc);
-            var res = new Object(doc.data());
-            res["id"] = doc.id;
-            console.log(res);
-            return res;
-          });
-          this.blogPosts = posts;
-        });
+    async getPosts() {
+      try {
+        this.blogPosts = (
+          await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/posts`)
+        ).data;
+        // console.log(this.coordinates);
+      } catch (error) {
+        console.log(error);
+      }
     },
+    // getPosts() {
+    //   console.log("ok");
+    //   db.collection(`blogPosts${this.env}`)
+    //     .get()
+    //     .then((querySnapshot) => {
+    //       console.log(querySnapshot);
+    //       const posts = querySnapshot.docs.map((doc) => {
+    //         console.log(doc);
+    //         var res = new Object(doc.data());
+    //         res["id"] = doc.id;
+    //         console.log(res);
+    //         return res;
+    //       });
+    //       this.blogPosts = posts;
+    //     });
+    // },
     getAdminCode() {
       this.$store.dispatch("getEnvVariables").then((env) => {
         this.adminCode = env[0].superAdmin;
@@ -138,7 +146,7 @@ export default {
 }
 .blogPost {
   width: 80%;
-  height: 300px;
+  height: auto;
   background: white;
   border-radius: 3px;
   margin: 10px;
