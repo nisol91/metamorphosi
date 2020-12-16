@@ -13,8 +13,9 @@
               class="pTag"
               v-for="(cat, i) in post.catNames"
               :key="i + `_tag`"
+              @click="filterTax(cat.id, 'categories')"
             >
-              {{ cat }}
+              {{ cat.name }}
             </div>
           </div>
           <router-link
@@ -38,8 +39,9 @@
               class="pTag"
               v-for="(tag, i) in post.tagNames"
               :key="i + `_tag`"
+              @click="filterTax(tag.id, 'tags')"
             >
-              {{ tag }}
+              {{ tag.name }}
             </div>
           </div>
         </div>
@@ -76,6 +78,7 @@ export default {
   data() {
     return {
       blogPosts: {},
+      blogPostsFiltered: {},
       categories: [],
       tags: [],
       env: process.env.VUE_APP_DB_ENV,
@@ -87,6 +90,15 @@ export default {
     this.getAdminCode();
   },
   methods: {
+    async filterTax(tax, type) {
+      console.log(tax);
+      console.log(type);
+      this.blogPostsFiltered = (
+        await axios.get(
+          `https://endorphinoutdoor.com/wp-json/wp/v2/posts?${type}=${tax}`
+        )
+      ).data;
+    },
     async getPosts() {
       try {
         this.blogPosts = (
@@ -145,14 +157,14 @@ export default {
           post.categories.forEach((postCat) => {
             this.categories.forEach((cat) => {
               if (postCat === cat.id) {
-                post["catNames"].push(cat.name);
+                post["catNames"].push({ name: cat.name, id: cat.id });
               }
             });
           });
           post.tags.forEach((postTag) => {
             this.tags.forEach((tag) => {
               if (postTag === tag.id) {
-                post["tagNames"].push(tag.name);
+                post["tagNames"].push({ name: tag.name, id: tag.id });
               }
             });
           });
@@ -278,6 +290,7 @@ export default {
 .pCategory {
   font-style: italic;
   width: 100%;
+  cursor: pointer;
 }
 .editPost {
   margin: 0 30px;
