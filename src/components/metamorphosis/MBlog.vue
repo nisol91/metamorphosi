@@ -36,10 +36,10 @@
           <div class="pTags">
             <div
               class="pTag"
-              v-for="(cat, i) in post.catNames"
+              v-for="(tag, i) in post.tagNames"
               :key="i + `_tag`"
             >
-              {{ cat }}
+              {{ tag }}
             </div>
           </div>
         </div>
@@ -133,9 +133,10 @@ export default {
 
         // ----
         var posts = this.blogPosts;
-        // posts.forEach((post) => {
         for (const post of posts) {
           post["catNames"] = [];
+          post["tagNames"] = [];
+
           post["featured_media_url"] = (
             await axios.get(
               `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
@@ -145,6 +146,13 @@ export default {
             this.categories.forEach((cat) => {
               if (postCat === cat.id) {
                 post["catNames"].push(cat.name);
+              }
+            });
+          });
+          post.tags.forEach((postTag) => {
+            this.tags.forEach((tag) => {
+              if (postTag === tag.id) {
+                post["tagNames"].push(tag.name);
               }
             });
           });

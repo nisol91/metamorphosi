@@ -339,12 +339,12 @@ export default {
   }
   .mCont {
     justify-content: flex-start;
-    cursor: pointer;
     font-weight: bold;
     color: white;
     z-index: 9999;
     .mContText {
       margin-left: 10px;
+      cursor: pointer;
     }
   }
   .mMenu {
