@@ -1,15 +1,10 @@
 <template>
   <div class="mBlogBox">
     <div class="blogPosts" v-if="!loaded">
-      <div
-        class="blogPostSkel"
-        v-for="(post, i) in blogPostsFiltered"
-        :key="i + `_blogPost`"
-      >
+      <div class="blogPostSkel" v-for="(post, i) in 20" :key="i + `_blogPost`">
         <q-skeleton :animation="'pulse'" class="skel" />
         <q-skeleton :animation="'pulse'" class="skel" />
         <q-skeleton :animation="'pulse'" class="skel" />
-
       </div>
     </div>
 
@@ -32,12 +27,13 @@
         <div class="pSx">
           <div class="pCategory">
             <div
-              class="pTag"
+              class="pCat"
               v-for="(cat, i) in post.catNames"
               :key="i + `_tag`"
               @click="filterTax(cat.id, 'categories')"
             >
               {{ cat.name }}
+              <div class="pLine"></div>
             </div>
           </div>
           <router-link
@@ -64,6 +60,7 @@
               @click="filterTax(tag.id, 'tags')"
             >
               {{ tag.name }}
+              <div class="pLine"></div>
             </div>
           </div>
         </div>
@@ -120,16 +117,26 @@ export default {
           return o.title.rendered.includes(val);
         }
       });
+      // if (val == "") {
+      //   this.getAdminCode();
+      // }
       //    console.log(this.wineEventsFiltered);
     },
     async filterTax(tax, type) {
-      console.log(tax);
-      console.log(type);
-      this.blogPostsFiltered = (
-        await axios.get(
-          `https://endorphinoutdoor.com/wp-json/wp/v2/posts?${type}=${tax}`
-        )
-      ).data;
+      this.loaded = false;
+      try {
+        this.blogPosts = (
+          await axios.get(
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?${type}=${tax}`
+          )
+        ).data;
+      } catch (error) {
+        console.log(error);
+      }
+      this.blogPostsFiltered = this.blogPosts;
+      await this.getOtherFields();
+
+      this.loaded = true;
     },
     async getPosts() {
       try {
@@ -143,38 +150,43 @@ export default {
       }
     },
     async getOtherFields() {
+      console.log("getotherfields");
       try {
-        var categories = [];
-        var tags = [];
+        if (this.categories.length == 0 && this.tags.length == 0) {
+          console.log("sono qui");
 
-        var categoriesRaw = (
-          await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
-          )
-        ).data;
+          var categories = [];
+          var tags = [];
 
-        var tagsRaw = (
-          await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/tags`)
-        ).data;
+          var categoriesRaw = (
+            await axios.get(
+              `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
+            )
+          ).data;
 
-        // ----
-        categoriesRaw.forEach((cat) => {
-          var temp = new Object();
-          temp["id"] = cat.id;
-          temp["name"] = cat.name;
-          temp["slug"] = cat.slug;
-          categories.push(temp);
-        });
-        this.categories = categories;
-        //
-        tagsRaw.forEach((tag) => {
-          var temp = new Object();
-          temp["id"] = tag.id;
-          temp["name"] = tag.name;
-          temp["slug"] = tag.slug;
-          tags.push(temp);
-        });
-        this.tags = tags;
+          var tagsRaw = (
+            await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/tags`)
+          ).data;
+
+          // ----
+          categoriesRaw.forEach((cat) => {
+            var temp = new Object();
+            temp["id"] = cat.id;
+            temp["name"] = cat.name;
+            temp["slug"] = cat.slug;
+            categories.push(temp);
+          });
+          this.categories = categories;
+          //
+          tagsRaw.forEach((tag) => {
+            var temp = new Object();
+            temp["id"] = tag.id;
+            temp["name"] = tag.name;
+            temp["slug"] = tag.slug;
+            tags.push(temp);
+          });
+          this.tags = tags;
+        }
 
         // ----
         var posts = this.blogPosts;
@@ -202,6 +214,7 @@ export default {
             });
           });
         }
+        console.log(posts);
         this.blogPosts = posts;
 
         // console.log(this.coordinates);
@@ -309,7 +322,7 @@ export default {
   font-size: 30px;
   cursor: pointer;
   transition: 0.5s;
-  padding: 5px 0;
+  padding: 5px;
 
   &:hover {
     background: rgb(194, 194, 194);
@@ -324,6 +337,7 @@ export default {
   justify-content: space-around;
   align-items: flex-start;
   flex-direction: column;
+  padding: 0 5px;
 }
 .pDx {
   width: 70%;
@@ -344,6 +358,30 @@ export default {
   font-style: italic;
   width: 100%;
   cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pCat {
+  margin: 0 5px;
+  overflow: hidden;
+  position: relative;
+  padding: 3px;
+  .pLine {
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 22px;
+    right: 105px;
+    background: black;
+    transition: 0.5s;
+  }
+  &:hover {
+    .pLine {
+      right: 0px;
+      transition: 0.5s;
+    }
+  }
 }
 .editPost {
   margin: 0 30px;
@@ -363,6 +401,24 @@ export default {
   justify-content: flex-start;
   .pTag {
     margin: 0 5px;
+    overflow: hidden;
+    position: relative;
+    padding: 3px;
+    .pLine {
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      top: 22px;
+      right: 105px;
+      background: black;
+      transition: 0.5s;
+    }
+    &:hover {
+      .pLine {
+        right: 0px;
+        transition: 0.5s;
+      }
+    }
   }
 }
 // ##

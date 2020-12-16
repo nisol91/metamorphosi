@@ -1,6 +1,6 @@
 <template>
   <div class="editorBox" v-if="post">
-    <div>{{ post.title.rendered }}</div>
+    <div class="postTitle">{{ post.title.rendered }}</div>
     <div class="post" v-html="post.content.rendered"></div>
   </div>
 </template>
@@ -49,6 +49,11 @@ export default {
 </script>
 
 <style lang="scss">
+.postTitle {
+  font-size: 30px;
+  font-weight: bold;
+  width: 100%;
+}
 .has-text-align-right {
   text-align: right !important;
 }
