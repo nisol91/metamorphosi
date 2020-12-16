@@ -1,6 +1,18 @@
 <template>
-  <div class="mBlogBox" v-if="loaded">
-    <div class="blogPosts">
+  <div class="mBlogBox">
+    <div class="blogPosts" v-if="!loaded">
+      <div
+        class="blogPostSkel"
+        v-for="(post, i) in blogPostsFiltered"
+        :key="i + `_blogPost`"
+      >
+        <q-skeleton :animation="pulse" class="skel" />
+        <q-skeleton :animation="pulse" class="skel" />
+        <q-skeleton :animation="pulse" class="skel" />
+      </div>
+    </div>
+
+    <div class="blogPosts" v-if="loaded">
       <div class="searchBarPosts">
         <div>Search post</div>
         <input
@@ -18,7 +30,6 @@
       >
         <div class="pSx">
           <div class="pCategory">
-            {{ post.title.rendered }}
             <div
               class="pTag"
               v-for="(cat, i) in post.catNames"
@@ -235,6 +246,10 @@ export default {
 </script>
 <style lang="scss">
 @import "../../sass/_variables.scss";
+
+.skel {
+  width: 80% !important;
+}
 .searchBarPosts {
   width: 80%;
   margin: 20px;
@@ -257,6 +272,7 @@ export default {
   flex-direction: column;
   border-right: 0.5px solid rgb(197, 197, 197);
 }
+
 .blogFilters {
   width: 20%;
   height: 100vh;
@@ -275,12 +291,24 @@ export default {
   align-items: center;
   padding: 20px;
 }
+.blogPostSkel {
+  width: 80%;
+  height: 200px;
+  background: white;
+  border-radius: 3px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
 .pTitle {
   font-weight: bold;
   font-size: 30px;
   cursor: pointer;
   transition: 0.5s;
-  padding: 5px;
+  padding: 5px 0;
 
   &:hover {
     background: rgb(194, 194, 194);
@@ -323,13 +351,18 @@ export default {
 .pDate {
   font-weight: 700;
   font-size: 12px;
+  margin: 5px 0;
 }
 .pTags {
   width: 80%;
   cursor: pointer;
   display: flex;
+  margin: 5px 0;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
+  .pTag {
+    margin: 0 5px;
+  }
 }
 // ##
 @media (max-width: 800px) {
