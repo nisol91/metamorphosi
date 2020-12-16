@@ -1,7 +1,7 @@
 <template>
-  <div class="editorBox">
-    <div>{{ this.$route.params.id }}</div>
-    <div class="" v-html="contentTest"></div>
+  <div class="editorBox" v-if="post">
+    <div>{{ post.title.rendered }}</div>
+    <div class="post" v-html="post.content.rendered"></div>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      contentTest: "",
+      post: null,
       categories: [],
     };
   },
@@ -22,11 +22,11 @@ export default {
   methods: {
     async getPost() {
       try {
-        this.contentTest = (
+        this.post = (
           await axios.get(
             `https://endorphinoutdoor.com/wp-json/wp/v2/posts/${this.$route.params.id}`
           )
-        ).data.content.rendered;
+        ).data;
         // console.log(this.coordinates);
       } catch (error) {
         console.log(error);
@@ -73,10 +73,15 @@ export default {
 
 .editorBox {
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
+  flex-direction: column;
   padding: 20px;
   padding-top: 120px;
+}
+.post {
+  width: 100%;
 }
 .editor {
   height: 100%;

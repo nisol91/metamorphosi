@@ -6,9 +6,10 @@
         v-for="(post, i) in blogPostsFiltered"
         :key="i + `_blogPost`"
       >
-        <q-skeleton :animation="pulse" class="skel" />
-        <q-skeleton :animation="pulse" class="skel" />
-        <q-skeleton :animation="pulse" class="skel" />
+        <q-skeleton :animation="'pulse'" class="skel" />
+        <q-skeleton :animation="'pulse'" class="skel" />
+        <q-skeleton :animation="'pulse'" class="skel" />
+
       </div>
     </div>
 
