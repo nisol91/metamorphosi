@@ -2,9 +2,9 @@
   <!-- nell index è comodo mettere la navigazione dell'app -->
   <div>
     <v-app>
-      <div class="mainBox">
+      <div class="mainBox" v-scroll="scrolled">
         <!-- header menu -->
-        <div class="mTop" v-if="loaded">
+        <div class="mTop" v-if="loaded" :class="[{ menuBkg: scroll > 200 }]">
           <div class="mTopEl mCont">
             <div class="mLine"></div>
             <div class="mContText">CONTACTS</div>
@@ -230,6 +230,7 @@ export default {
       // lastSearch: this.$store.state.lastSearch,
       menuOpen: false,
       loaded: false,
+      scroll: null,
     };
   },
   async created() {
@@ -252,6 +253,9 @@ export default {
     }, 2000);
   },
   methods: {
+    scrolled(position) {
+      this.scroll = position;
+    },
     // menu
     selectEl(value) {
       console.log("select el");
@@ -303,9 +307,14 @@ export default {
 };
 </script>
 <style lang="scss">
+.menuBkg {
+  background: rgba(167, 167, 167, 0.596);
+  transition: 1s;
+}
 .mTop {
   width: 100vw;
   height: 100px;
+  transition: 1s;
   display: flex;
   justify-content: space-around;
   align-items: center;
