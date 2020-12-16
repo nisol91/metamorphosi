@@ -17,6 +17,7 @@ export default {
   },
   created() {
     this.getPost();
+    this.getCategories();
   },
   methods: {
     async getPost() {
@@ -33,9 +34,9 @@ export default {
     },
     async getCategories() {
       try {
-        this.contentTest = (
+        this.categories = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/categories/${this.$route.params.id}`
+            `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
           )
         ).data.content.rendered;
         // console.log(this.coordinates);

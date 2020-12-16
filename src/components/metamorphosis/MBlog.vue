@@ -1,5 +1,5 @@
 <template>
-  <div class="mBlogBox">
+  <div class="mBlogBox" v-if="loaded">
     <div class="blogPosts">
       <div
         class="blogPost"
@@ -9,9 +9,13 @@
         <div class="pSx">
           <div class="pCategory">
             {{ post.title.rendered }}
-            <v-icon v-if="userRole && userRole == adminCode" class="editPost"
-              >mdi-playlist-edit</v-icon
+            <div
+              class="pTag"
+              v-for="(cat, i) in post.catNames"
+              :key="i + `_tag`"
             >
+              {{ cat }}
+            </div>
           </div>
           <router-link
             class="pTitle"
@@ -28,11 +32,16 @@
           <div class="pDate">
             {{ new Date(post.date) | moment("dddd, MMMM Do YYYY") }}
           </div>
-          <!-- <div class="pTags">
-            <div class="pTag" v-for="(tag, i) in post.tags" :key="i + `_tag`">
-              {{ tag }}
+
+          <div class="pTags">
+            <div
+              class="pTag"
+              v-for="(cat, i) in post.catNames"
+              :key="i + `_tag`"
+            >
+              {{ cat }}
             </div>
-          </div> -->
+          </div>
         </div>
         <div class="pDx">
           <!-- <v-img
@@ -67,8 +76,11 @@ export default {
   data() {
     return {
       blogPosts: {},
+      categories: [],
+      tags: [],
       env: process.env.VUE_APP_DB_ENV,
       adminCode: null,
+      loaded: false,
     };
   },
   created() {
@@ -80,6 +92,41 @@ export default {
         this.blogPosts = (
           await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/posts`)
         ).data;
+        // console.log(this.coordinates);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getCategories() {
+      try {
+        var categories = [];
+        var categoriesRaw = (
+          await axios.get(
+            `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
+          )
+        ).data;
+        categoriesRaw.forEach((cat) => {
+          var temp = new Object();
+          temp["id"] = cat.id;
+          temp["name"] = cat.name;
+          temp["slug"] = cat.slug;
+          categories.push(temp);
+        });
+        this.categories = categories;
+
+        var posts = this.blogPosts;
+        posts.forEach((post) => {
+          post["catNames"] = [];
+          post.categories.forEach((postCat) => {
+            this.categories.forEach((cat) => {
+              if (postCat === cat.id) {
+                post["catNames"].push(cat.name);
+              }
+            });
+          });
+        });
+        this.blogPosts = posts;
+
         // console.log(this.coordinates);
       } catch (error) {
         console.log(error);
@@ -101,11 +148,16 @@ export default {
     //       this.blogPosts = posts;
     //     });
     // },
-    getAdminCode() {
-      this.$store.dispatch("getEnvVariables").then((env) => {
-        this.adminCode = env[0].superAdmin;
-        this.getPosts();
-      });
+    async getAdminCode() {
+      this.loaded = false;
+      this.$store
+        .dispatch("getEnvVariables")
+        .then((env) => {
+          this.adminCode = env[0].superAdmin;
+        })
+        .then(await this.getPosts())
+        .then(await this.getCategories())
+        .then((this.loaded = true));
     },
   },
   computed: {
