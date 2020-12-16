@@ -44,9 +44,9 @@
           </div>
         </div>
         <div class="pDx">
-          <!-- <v-img
-            v-if="post.media"
-            :src="post.media[0]"
+          <v-img
+            v-if="post.featured_media_url"
+            :src="post.featured_media_url"
             class="grey lighten-2 pMedia"
             :aspect-ratio="16 / 9"
           >
@@ -58,7 +58,7 @@
                 ></v-progress-circular>
               </v-row>
             </template>
-          </v-img> -->
+          </v-img>
         </div>
       </div>
     </div>
@@ -97,14 +97,22 @@ export default {
         console.log(error);
       }
     },
-    async getCategories() {
+    async getOtherFields() {
       try {
         var categories = [];
+        var tags = [];
+
         var categoriesRaw = (
           await axios.get(
             `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
           )
         ).data;
+
+        var tagsRaw = (
+          await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/tags`)
+        ).data;
+
+        // ----
         categoriesRaw.forEach((cat) => {
           var temp = new Object();
           temp["id"] = cat.id;
@@ -113,10 +121,26 @@ export default {
           categories.push(temp);
         });
         this.categories = categories;
+        //
+        tagsRaw.forEach((tag) => {
+          var temp = new Object();
+          temp["id"] = tag.id;
+          temp["name"] = tag.name;
+          temp["slug"] = tag.slug;
+          tags.push(temp);
+        });
+        this.tags = tags;
 
+        // ----
         var posts = this.blogPosts;
-        posts.forEach((post) => {
+        // posts.forEach((post) => {
+        for (const post of posts) {
           post["catNames"] = [];
+          post["featured_media_url"] = (
+            await axios.get(
+              `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
+            )
+          ).data.link;
           post.categories.forEach((postCat) => {
             this.categories.forEach((cat) => {
               if (postCat === cat.id) {
@@ -124,7 +148,7 @@ export default {
               }
             });
           });
-        });
+        }
         this.blogPosts = posts;
 
         // console.log(this.coordinates);
@@ -156,7 +180,7 @@ export default {
           this.adminCode = env[0].superAdmin;
         })
         .then(await this.getPosts())
-        .then(await this.getCategories())
+        .then(await this.getOtherFields())
         .then((this.loaded = true));
     },
   },
