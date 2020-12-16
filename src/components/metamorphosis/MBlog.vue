@@ -1,9 +1,19 @@
 <template>
   <div class="mBlogBox" v-if="loaded">
     <div class="blogPosts">
+      <div class="searchBarPosts">
+        <div>Search post</div>
+        <input
+          type="text"
+          v-model="searchValue"
+          class="form-control"
+          @keyup="searchEvent(searchValue)"
+        />
+      </div>
+
       <div
         class="blogPost"
-        v-for="(post, i) in blogPosts"
+        v-for="(post, i) in blogPostsFiltered"
         :key="i + `_blogPost`"
       >
         <div class="pSx">
@@ -64,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="blogFilters">dx</div>
+    <!-- <div class="blogFilters">dx</div> -->
   </div>
 </template>
 <script>
@@ -73,6 +83,7 @@ import firebase from "firebase";
 import VueMoment from "vue-moment";
 import { mapState, mapGetters } from "vuex";
 import axios from "axios";
+import _ from "lodash";
 
 export default {
   data() {
@@ -84,12 +95,21 @@ export default {
       env: process.env.VUE_APP_DB_ENV,
       adminCode: null,
       loaded: false,
+      searchValue: null,
     };
   },
   created() {
     this.getAdminCode();
   },
   methods: {
+    searchEvent(val) {
+      this.blogPostsFiltered = _.filter(this.blogPosts, function (o) {
+        if (o.title.rendered) {
+          return o.title.rendered.includes(val);
+        }
+      });
+      //    console.log(this.wineEventsFiltered);
+    },
     async filterTax(tax, type) {
       console.log(tax);
       console.log(type);
@@ -104,6 +124,7 @@ export default {
         this.blogPosts = (
           await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/posts`)
         ).data;
+        this.blogPostsFiltered = this.blogPosts;
         // console.log(this.coordinates);
       } catch (error) {
         console.log(error);
@@ -214,7 +235,10 @@ export default {
 </script>
 <style lang="scss">
 @import "../../sass/_variables.scss";
-
+.searchBarPosts {
+  width: 80%;
+  margin: 20px;
+}
 .mBlogBox {
   width: 100%;
   min-height: 100vh;
@@ -228,7 +252,7 @@ export default {
   width: 80%;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   border-right: 0.5px solid rgb(197, 197, 197);
