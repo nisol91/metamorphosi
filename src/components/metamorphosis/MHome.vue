@@ -100,7 +100,7 @@
       <div class="mTripartitionMobile">
         <div class="mTripMobile">ABOUT</div>
         <div class="mTripMobile">CONTENTS</div>
-        <div class="mTripMobile">BLOG</div>
+        <div class="mTripMobile" @click="pushBlog">BLOG</div>
       </div>
     </div>
   </div>
