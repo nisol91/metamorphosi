@@ -319,6 +319,7 @@ export default {
   cursor: pointer;
   transition: 0.5s;
   padding: 5px;
+  margin: 10px 0;
 
   &:hover {
     background: rgb(194, 194, 194);
@@ -359,10 +360,13 @@ export default {
   align-items: center;
 }
 .pCat {
-  margin: 0 5px;
+  background: rgba(175, 175, 175, 0.678);
+  margin-right: 5px;
   overflow: hidden;
   position: relative;
-  padding: 3px;
+  padding: 5px;
+  border-radius: 3px;
+
   .pLine {
     height: 2px;
     width: 100%;
@@ -373,10 +377,8 @@ export default {
     transition: 0.5s;
   }
   &:hover {
-    .pLine {
-      right: 0px;
-      transition: 0.5s;
-    }
+    transition: 0.5s;
+    background: rgba(98, 98, 98, 0.74);
   }
 }
 .editPost {
@@ -396,12 +398,12 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   .pTag {
-    margin: 0 5px;
+    margin-right: 5px;
     overflow: hidden;
     position: relative;
-    padding: 3px;
+    padding: 5px;
     .pLine {
-      height: 1px;
+      height: 2px;
       width: 100%;
       position: absolute;
       top: 22px;

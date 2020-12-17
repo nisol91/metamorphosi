@@ -1,16 +1,29 @@
 <template>
-  <div class="editorBox" v-if="post">
-    <div class="postTitle" v-if="post">{{ post.title.rendered }}</div>
-    <div class="postDate" v-if="post">
-      {{ new Date(post.date) | moment("dddd, MMMM Do YYYY") }}
+  <div class="editorBox">
+    <div class="load" v-if="!post">
+      <q-linear-progress
+        indeterminate
+        rounded
+        color="blue-grey-6"
+        class="q-mt-sm"
+      />
     </div>
-
-    <div class="postCategory" v-if="post">
-      <div class="pCat" v-for="(cat, i) in post.catNames" :key="i + `_tag`">
-        {{ cat.name }}
+    <div class="postBox" v-if="post">
+      <div class="postTitle" v-if="post">{{ post.title.rendered }}</div>
+      <div class="postDate" v-if="post">
+        {{ new Date(post.date) | moment("dddd, MMMM Do YYYY") }}
       </div>
+
+      <div class="postCategory" v-if="post">
+        <div class="pCat" v-for="(cat, i) in post.catNames" :key="i + `_tag`">
+          {{ cat.name }}
+        </div>
+      </div>
+      <div class="post" v-if="post" v-html="post.content.rendered"></div>
+      <div class="postFooter postShare">share</div>
+      <div class="postFooter">related posts</div>
+      <div class="postFooter">comments</div>
     </div>
-    <div class="post" v-if="post" v-html="post.content.rendered"></div>
   </div>
 </template>
 
@@ -111,12 +124,28 @@ export default {
 </script>
 
 <style lang="scss">
+.load {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.postBox {
+  width: 100%;
+}
+.postFooter {
+  width: 100%;
+  height: 100px;
+  border-top: 2px solid grey;
+}
 .wp-block-columns {
   display: flex;
   justify-content: center;
 }
 .wp-block-image {
-  padding: 0 50px;
+  display: block;
+  overflow: hidden;
 }
 .postCategory {
   font-style: italic;
@@ -135,7 +164,8 @@ export default {
   justify-content: center;
 }
 .postDate {
-  font-size: 20px;
+  font-size: 15px;
+  margin-bottom: 10px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -176,7 +206,7 @@ export default {
 }
 .post {
   width: 100%;
-  border-top: 1px solid grey;
+  border-top: 2px solid rgba(128, 128, 128, 0.603);
   margin-top: 20px;
   padding-top: 20px;
 }
