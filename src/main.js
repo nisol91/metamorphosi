@@ -14,6 +14,8 @@ import VueMeta from 'vue-meta'
 import firebase from "firebase";
 import 'firebase/firestore'
 import { firestorePlugin } from 'vuefire'
+import VueSocialSharing from "vue-social-sharing";
+
 
 // import axios from 'axios'
 // import VueAxios from 'vue-axios';
@@ -65,6 +67,7 @@ Vue.use(VueRouter);
 Vue.use(Vuex)
 Vue.use(VueMapbox, { mapboxgl: Mapbox });
 Vue.use(VueI18n)
+Vue.use(VueSocialSharing);
 
 Vue.use(VueMeta, {
   // optional pluginOptions

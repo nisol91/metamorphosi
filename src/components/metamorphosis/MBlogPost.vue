@@ -20,7 +20,18 @@
         </div>
       </div>
       <div class="post" v-if="post" v-html="post.content.rendered"></div>
-      <div class="postFooter postShare">share</div>
+      <div class="postFooter postShare">
+        <ShareNetwork
+          network="facebook"
+          url="https://news.vuejs.org/issues/180"
+          title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
+          description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
+          quote="The hot reload is so fast it\'s near instant. - Evan You"
+          hashtags="vuejs,vite"
+        >
+          Share on Facebook
+        </ShareNetwork>
+      </div>
       <div class="postFooter">related posts</div>
       <div class="postFooter">comments</div>
     </div>
@@ -30,6 +41,7 @@
 <script>
 import axios from "axios";
 import VueMoment from "vue-moment";
+import VueSocialSharing from "vue-social-sharing";
 
 export default {
   data() {
