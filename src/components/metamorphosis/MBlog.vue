@@ -40,7 +40,7 @@
             class="pTitle"
             :to="{
               name: 'mBlogPost',
-              params: { id: post.id, postFields: post },
+              params: { id: post.id },
             }"
             >{{ post.title.rendered }}</router-link
           >
@@ -185,7 +185,7 @@ export default {
           this.tags = tags;
         }
 
-        // ----
+        // ---- aggiungo i fields aggiuntivi ai post di wp
         var posts = this.blogPosts;
         for (const post of posts) {
           post["catNames"] = [];
@@ -291,7 +291,7 @@ export default {
   align-items: center;
 }
 .blogPost {
-  width: 80%;
+  width: 90%;
   height: auto;
   background: white;
   border-radius: 3px;
@@ -368,6 +368,7 @@ export default {
   border-radius: 3px;
 
   .pLine {
+    opacity: 0;
     height: 2px;
     width: 100%;
     position: absolute;
@@ -410,11 +411,13 @@ export default {
       right: 105px;
       background: black;
       transition: 0.5s;
+      opacity: 0;
     }
     &:hover {
       .pLine {
         right: 0px;
         transition: 0.5s;
+        opacity: 1;
       }
     }
   }

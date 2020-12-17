@@ -21,18 +21,59 @@
       </div>
       <div class="post" v-if="post" v-html="post.content.rendered"></div>
       <div class="postFooter postShare">
+        share:
         <ShareNetwork
+          class="shareIcons"
           network="facebook"
-          url="https://news.vuejs.org/issues/180"
-          title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
-          description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
-          quote="The hot reload is so fast it\'s near instant. - Evan You"
-          hashtags="vuejs,vite"
+          :url="url"
+          title="fb"
         >
-          Share on Facebook
+          <v-icon>mdi-facebook</v-icon>
+        </ShareNetwork>
+        <ShareNetwork
+          class="shareIcons"
+          network="twitter"
+          :url="url"
+          title="insta"
+        >
+          <v-icon>mdi-twitter</v-icon>
         </ShareNetwork>
       </div>
-      <div class="postFooter">related posts</div>
+      <div class="postFooter relPosts">
+        <q-circular-progress
+          v-if="!relatedPosts"
+          indeterminate
+          size="75px"
+          :thickness="0.6"
+          color="blue-grey-7"
+          center-color="grey-8"
+          class="q-ma-md"
+        />
+        <div
+          class="relPost"
+          v-for="(post, i) in relatedPosts"
+          :key="i + `_blogRelatedPost`"
+        >
+          <div class="relPostTitle" @click="pushPost(post.id)">
+            {{ post.title.rendered }}
+          </div>
+          <v-img
+            v-if="post.featured_media_url"
+            :src="post.featured_media_url"
+            class="grey lighten-2 relPostImg"
+            :aspect-ratio="16 / 9"
+          >
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </div>
+      </div>
       <div class="postFooter">comments</div>
     </div>
   </div>
@@ -47,14 +88,72 @@ export default {
   data() {
     return {
       post: null,
+      relatedPosts: null,
       categories: [],
       tags: [],
+      url: "",
     };
   },
-  created() {
-    this.getPost();
+  async created() {
+    await this.getPost();
+    await this.getRelatedPost();
+    this.url = process.env.VUE_APP_URL + this.$route.fullPath;
+    console.log(process.env.VUE_APP_URL + this.$route.fullPath);
   },
   methods: {
+    pushPost(id) {
+      this.$router
+        .push({
+          name: "mBlogPost",
+          params: { id: id },
+        })
+        .then(location.reload());
+    },
+    async getRelatedPost() {
+      try {
+        var relatedPosts = (
+          await axios.get(
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories=${this.categories[0].id}`
+          )
+        ).data;
+
+        console.log(relatedPosts);
+      } catch (error) {
+        console.log(error);
+      }
+      try {
+        // ---- aggiungo i fields aggiuntivi ai post di wp
+        for (const post of relatedPosts) {
+          post["catNames"] = [];
+          post["tagNames"] = [];
+
+          post["featured_media_url"] = (
+            await axios.get(
+              `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
+            )
+          ).data.link;
+          post.categories.forEach((postCat) => {
+            this.categories.forEach((cat) => {
+              if (postCat === cat.id) {
+                post["catNames"].push({ name: cat.name, id: cat.id });
+              }
+            });
+          });
+          post.tags.forEach((postTag) => {
+            this.tags.forEach((tag) => {
+              if (postTag === tag.id) {
+                post["tagNames"].push({ name: tag.name, id: tag.id });
+              }
+            });
+          });
+        }
+        this.relatedPosts = relatedPosts;
+
+        // console.log(this.coordinates);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async getPost() {
       try {
         var post = (
@@ -81,7 +180,7 @@ export default {
             await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/tags`)
           ).data;
 
-          // ----
+          // ---- aggiungo i fields aggiuntivi ai post di wp
           categoriesRaw.forEach((cat) => {
             var temp = new Object();
             temp["id"] = cat.id;
@@ -136,6 +235,13 @@ export default {
 </script>
 
 <style lang="scss">
+.shareIcons {
+  text-decoration: none !important;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
 .load {
   width: 100%;
   height: 80vh;
@@ -150,6 +256,46 @@ export default {
   width: 100%;
   height: 100px;
   border-top: 2px solid grey;
+}
+.relPost {
+  width: 200px;
+  height: 80%;
+  padding: 10px;
+  margin: 10px;
+  background: white;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .relPostImg {
+    width: 70%;
+    border-radius: 3px;
+  }
+  .relPostTitle {
+    cursor: pointer;
+    padding: 3px;
+    transition: 1s;
+    margin: 3px;
+    padding: 3px;
+    text-align: center;
+    border-radius: 3px;
+    &:hover {
+      background: rgba(128, 128, 128, 0.589);
+      transition: 1s;
+    }
+  }
+}
+
+.relPosts {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.postShare {
+  height: 30px;
 }
 .wp-block-columns {
   display: flex;
