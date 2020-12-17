@@ -74,7 +74,25 @@
           </v-img>
         </div>
       </div>
-      <div class="postFooter">comments</div>
+      <div class="postFooter comments">
+        <q-circular-progress
+          v-if="!comments"
+          indeterminate
+          size="75px"
+          :thickness="0.6"
+          color="blue-grey-7"
+          center-color="grey-8"
+          class="q-ma-md"
+        />
+        <div
+          class="comment"
+          v-for="(comment, i) in comments"
+          :key="i + `_comment`"
+        >
+          <div class="commentTitle">{{ comment.author_name }}</div>
+          <div class="" v-html="comment.content.rendered"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -91,16 +109,27 @@ export default {
       relatedPosts: null,
       categories: [],
       tags: [],
+      comments: null,
       url: "",
     };
   },
   async created() {
     await this.getPost();
     await this.getRelatedPost();
+    await this.getComments();
     this.url = process.env.VUE_APP_URL + this.$route.fullPath;
-    console.log(process.env.VUE_APP_URL + this.$route.fullPath);
   },
+
   methods: {
+    async getComments() {
+      var comments = (
+        await axios.get(
+          `https://endorphinoutdoor.com/wp-json/wp/v2/comments?post=${this.post.id}`
+        )
+      ).data;
+      console.log(comments);
+      this.comments = comments;
+    },
     pushPost(id) {
       this.$router
         .push({
@@ -117,7 +146,7 @@ export default {
           )
         ).data;
 
-        console.log(relatedPosts);
+        // console.log(relatedPosts);
       } catch (error) {
         console.log(error);
       }
@@ -235,6 +264,23 @@ export default {
 </script>
 
 <style lang="scss">
+.comments {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+  .comment {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    border-bottom: 2px solid grey;
+    .commentTitle {
+      font-weight: bold;
+    }
+  }
+}
 .shareIcons {
   text-decoration: none !important;
 
@@ -258,7 +304,7 @@ export default {
   border-top: 2px solid grey;
 }
 .relPost {
-  width: 200px;
+  width: 300px;
   height: 80%;
   padding: 10px;
   margin: 10px;
@@ -269,7 +315,7 @@ export default {
   align-items: center;
   flex-direction: column;
   .relPostImg {
-    width: 70%;
+    width: 60%;
     border-radius: 3px;
   }
   .relPostTitle {
@@ -288,14 +334,15 @@ export default {
 }
 
 .relPosts {
-  height: 200px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
 .postShare {
-  height: 30px;
+  height: 50px;
+  padding: 10px 0;
 }
 .wp-block-columns {
   display: flex;
@@ -371,39 +418,14 @@ export default {
 .editor {
   height: 100%;
 }
-.menubar__button {
-  width: 50px;
-  height: 50px;
-  margin: 10px;
-  border: 1px solid black;
-}
-.actions {
-  max-width: 30rem;
-  margin: 0 auto 2rem auto;
-}
-.editor__content {
-  background: white !important;
-  padding: 50px;
-}
-.menubar {
-  background: grey;
-}
-.export {
-  max-width: 30rem;
-  margin: 0 auto 2rem auto;
-
-  pre {
-    padding: 1rem;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    background: black;
-    color: black;
-  }
-
-  code {
-    display: block;
-    white-space: pre-wrap;
+// ##
+@media (max-width: 600px) {
+  .relPosts {
+    flex-direction: column;
+    height: auto;
+    .relPost {
+      width: 80%;
+    }
   }
 }
 </style>

@@ -261,7 +261,7 @@ export default {
   width: 80% !important;
 }
 .searchBarPosts {
-  width: 80%;
+  width: 90%;
   margin: 20px;
 }
 .mBlogBox {
@@ -432,6 +432,13 @@ export default {
   .pSx,
   .pDx {
     width: 100%;
+  }
+  .pCat,
+  .pTag {
+    font-size: 10px !important;
+  }
+  .pLine {
+    height: 1.2px !important;
   }
 }
 </style>
