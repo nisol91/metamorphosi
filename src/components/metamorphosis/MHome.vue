@@ -27,6 +27,7 @@
               mTripHidden: mTripDxHover,
               mShort: mTripDxHover,
               hide: pushedAbout,
+              pushingBlogOthers: pushedBlog,
             },
           ]"
           :style="{
@@ -51,6 +52,7 @@
               mTripCenterHidden: mTripDxHover,
               mTripCenterHidden_2: mTripSxHover,
               pushingAbout: pushedAbout,
+              pushingBlogOthers: pushedBlog,
             },
           ]"
         >
@@ -288,6 +290,11 @@ export default {
   }
   .pushingBlog {
     width: 100vw !important;
+    transition: 1s;
+  }
+  .pushingBlogOthers {
+    opacity: 0;
+    width: 10px !important;
     transition: 1s;
   }
   .mTripText {
