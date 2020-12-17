@@ -40,7 +40,7 @@
             class="pTitle"
             :to="{
               name: 'mBlogPost',
-              params: { id: post.id },
+              params: { id: post.id, postFields: post },
             }"
             >{{ post.title.rendered }}</router-link
           >
@@ -150,11 +150,8 @@ export default {
       }
     },
     async getOtherFields() {
-      console.log("getotherfields");
       try {
         if (this.categories.length == 0 && this.tags.length == 0) {
-          console.log("sono qui");
-
           var categories = [];
           var tags = [];
 
@@ -214,7 +211,6 @@ export default {
             });
           });
         }
-        console.log(posts);
         this.blogPosts = posts;
 
         // console.log(this.coordinates);
@@ -368,10 +364,10 @@ export default {
   position: relative;
   padding: 3px;
   .pLine {
-    height: 1px;
+    height: 2px;
     width: 100%;
     position: absolute;
-    top: 22px;
+    top: 19px;
     right: 105px;
     background: black;
     transition: 0.5s;

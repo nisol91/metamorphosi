@@ -1,28 +1,38 @@
 <template>
   <div class="editorBox" v-if="post">
-    <div class="postTitle">{{ post.title.rendered }}</div>
-    <div class="post" v-html="post.content.rendered"></div>
+    <div class="postTitle" v-if="post">{{ post.title.rendered }}</div>
+    <div class="postDate" v-if="post">
+      {{ new Date(post.date) | moment("dddd, MMMM Do YYYY") }}
+    </div>
+
+    <div class="postCategory" v-if="post">
+      <div class="pCat" v-for="(cat, i) in post.catNames" :key="i + `_tag`">
+        {{ cat.name }}
+      </div>
+    </div>
+    <div class="post" v-if="post" v-html="post.content.rendered"></div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import VueMoment from "vue-moment";
 
 export default {
   data() {
     return {
       post: null,
       categories: [],
+      tags: [],
     };
   },
   created() {
     this.getPost();
-    this.getCategories();
   },
   methods: {
     async getPost() {
       try {
-        this.post = (
+        var post = (
           await axios.get(
             `https://endorphinoutdoor.com/wp-json/wp/v2/posts/${this.$route.params.id}`
           )
@@ -31,14 +41,66 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    async getCategories() {
       try {
-        this.categories = (
+        if (this.categories.length == 0 && this.tags.length == 0) {
+          var categories = [];
+          var tags = [];
+
+          var categoriesRaw = (
+            await axios.get(
+              `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
+            )
+          ).data;
+
+          var tagsRaw = (
+            await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/tags`)
+          ).data;
+
+          // ----
+          categoriesRaw.forEach((cat) => {
+            var temp = new Object();
+            temp["id"] = cat.id;
+            temp["name"] = cat.name;
+            temp["slug"] = cat.slug;
+            categories.push(temp);
+          });
+          this.categories = categories;
+          //
+          tagsRaw.forEach((tag) => {
+            var temp = new Object();
+            temp["id"] = tag.id;
+            temp["name"] = tag.name;
+            temp["slug"] = tag.slug;
+            tags.push(temp);
+          });
+          this.tags = tags;
+        }
+
+        // ----
+        post["catNames"] = [];
+        post["tagNames"] = [];
+
+        post["featured_media_url"] = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
+            `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
           )
-        ).data.content.rendered;
+        ).data.link;
+        post.categories.forEach((postCat) => {
+          this.categories.forEach((cat) => {
+            if (postCat === cat.id) {
+              post["catNames"].push({ name: cat.name, id: cat.id });
+            }
+          });
+        });
+        post.tags.forEach((postTag) => {
+          this.tags.forEach((tag) => {
+            if (postTag === tag.id) {
+              post["tagNames"].push({ name: tag.name, id: tag.id });
+            }
+          });
+        });
+        this.post = post;
+
         // console.log(this.coordinates);
       } catch (error) {
         console.log(error);
@@ -49,18 +111,46 @@ export default {
 </script>
 
 <style lang="scss">
+.wp-block-columns {
+  display: flex;
+  justify-content: center;
+}
+.wp-block-image {
+  padding: 0 50px;
+}
+.postCategory {
+  font-style: italic;
+  width: 100%;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .postTitle {
   font-size: 30px;
   font-weight: bold;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.has-text-align-right {
+.postDate {
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.has-text-align-right,
+.alignright {
   text-align: right !important;
 }
-.has-text-align-left {
+.has-text-align-left,
+.alignleft {
   text-align: left !important;
 }
-.has-text-align-center {
+.has-text-align-center,
+.aligncenter {
   text-align: center !important;
 }
 .postBox {
@@ -78,7 +168,6 @@ export default {
 
 .editorBox {
   min-height: 100vh;
-  width: 100vw;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -87,6 +176,9 @@ export default {
 }
 .post {
   width: 100%;
+  border-top: 1px solid grey;
+  margin-top: 20px;
+  padding-top: 20px;
 }
 .editor {
   height: 100%;

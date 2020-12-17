@@ -73,6 +73,7 @@
               mTripHidden: mTripSxHover,
               mShort: mTripSxHover,
               hide: pushedAbout,
+              pushingBlog: pushedBlog,
             },
           ]"
           :style="{
@@ -84,6 +85,7 @@
             class="mTripText mTripTextDx"
             @mouseenter="mTripDxHover = true"
             @mouseleave="mTripDxHover = false"
+            @click="pushBlog"
           >
             BLOG
             <div class="mLine mLineDx"></div>
@@ -111,6 +113,8 @@ export default {
       mTripDxHover: false,
       mTripSxHover: false,
       pushedAbout: false,
+      pushedBlog: false,
+
       backgrounds: [
         "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/t4.jpg?alt=media&token=65c4464d-b30d-4dd7-a30c-7c5506cd5350",
         "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/t3.jpg?alt=media&token=fe69ab91-af45-4a09-9adc-047ad3c76994",
@@ -130,6 +134,15 @@ export default {
       setTimeout(() => {
         this.$router.push({
           name: "mAbout",
+          // params: { eventName: this.event.name },
+        });
+      }, 2000);
+    },
+    pushBlog() {
+      this.pushedBlog = true;
+      setTimeout(() => {
+        this.$router.push({
+          name: "mBlog",
           // params: { eventName: this.event.name },
         });
       }, 2000);
@@ -272,6 +285,10 @@ export default {
     background: rgba(128, 128, 128, 0.404);
     transition: 1s;
     width: 55vw !important;
+  }
+  .pushingBlog {
+    width: 100vw !important;
+    transition: 1s;
   }
   .mTripText {
     color: white;
