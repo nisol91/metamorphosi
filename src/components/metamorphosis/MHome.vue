@@ -107,6 +107,7 @@
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -129,6 +130,7 @@ export default {
     this.$store.commit("isMetamorphosis", true);
     this.setSplash();
     this.backImgs();
+    this.$store.commit("selectEl", "mHome");
   },
   methods: {
     pushAbout() {

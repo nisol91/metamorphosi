@@ -23,11 +23,55 @@ export default {
         isEmailVerified: true,
         userRole: "",
         user: {},
-        globalMessage: ''
+        globalMessage: '',
+        menuEl: {
+            mHome: {
+                val: false,
+                slug: "mHome",
+            },
+            mAbout: {
+                val: false,
+                slug: "mAbout",
+            },
+            mContents: {
+                val: false,
+                slug: "mContents",
+            },
+            mBlog: {
+                val: false,
+                slug: "mBlog",
+            },
+            mShop: {
+                val: false,
+                slug: "mShop",
+            },
+            mContacts: {
+                val: false,
+                slug: "mContacts",
+            },
+            login: {
+                val: false,
+                slug: "login",
+            },
+            userProfile: {
+                val: false,
+                slug: "userProfile",
+            },
+        },
     },
     // le mutations hanno solo il compito di mutare lo stato dell'app, sono
     // come semplici funzioni
     mutations: {
+        selectEl(state, payload) {
+            var menu = state.menuEl;
+            for (const el in menu) {
+                if (menu[el].slug != payload) {
+                    menu[el].val = false;
+                } else {
+                    menu[el].val = true;
+                }
+            }
+        },
         toggleMenu(state) {
             state.menu = !state.menu;
         },
@@ -114,6 +158,7 @@ export default {
     // le actions mi chiamano le mutations e in più salvano nel local storage
     // di modo che anche al refresh i dati rimangano salvati
     actions: {
+
         addItemNumberToBasketItem({ commit, state }, payload) {
             commit('addItemNumberToBasketItem', payload)
             localStorage.setItem('basket', JSON.stringify(state.basket))
@@ -171,6 +216,7 @@ export default {
         // ################################################
         //######################## firebase  ##################
         // ################################################
+
 
         getEnvVariables() {
             return new Promise((resolve, reject) => {

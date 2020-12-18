@@ -193,40 +193,6 @@ export default {
   },
   data() {
     return {
-      menuEl: {
-        mHome: {
-          val: true,
-          slug: "mHome",
-        },
-        mAbout: {
-          val: false,
-          slug: "mAbout",
-        },
-        mContents: {
-          val: false,
-          slug: "mContents",
-        },
-        mBlog: {
-          val: false,
-          slug: "mBlog",
-        },
-        mShop: {
-          val: false,
-          slug: "mShop",
-        },
-        mContacts: {
-          val: false,
-          slug: "mContacts",
-        },
-        login: {
-          val: false,
-          slug: "login",
-        },
-        userProfile: {
-          val: false,
-          slug: "userProfile",
-        },
-      },
       // lastSearch: this.$store.state.lastSearch,
       menuOpen: false,
       loaded: false,
@@ -259,14 +225,7 @@ export default {
     // menu
     selectEl(value) {
       console.log("select el");
-      var menu = this.menuEl;
-      for (const el in menu) {
-        if (menu[el].slug != value) {
-          menu[el].val = false;
-        } else {
-          menu[el].val = true;
-        }
-      }
+      this.$store.commit("selectEl", value);
     },
     toggleMenu() {
       this.$store.commit("toggleMenu");
@@ -301,6 +260,7 @@ export default {
       globalMessage: "globalMessage",
       isMetamorphosis: "isMetamorphosis",
       menu: "menu",
+      menuEl: "menuEl",
     }),
     ...mapGetters({ itemsInBasket: "itemsInBasket" }),
   },

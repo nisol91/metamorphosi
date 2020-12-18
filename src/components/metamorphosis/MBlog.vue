@@ -109,6 +109,7 @@ export default {
   },
   created() {
     this.getAdminCode();
+    this.$store.commit("selectEl", "mBlog");
   },
   methods: {
     searchEvent(val) {
@@ -250,6 +251,7 @@ export default {
     ...mapState({
       user: "user",
       userRole: "userRole",
+      menuEl: "menuEl",
     }),
   },
 };
