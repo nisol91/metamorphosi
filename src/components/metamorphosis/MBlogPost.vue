@@ -131,12 +131,15 @@ export default {
       this.comments = comments;
     },
     pushPost(id) {
-      this.$router
-        .push({
-          name: "mBlogPost",
-          params: { id: id },
-        })
-        .then(location.reload());
+      this.$vuetify.goTo(0);
+      setTimeout(() => {
+        this.$router
+          .push({
+            name: "mBlogPost",
+            params: { id: id },
+          })
+          .then(location.reload());
+      }, 1000);
     },
     async getRelatedPost() {
       try {
