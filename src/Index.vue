@@ -9,9 +9,9 @@
             <div class="mLine"></div>
             <div class="mContText">CONTACTS</div>
           </div>
-          <router-link :to="{ name: 'mHome' }" class="mTopEl mLogo"
-            ><div style="color: red">中文</div></router-link
-          >
+          <router-link :to="{ name: 'mHome' }" class="mTopEl mLogo">
+            <div style="color: red">中文</div>
+          </router-link>
           <div class="mTopEl mMenu">
             <div
               class="menuOpen"

@@ -60,6 +60,7 @@ Vue.config.productionTip = false
 import _ from "lodash"; */
 import './quasar'
 
+Vue.use(window.VueBabylonjs);
 Vue.use(require('vue-faker'));
 Vue.use(require('vue-moment'));
 Vue.use(firestorePlugin)

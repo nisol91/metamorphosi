@@ -92,6 +92,30 @@
           <div class="commentTitle">{{ comment.author_name }}</div>
           <div class="" v-html="comment.content.rendered"></div>
         </div>
+        <v-form
+          action="#"
+          @submit.prevent="addEvent"
+          ref="form"
+          v-model="valid"
+          lazy-validation
+        >
+          <v-text-field
+            label="email"
+            value
+            required
+            v-model="form.email"
+          ></v-text-field>
+        </v-form>
+        <v-btn
+          class="saveEvent"
+          type="submit"
+          color="primary"
+          rounded
+          dark
+          depressed
+        >
+          send
+        </v-btn>
       </div>
     </div>
   </div>
@@ -111,6 +135,11 @@ export default {
       tags: [],
       comments: null,
       url: "",
+      form: {
+        email: "",
+        name: "",
+        content: "",
+      },
     };
   },
   async created() {

@@ -11,10 +11,79 @@
     }"
   >
     <!-- splash -->
-    <div v-if="splash" class="splash pulsate-fwd">METAMORPHOSI</div>
+    <!-- <div v-if="splash" class="splash pulsate-fwd">METAMORPHOSI</div> -->
+    <div v-if="splash" class="canvasBoxBabylon">
+      <Scene>
+        <Property name="clearColor" color="#505050"></Property>
+        <Camera
+          type="arcRotate"
+          :properties="{ position: $vector([cameraZoom, 0, 0]) }"
+        ></Camera>
+        <!-- Standard Mesh component props-->
+        <!-- Properties prop object on Entity component-->
+        <!-- $vector() helper function-->
+        <Entity :position="[0, 0, 0]">
+          <Animation property="rotation.x" :duration="5">
+            <Key frame="0%" :value="0"></Key>
+            <Key frame="100%" :value="Math.PI * 2"></Key>
+          </Animation>
+          <Sphere
+            :properties="{
+              position: $vector([-0.6, -1, 0]),
+            }"
+            ><Material diffuse="#143b60"> </Material
+          ></Sphere>
+          <Sphere
+            :properties="{
+              position: $vector([0.6, 1, 0]),
+            }"
+            ><Material diffuse="#143b60"> </Material
+          ></Sphere>
+        </Entity>
+        <Entity>
+          <Animation
+            property="rotation.x"
+            :duration="5"
+            :end="Math.PI * 2"
+          ></Animation>
+          <!-- Standard Light component props-->
+          <PointLight diffuse="#F0F" :position="[0, 0, 4]"></PointLight>
+        </Entity>
+        <Entity>
+          <Animation
+            property="rotation.y"
+            :duration="5"
+            :end="Math.PI * 2"
+          ></Animation>
+          <!-- Property components-->
+          <PointLight>
+            <property name="diffuse" color="#0FF"></property>
+            <property name="position" :vector="[0, 0, 4]"></property>
+          </PointLight>
+        </Entity>
+        <Entity>
+          <Animation
+            property="rotation.z"
+            :duration="5"
+            :end="Math.PI * 2"
+          ></Animation>
+          <!-- Properties prop object on Entity component (set multiple values!)-->
+          <!-- $color() helper function-->
+          <PointLight
+            :properties="{
+              diffuse: $color('#FF0'),
+              specular: $color({ r: 1, g: 0, b: 0 }),
+            }"
+          >
+            <!-- Mix-and-match!-->
+            <property name="position" :vector="[0, 4, 0]"></property>
+          </PointLight>
+        </Entity>
+      </Scene>
+    </div>
 
     <!-- desktop tripartition -->
-    <div v-if="!splash" class="mHome">
+    <div v-if="!splash" class="mHome fade-in-home">
       <div class="mImgBackgroundOverlay"></div>
       <div v-if="menu" class="mBackgroundOverlay fade-in fade-out"></div>
 
@@ -127,6 +196,7 @@ export default {
     };
   },
   created() {
+    console.log(window.innerWidth);
     this.$store.commit("isMetamorphosis", true);
     this.setSplash();
     this.backImgs();
@@ -154,7 +224,7 @@ export default {
     setSplash() {
       setTimeout(() => {
         this.splash = false;
-      }, 2000);
+      }, 4000);
     },
     backImgs() {
       setInterval(() => {
@@ -172,10 +242,25 @@ export default {
       isMetamorphosis: "isMetamorphosis",
       menu: "menu",
     }),
+    cameraZoom: function () {
+      var w = window.innerWidth;
+      if (w < 600) {
+        return 15;
+      } else {
+        return 5;
+      }
+    },
   },
 };
 </script>
 <style lang="scss">
+.canvasBoxBabylon {
+  height: 60vh;
+  width: 60vw;
+  canvas {
+    outline: none !important;
+  }
+}
 .mHomeBox {
   display: flex;
   justify-content: center;
@@ -401,6 +486,11 @@ export default {
   animation: pulsate-fwd 1.5s ease-in-out infinite both;
 }
 
+.fade-in-home {
+  -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
 .mTripartitionMobile {
   display: none;
   position: absolute;
@@ -457,6 +547,12 @@ export default {
     justify-content: center;
     align-items: center;
     height: 33%;
+  }
+}
+@media (max-width: 600px) {
+  .canvasBoxBabylon {
+    height: 100vh;
+    width: 100vw;
   }
 }
 </style>
