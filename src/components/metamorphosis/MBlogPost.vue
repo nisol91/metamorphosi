@@ -21,7 +21,8 @@
       </div>
       <div class="post" v-if="post" v-html="post.content.rendered"></div>
       <div class="postFooter postShare">
-        share:
+        <div class="shareTitle">SHARE</div>
+
         <ShareNetwork
           class="shareIcons"
           network="facebook"
@@ -40,6 +41,8 @@
         </ShareNetwork>
       </div>
       <div class="postFooter relPosts">
+        <div class="relTitle">RELATED POSTS</div>
+
         <q-circular-progress
           v-if="!relatedPosts"
           indeterminate
@@ -75,6 +78,7 @@
         </div>
       </div>
       <div class="postFooter comments">
+        <div class="commentsTitle">COMMENTS</div>
         <q-circular-progress
           v-if="!comments"
           indeterminate
@@ -344,12 +348,21 @@ export default {
   border-top: 2px solid grey;
 }
 .comments {
+  position: relative;
+
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   padding-top: 10px;
+  .commentsTitle {
+    position: absolute;
+    left: 40px;
+    top: -10px;
+    background: #bec0c8;
+    padding: 0 20px;
+  }
   .comment {
     display: flex;
     justify-content: center;
@@ -400,15 +413,32 @@ export default {
 }
 
 .relPosts {
+  position: relative;
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  padding: 20px 0;
+  .relTitle {
+    position: absolute;
+    left: 40px;
+    top: -10px;
+    background: #bec0c8;
+    padding: 0 20px;
+  }
 }
 .postShare {
+  position: relative;
   height: 50px;
   padding: 10px 0;
+  .shareTitle {
+    position: absolute;
+    left: 40px;
+    top: -10px;
+    background: #bec0c8;
+    padding: 0 20px;
+  }
 }
 .wp-block-columns {
   display: flex;

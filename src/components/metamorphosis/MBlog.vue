@@ -302,6 +302,7 @@ export default {
   justify-content: space-around;
   align-items: center;
   padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .blogPostSkel {
   width: 80%;
@@ -368,6 +369,7 @@ export default {
   position: relative;
   padding: 5px;
   border-radius: 3px;
+  font-size: 12px;
 
   .pLine {
     opacity: 0;
@@ -394,7 +396,6 @@ export default {
   margin: 5px 0;
 }
 .pTags {
-  width: 80%;
   cursor: pointer;
   display: flex;
   margin: 5px 0;
