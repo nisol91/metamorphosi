@@ -94,28 +94,38 @@
         </div>
         <v-form
           action="#"
-          @submit.prevent="addEvent"
+          @submit.prevent="addComment"
           ref="form"
           v-model="valid"
           lazy-validation
+          class="commentForm"
         >
+          <v-textarea
+            name="input-7-1"
+            filled
+            label="Comment here"
+            class="commentContent"
+            auto-grow
+            v-model="form.content"
+          ></v-textarea>
           <v-text-field
-            label="email"
+            label="name"
+            :rules="rules"
             value
             required
-            v-model="form.email"
+            v-model="form.name"
           ></v-text-field>
+          <v-btn
+            class="saveEvent"
+            type="submit"
+            color="primary"
+            rounded
+            dark
+            depressed
+          >
+            send
+          </v-btn>
         </v-form>
-        <v-btn
-          class="saveEvent"
-          type="submit"
-          color="primary"
-          rounded
-          dark
-          depressed
-        >
-          send
-        </v-btn>
       </div>
     </div>
   </div>
@@ -135,8 +145,12 @@ export default {
       tags: [],
       comments: null,
       url: "",
+      valid: true,
+      rules: [
+        (v) => !!v || "field is required",
+        (v) => (v && v.length >= 1) || "Name must be more than 1 characters",
+      ],
       form: {
-        email: "",
         name: "",
         content: "",
       },
@@ -150,6 +164,17 @@ export default {
   },
 
   methods: {
+    async addComment() {
+      var commentPost = await axios.post(
+        `https://endorphinoutdoor.com/wp-json/wp/v2/comments`,
+        {
+          author_name: this.form.name,
+          content: this.form.content,
+          post: this.post.id,
+        }
+      );
+      console.log(commentPost);
+    },
     async getComments() {
       var comments = (
         await axios.get(
@@ -296,23 +321,6 @@ export default {
 </script>
 
 <style lang="scss">
-.comments {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 10px;
-  .comment {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    border-bottom: 2px solid grey;
-    .commentTitle {
-      font-weight: bold;
-    }
-  }
-}
 .shareIcons {
   text-decoration: none !important;
 
@@ -334,6 +342,32 @@ export default {
   width: 100%;
   height: 100px;
   border-top: 2px solid grey;
+}
+.comments {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+  .comment {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    border-bottom: 2px solid grey;
+    .commentTitle {
+      font-weight: bold;
+    }
+  }
+}
+.commentContent {
+  width: 100%;
+}
+.commentForm {
+  height: auto;
+  width: 100%;
+  padding-top: 30px;
 }
 .relPost {
   width: 300px;
