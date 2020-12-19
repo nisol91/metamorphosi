@@ -13,6 +13,7 @@
     <!-- splash -->
     <!-- <div v-if="splash" class="splash pulsate-fwd">METAMORPHOSI</div> -->
     <div v-if="splash" class="canvasBoxBabylon">
+      <div class="splashText pulsate-fwd">METAMORPHOSI</div>
       <Scene>
         <Property name="clearColor" color="#505050"></Property>
         <Camera
@@ -257,6 +258,14 @@ export default {
 };
 </script>
 <style lang="scss">
+.splashText {
+  position: absolute;
+  top: 50vh;
+  left: calc(50vw - 115px);
+  color: white;
+  font-size: 30px;
+  width: 100px;
+}
 .canvasBoxBabylon {
   height: 60vh;
   width: 60vw;
@@ -556,6 +565,9 @@ export default {
   .canvasBoxBabylon {
     height: 100vh;
     width: 100vw;
+  }
+  .splashText {
+    left: calc(50vw - 125px);
   }
 }
 </style>

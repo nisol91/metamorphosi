@@ -83,6 +83,15 @@
     </div>
     <div class="blogFilters">
       <div class="fTitle">categories:</div>
+      <q-circular-progress
+        v-if="categories.length == 0"
+        indeterminate
+        size="75px"
+        :thickness="0.6"
+        color="blue-grey-7"
+        center-color="grey-8"
+        class="q-ma-md"
+      />
       <div
         class="fCat"
         v-for="(cat, i) in categories"
@@ -320,13 +329,14 @@ export default {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  padding: 30px 0;
   .fTitle {
     font-size: 20px;
   }
   .fCat {
     cursor: pointer;
     transition: 1s;
-
+    margin-top: 10px;
     &:hover {
       color: grey;
       transition: 1s;
@@ -491,6 +501,18 @@ export default {
   }
   .pLine {
     height: 1.2px !important;
+  }
+  .mBlogBox {
+    flex-wrap: wrap;
+  }
+  .blogPosts {
+    width: 100%;
+    border-right: none;
+  }
+  .blogFilters {
+    width: 100%;
+    height: auto;
+    padding: 30px;
   }
 }
 </style>

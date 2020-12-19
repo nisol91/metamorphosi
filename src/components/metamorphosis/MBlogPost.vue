@@ -362,7 +362,7 @@ export default {
   .commentsTitle {
     position: absolute;
     left: 40px;
-    top: -10px;
+    top: -11px;
     background: #bec0c8;
     padding: 0 20px;
   }

@@ -192,7 +192,7 @@
         </transition>
 
         <!-- footer -->
-        <div class="mFooter" v-if="notHome">footer</div>
+        <div class="mFooter" v-if="notHome">Metamorphosi 2020</div>
 
         <!-- for some type of notification -->
         <global-message
@@ -303,6 +303,10 @@ export default {
   width: 100%;
   height: 100px;
   background: rgb(41, 41, 41);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 .colorBlack {
   color: black !important;
