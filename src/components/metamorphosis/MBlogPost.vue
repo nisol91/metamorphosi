@@ -4,7 +4,7 @@
       <q-linear-progress
         indeterminate
         rounded
-        color="blue-grey-6"
+        color="primary"
         class="q-mt-sm"
       />
     </div>
@@ -127,7 +127,7 @@
             dark
             depressed
           >
-            send
+            post comment
           </v-btn>
         </v-form>
       </div>
@@ -165,7 +165,9 @@ export default {
     await this.getRelatedPost();
     await this.getComments();
     this.url = process.env.VUE_APP_URL + this.$route.fullPath;
-    this.$store.commit("toggleHomeMenuColor", true);
+    setTimeout(() => {
+      this.$store.commit("toggleHomeMenuColor", true);
+    }, 2000);
   },
 
   methods: {
@@ -431,8 +433,11 @@ export default {
 }
 .postShare {
   position: relative;
-  height: 50px;
+  height: 70px;
   padding: 10px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   .shareTitle {
     position: absolute;
     left: 40px;

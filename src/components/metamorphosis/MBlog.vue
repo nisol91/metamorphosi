@@ -108,7 +108,9 @@ export default {
   created() {
     this.getAdminCode();
     this.$store.commit("selectEl", "mBlog");
-    this.$store.commit("toggleHomeMenuColor", true);
+    setTimeout(() => {
+      this.$store.commit("toggleHomeMenuColor", true);
+    }, 2000);
   },
   methods: {
     searchEvent(val) {
@@ -353,8 +355,9 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.pSubtitle {
-  font-size: 25px;
+.pSubTitle {
+  font-size: 15px;
+  margin-left: 5px;
 }
 .pMedia {
   width: 100%;
@@ -370,8 +373,9 @@ export default {
   align-items: center;
 }
 .pCat {
-  background: rgba(175, 175, 175, 0.678);
+  background: $primary-color;
   margin-right: 5px;
+  margin-left: 5px;
   overflow: hidden;
   position: relative;
   padding: 5px;
@@ -401,6 +405,7 @@ export default {
   font-weight: 700;
   font-size: 12px;
   margin: 5px 0;
+  margin-left: 5px;
 }
 .pTags {
   cursor: pointer;

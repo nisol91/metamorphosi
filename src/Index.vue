@@ -191,6 +191,9 @@
           <router-view></router-view>
         </transition>
 
+        <!-- footer -->
+        <div class="mFooter" v-if="notHome">footer</div>
+
         <!-- for some type of notification -->
         <global-message
           v-if="globalMessage"
@@ -296,6 +299,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.mFooter {
+  width: 100%;
+  height: 100px;
+  background: rgb(41, 41, 41);
+}
 .colorBlack {
   color: black !important;
 }

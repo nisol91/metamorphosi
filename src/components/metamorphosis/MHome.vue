@@ -201,7 +201,9 @@ export default {
     this.setSplash();
     this.backImgs();
     this.$store.commit("selectEl", "mHome");
-    this.$store.commit("toggleHomeMenuColor", false);
+    setTimeout(() => {
+      this.$store.commit("toggleHomeMenuColor", false);
+    }, 2000);
   },
   methods: {
     pushAbout() {
@@ -311,7 +313,7 @@ export default {
     opacity: 0;
     transition: 0.5s;
     width: 100%;
-    height: 1px;
+    height: 2px;
     background: white;
   }
   .menuLineShow {

@@ -7,7 +7,20 @@ import '@quasar/extras/material-icons/material-icons.css'
 import { Quasar, Scroll, QSkeleton, QLinearProgress, QCircularProgress } from 'quasar'
 
 Vue.use(Quasar, {
-  config: {},
+  config: {
+    brand: {
+      primary: '#9a9ead',
+      secondary: '#26A69A',
+      accent: '#9C27B0',
+
+      dark: '#1d1d1d',
+
+      positive: '#21BA45',
+      negative: '#C10015',
+      info: '#31CCEC',
+      warning: '#F2C037'
+    }
+  },
   plugins: {
   },
   components: { QSkeleton, QLinearProgress, QCircularProgress },
