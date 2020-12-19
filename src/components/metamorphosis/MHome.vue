@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mHomeBox"
+    class="mHomeBox fade-in-home"
     :style="{
       background: `${splash ? 'rgb(80, 80, 80)' : ''}`,
       backgroundImage: `url(${
@@ -487,8 +487,8 @@ export default {
 }
 
 .fade-in-home {
-  -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  -webkit-animation: fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 .mTripartitionMobile {
