@@ -1,6 +1,6 @@
 <template>
   <div class="editorBox">
-    <div v-if="post">
+    <div class="headerMediaBox" v-if="post">
       <v-img
         v-if="post.featured_media_url && post"
         :src="post.featured_media_url"
@@ -225,11 +225,11 @@ export default {
       try {
         var relatedPosts = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories=${this.categories[0].id}`
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?cat=${this.categories[0].id}`
           )
         ).data;
 
-        // console.log(relatedPosts);
+        console.log(relatedPosts);
       } catch (error) {
         console.log(error);
       }
@@ -352,6 +352,9 @@ export default {
   top: -120px;
   left: 0px;
   width: 100vw !important;
+  height: 100vh !important;
+}
+.headerMediaBox {
   height: 100vh !important;
 }
 .shareIcons {
@@ -556,9 +559,6 @@ export default {
     .relPost {
       width: 80%;
     }
-  }
-  .headerMedia {
-    // top: 0px;
   }
 }
 </style>
