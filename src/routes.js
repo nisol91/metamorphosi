@@ -104,10 +104,10 @@ const routes = [
         component: MContacts,
         name: "mContacts",
         // protezione della rotta se non loggato
-        beforeEnter: (to, from, next) => {
-            if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
-            else next()
-        }
+        // beforeEnter: (to, from, next) => {
+        //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
+        //     else next()
+        // }
     },
     {
         path: "/m-shop",

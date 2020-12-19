@@ -4,12 +4,21 @@
     <v-app>
       <div class="mainBox" v-scroll="scrolled">
         <!-- header menu -->
-        <div class="mTop" v-if="loaded" :class="[{ menuBkg: scroll > 200 }]">
+        <div
+          class="mTop included"
+          v-if="loaded"
+          :class="[{ menuBkg: scroll > 200 }]"
+        >
           <div class="mTopEl mCont">
             <div class="mLine" :class="[{ bkgBlack: notHome }]"></div>
-            <div class="mContText" :class="[{ colorBlack: notHome }]">
-              CONTACTS
-            </div>
+            <router-link class="menuEl" :to="{ name: 'mContacts' }">
+              <div
+                class="mContText"
+                :style="{ color: notHome ? 'black' : 'white' }"
+              >
+                CONTACTS
+              </div>
+            </router-link>
           </div>
           <router-link :to="{ name: 'mHome' }" class="mTopEl mLogo">
             <div style="color: red">中文</div>
@@ -18,6 +27,10 @@
             <div
               class="menuOpen"
               :class="[{ showMenu: menu, showMenuLong: isLoggedIn && menu }]"
+              v-click-outside="{
+                handler: onClickOutsideSideBar,
+                include: include,
+              }"
             >
               <router-link :to="{ name: 'mHome' }" class="menuEl">
                 <div
@@ -250,6 +263,13 @@ export default {
     }, 2000);
   },
   methods: {
+    onClickOutsideSideBar() {
+      console.log("click");
+      this.$store.commit("toggleMenu");
+    },
+    include() {
+      return [document.querySelector(".included")];
+    },
     scrolled(position) {
       this.scroll = position;
     },
