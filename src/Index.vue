@@ -205,7 +205,23 @@
         </transition>
 
         <!-- footer -->
-        <div class="mFooter" v-if="notHome">Metamorphosi 2020</div>
+        <div class="mFooter" v-if="notHome">
+          <div class="fTitle">Metamorphosi 2020</div>
+          <div class="fBody">
+            <div class="fbCol">
+              <div class="">sitemap</div>
+              <div class="">sitemap</div>
+              <div class="">sitemap</div>
+              <div class="">sitemap</div>
+            </div>
+            <div class="fbCol">
+              <div class="">sitemap</div>
+              <div class="">sitemap</div>
+              <div class="">sitemap</div>
+              <div class="">sitemap</div>
+            </div>
+          </div>
+        </div>
 
         <!-- for some type of notification -->
         <global-message
@@ -320,13 +336,21 @@ export default {
 };
 </script>
 <style lang="scss">
+.fBody {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .mFooter {
   width: 100%;
-  height: 100px;
+  height: 200px;
   background: rgb(41, 41, 41);
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   color: white;
 }
 .colorBlack {
@@ -477,6 +501,12 @@ export default {
 
   .menuElDivider {
     display: none;
+  }
+  .mContText {
+    &:hover {
+      margin-left: 0px !important;
+      transition: 1s;
+    }
   }
 }
 // ##
