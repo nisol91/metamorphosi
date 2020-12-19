@@ -200,7 +200,7 @@
           </div>
         </div>
         <!--  -->
-        <transition name="fade">
+        <transition name="fade-in">
           <router-view></router-view>
         </transition>
 
