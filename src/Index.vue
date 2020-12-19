@@ -265,7 +265,8 @@ export default {
   methods: {
     onClickOutsideSideBar() {
       console.log("click");
-      this.$store.commit("toggleMenu");
+
+      this.$store.commit("closeMenu");
     },
     include() {
       return [document.querySelector(".included")];
