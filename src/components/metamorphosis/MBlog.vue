@@ -81,7 +81,25 @@
         </div>
       </div>
     </div>
-    <!-- <div class="blogFilters">dx</div> -->
+    <div class="blogFilters">
+      <div class="fTitle">categories:</div>
+      <div
+        class="fCat"
+        v-for="(cat, i) in categories"
+        :key="i + `_catz`"
+        @click="
+          filterTax(cat.id, 'categories');
+          catSelected = cat.name;
+        "
+        :class="[
+          {
+            catSelected: cat.name == catSelected,
+          },
+        ]"
+      >
+        {{ cat.name }}
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -98,6 +116,7 @@ export default {
       blogPosts: {},
       blogPostsFiltered: {},
       categories: [],
+      catSelected: "",
       tags: [],
       env: process.env.VUE_APP_DB_ENV,
       adminCode: null,
@@ -281,7 +300,7 @@ export default {
   padding-top: 100px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background: $primaryBkg;
 }
 .blogPosts {
@@ -298,8 +317,26 @@ export default {
   width: 20%;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
+  .fTitle {
+    font-size: 20px;
+  }
+  .fCat {
+    cursor: pointer;
+    transition: 1s;
+
+    &:hover {
+      color: grey;
+      transition: 1s;
+    }
+  }
+  .catSelected {
+    background: $primary-color;
+    transition: 1s;
+    padding: 3px;
+  }
 }
 .blogPost {
   width: 90%;

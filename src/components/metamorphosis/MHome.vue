@@ -311,13 +311,13 @@ export default {
     position: absolute;
     top: 10px;
     opacity: 0;
-    transition: 0.5s;
+    transition: 2s;
     width: 100%;
     height: 2px;
     background: white;
   }
   .menuLineShow {
-    opacity: 1;
+    opacity: 0.7;
     transition: 0.5s;
   }
 }

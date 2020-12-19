@@ -405,6 +405,13 @@ export default {
   border-top: 2px solid white;
   border-bottom: 2px solid white;
   position: relative;
+  transition: 1s;
+
+  &:hover {
+    background: rgba(52, 55, 66, 0.356);
+    margin-right: 5px;
+    transition: 0.5s;
+  }
   .mLineMenuCenterLine {
     position: absolute;
     height: 1px;
