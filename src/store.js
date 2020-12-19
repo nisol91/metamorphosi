@@ -8,6 +8,7 @@ import router from "./routes";
 export default {
     // vuex store
     state: {
+        notHome: false,
         menu: false,
         env: process.env.VUE_APP_DB_ENV,
         isHomePage: true,
@@ -62,6 +63,9 @@ export default {
     // le mutations hanno solo il compito di mutare lo stato dell'app, sono
     // come semplici funzioni
     mutations: {
+        toggleHomeMenuColor(state, payload) {
+            state.notHome = payload
+        },
         selectEl(state, payload) {
             var menu = state.menuEl;
             for (const el in menu) {

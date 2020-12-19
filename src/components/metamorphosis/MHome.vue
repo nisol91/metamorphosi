@@ -201,6 +201,7 @@ export default {
     this.setSplash();
     this.backImgs();
     this.$store.commit("selectEl", "mHome");
+    this.$store.commit("toggleHomeMenuColor", false);
   },
   methods: {
     pushAbout() {

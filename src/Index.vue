@@ -6,91 +6,99 @@
         <!-- header menu -->
         <div class="mTop" v-if="loaded" :class="[{ menuBkg: scroll > 200 }]">
           <div class="mTopEl mCont">
-            <div class="mLine"></div>
-            <div class="mContText">CONTACTS</div>
+            <div class="mLine" :class="[{ bkgBlack: notHome }]"></div>
+            <div class="mContText" :class="[{ colorBlack: notHome }]">
+              CONTACTS
+            </div>
           </div>
           <router-link :to="{ name: 'mHome' }" class="mTopEl mLogo">
             <div style="color: red">中文</div>
           </router-link>
-          <div class="mTopEl mMenu">
+          <div class="mTopEl mMenu" :class="[{ colorBlack: notHome }]">
             <div
               class="menuOpen"
               :class="[{ showMenu: menu, showMenuLong: isLoggedIn && menu }]"
             >
-              <router-link
-                :to="{ name: 'mHome' }"
-                class="menuEl"
-                style="color: white"
-              >
+              <router-link :to="{ name: 'mHome' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mHome.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('mHome')">HOME</div>
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('mHome')"
+                >
+                  HOME
+                </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link
-                :to="{ name: 'mAbout' }"
-                class="menuEl"
-                style="color: white"
-              >
+              <router-link :to="{ name: 'mAbout' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mAbout.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('mAbout')">
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('mAbout')"
+                >
                   ABOUT
                 </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link
-                :to="{ name: 'mContents' }"
-                class="menuEl"
-                style="color: white"
-              >
+              <router-link :to="{ name: 'mContents' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mContents.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('mContents')">
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('mContents')"
+                >
                   CONTENTS
                 </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link
-                :to="{ name: 'mBlog' }"
-                class="menuEl"
-                style="color: white"
-              >
+              <router-link :to="{ name: 'mBlog' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mBlog.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('mBlog')">BLOG</div>
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('mBlog')"
+                >
+                  BLOG
+                </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link
-                :to="{ name: 'mShop' }"
-                class="menuEl"
-                style="color: white"
-              >
+              <router-link :to="{ name: 'mShop' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mShop.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('mShop')">SHOP</div>
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('mShop')"
+                >
+                  SHOP
+                </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link
-                :to="{ name: 'mContacts' }"
-                class="menuEl"
-                style="color: white"
-              >
+              <router-link :to="{ name: 'mContacts' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mContacts.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('mContacts')">
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('mContacts')"
+                >
                   CONTACTS
                 </div>
               </router-link>
@@ -100,23 +108,35 @@
                 v-if="!isLoggedIn"
                 :to="{ name: 'login' }"
                 class="menuEl"
-                style="color: white"
               >
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.login.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('login')">Login</div>
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('login')"
+                >
+                  Login
+                </div>
               </router-link>
 
               <router-link
                 v-if="isLoggedIn"
                 :to="{ name: 'mHome' }"
                 class="menuEl"
-                style="color: white"
               >
-                <div class="menuLine"></div>
-                <div style="color: white" @click="logout">Logout</div>
+                <div
+                  class="menuLine"
+                  :style="{ background: notHome ? 'black' : 'white' }"
+                ></div>
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="logout"
+                >
+                  Logout
+                </div>
               </router-link>
               <div class="menuElDivider" v-if="isLoggedIn">/</div>
 
@@ -124,13 +144,16 @@
                 v-if="isLoggedIn"
                 :to="{ name: 'userProfile' }"
                 class="menuEl"
-                style="color: white"
               >
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.userProfile.val }]"
+                  :style="{ background: notHome ? 'black' : 'white' }"
                 ></div>
-                <div style="color: white" @click="selectEl('userProfile')">
+                <div
+                  :style="{ color: notHome ? 'black' : 'white' }"
+                  @click="selectEl('userProfile')"
+                >
                   Settings
                 </div>
               </router-link>
@@ -147,13 +170,18 @@
               v-if="!menu"
               class="mLineMenu fade-in fade-out"
               @click="toggleMenu"
+              :class="[{ bkgBlack: notHome, bkgBlack_2: notHome }]"
             >
-              <div class="mLineMenuCenterLine"></div>
+              <div
+                class="mLineMenuCenterLine"
+                :class="[{ bkgBlack: notHome }]"
+              ></div>
             </div>
             <v-icon
               v-if="menu"
               @click="toggleMenu"
               class="menuCross fade-in fade-out"
+              :style="{ color: notHome ? 'black' : 'white' }"
               >mdi-close</v-icon
             >
           </div>
@@ -261,12 +289,22 @@ export default {
       isMetamorphosis: "isMetamorphosis",
       menu: "menu",
       menuEl: "menuEl",
+      notHome: "notHome",
     }),
     ...mapGetters({ itemsInBasket: "itemsInBasket" }),
   },
 };
 </script>
 <style lang="scss">
+.colorBlack {
+  color: black !important;
+}
+.bkgBlack {
+  border-bottom: 2px solid black !important;
+}
+.bkgBlack_2 {
+  border-top: 2px solid black !important;
+}
 .menuBkg {
   background: rgba(167, 167, 167, 0.596);
   transition: 1s;
@@ -302,9 +340,15 @@ export default {
     font-weight: bold;
     color: white;
     z-index: 9999;
+
     .mContText {
       margin-left: 10px;
+      transition: 1s;
       cursor: pointer;
+      &:hover {
+        margin-left: 30px;
+        transition: 1s;
+      }
     }
   }
   .mMenu {
@@ -346,7 +390,6 @@ export default {
 .menuCross {
   margin-right: 10px;
   font-size: 40px !important;
-  color: white !important;
 }
 .mLineMenu {
   width: 50px;

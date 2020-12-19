@@ -45,9 +45,7 @@
             >{{ post.title.rendered }}</router-link
           >
 
-          <div class="pSubTitle">
-            {{ post.slug }}
-          </div>
+          <div v-html="post.excerpt.rendered" class="pSubTitle"></div>
           <div class="pDate">
             {{ new Date(post.date) | moment("dddd, MMMM Do YYYY") }}
           </div>
@@ -68,7 +66,7 @@
           <v-img
             v-if="post.featured_media_url"
             :src="post.featured_media_url"
-            class="grey lighten-2 pMedia"
+            class="grey lighten-2 pMedia blogImage"
             :aspect-ratio="16 / 9"
           >
             <template v-slot:placeholder>
@@ -110,6 +108,7 @@ export default {
   created() {
     this.getAdminCode();
     this.$store.commit("selectEl", "mBlog");
+    this.$store.commit("toggleHomeMenuColor", true);
   },
   methods: {
     searchEvent(val) {
@@ -259,6 +258,14 @@ export default {
 <style lang="scss">
 @import "../../sass/_variables.scss";
 
+.blogImage {
+  transition: 1s;
+
+  &:hover {
+    opacity: 0.8;
+    transition: 1s;
+  }
+}
 .skel {
   width: 80% !important;
 }
@@ -340,7 +347,7 @@ export default {
   padding: 0 5px;
 }
 .pDx {
-  width: 70%;
+  width: 60%;
   height: 100%;
   display: flex;
   justify-content: center;

@@ -165,6 +165,7 @@ export default {
     await this.getRelatedPost();
     await this.getComments();
     this.url = process.env.VUE_APP_URL + this.$route.fullPath;
+    this.$store.commit("toggleHomeMenuColor", true);
   },
 
   methods: {
