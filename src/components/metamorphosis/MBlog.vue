@@ -14,7 +14,7 @@
         <input
           type="text"
           v-model="searchValue"
-          class="form-control"
+          class="form-control blogSearchForm"
           @keyup="searchEvent(searchValue)"
         />
       </div>
@@ -147,10 +147,6 @@ export default {
           return o.title.rendered.includes(val);
         }
       });
-      // if (val == "") {
-      //   this.getAdminCode();
-      // }
-      //    console.log(this.wineEventsFiltered);
     },
     async filterTax(tax, type) {
       this.loaded = false;
@@ -248,22 +244,7 @@ export default {
         console.log(error);
       }
     },
-    // getPosts() {
-    //   console.log("ok");
-    //   db.collection(`blogPosts${this.env}`)
-    //     .get()
-    //     .then((querySnapshot) => {
-    //       console.log(querySnapshot);
-    //       const posts = querySnapshot.docs.map((doc) => {
-    //         console.log(doc);
-    //         var res = new Object(doc.data());
-    //         res["id"] = doc.id;
-    //         console.log(res);
-    //         return res;
-    //       });
-    //       this.blogPosts = posts;
-    //     });
-    // },
+
     async getAdminCode() {
       this.loaded = false;
       this.$store
@@ -288,6 +269,12 @@ export default {
 <style lang="scss">
 @import "../../sass/_variables.scss";
 
+.form-control {
+  margin-top: 10px;
+  &:focus {
+    border-color: rgb(183, 205, 211) !important;
+  }
+}
 .blogImage {
   transition: 1s;
 
@@ -310,7 +297,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: $primaryBkg;
+  background: $primary-background;
 }
 .blogPosts {
   width: 80%;
@@ -319,7 +306,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  border-right: 0.5px solid rgb(197, 197, 197);
+  border-right: 0.5px solid rgba(197, 197, 197, 0.644);
 }
 
 .blogFilters {

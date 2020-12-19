@@ -1,5 +1,5 @@
 <template>
-  <div>contacts</div>
+  <div class="contBox"></div>
 </template>
 <script>
 export default {
@@ -11,3 +11,11 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@import "../../sass/_variables.scss";
+
+.contBox {
+  min-height: 100vh;
+  background: $primary-background;
+}
+</style>

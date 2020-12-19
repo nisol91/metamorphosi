@@ -1,5 +1,23 @@
 <template>
   <div class="editorBox">
+    <div v-if="post">
+      <v-img
+        v-if="post.featured_media_url && post"
+        :src="post.featured_media_url"
+        class="grey lighten-2 headerMedia"
+        :aspect-ratio="16 / 9"
+      >
+        <template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row>
+        </template>
+      </v-img>
+    </div>
+
     <div class="load" v-if="!post">
       <q-linear-progress
         indeterminate
@@ -8,6 +26,7 @@
         class="q-mt-sm"
       />
     </div>
+
     <div class="postBox" v-if="post">
       <div class="postTitle" v-if="post">{{ post.title.rendered }}</div>
       <div class="postDate" v-if="post">
@@ -328,6 +347,13 @@ export default {
 </script>
 
 <style lang="scss">
+.headerMedia {
+  position: absolute;
+  top: -120px;
+  left: 0px;
+  width: 100vw !important;
+  height: 100vh !important;
+}
 .shareIcons {
   text-decoration: none !important;
 
@@ -391,6 +417,7 @@ export default {
   padding: 10px;
   margin: 10px;
   background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -463,7 +490,7 @@ export default {
   align-items: center;
 }
 .postTitle {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   width: 100%;
   display: flex;
@@ -492,6 +519,7 @@ export default {
 }
 .postBox {
   width: 100%;
+  padding: 20px;
 }
 .actions {
   width: 30%;
@@ -505,10 +533,10 @@ export default {
 
 .editorBox {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
   padding-top: 120px;
 }
 .post {
@@ -528,6 +556,9 @@ export default {
     .relPost {
       width: 80%;
     }
+  }
+  .headerMedia {
+    // top: 0px;
   }
 }
 </style>
