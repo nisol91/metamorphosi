@@ -16,6 +16,8 @@ import MWeTell from "./components/metamorphosis/MWeTell.vue";
 import MShop from "./components/metamorphosis/MShop.vue";
 import MContacts from "./components/metamorphosis/MContacts.vue";
 import MBlogPost from "./components/metamorphosis/MBlogPost.vue";
+import MSingleWork from "./components/metamorphosis/MSingleWork.vue";
+
 
 
 
@@ -73,6 +75,16 @@ const routes = [
         path: "/m-we-do",
         component: MWeDo,
         name: "mWeDo",
+        // protezione della rotta se non loggato
+        // beforeEnter: (to, from, next) => {
+        //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
+        //     else next()
+        // }
+    },
+    {
+        path: "/m-we-do/:id",
+        component: MSingleWork,
+        name: "mSingleWork",
         // protezione della rotta se non loggato
         // beforeEnter: (to, from, next) => {
         //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })

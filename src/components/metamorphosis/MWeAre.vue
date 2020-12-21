@@ -24,7 +24,7 @@ export default {
     };
   },
   created() {
-    this.$store.commit("selectEl", "mContacts");
+    this.$store.commit("selectEl", "mAbout");
     setTimeout(() => {
       this.$store.commit("toggleHomeMenuColor", true);
     }, 2000);
@@ -44,7 +44,7 @@ export default {
     },
     async getBkg() {
       var bkg = (
-        await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/media/2881`)
+        await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/media/2882`)
       ).data.source_url;
       this.bkgUrl = bkg;
       console.log(bkg);

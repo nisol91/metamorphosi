@@ -137,7 +137,7 @@ export default {
   },
   created() {
     this.getAdminCode();
-    this.$store.commit("selectEl", "mBlog");
+    this.$store.commit("selectEl", "mContents");
     setTimeout(() => {
       this.$store.commit("toggleHomeMenuColor", true);
     }, 2000);
