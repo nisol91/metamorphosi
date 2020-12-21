@@ -30,7 +30,10 @@
               class="pCat"
               v-for="(cat, i) in post.catNames"
               :key="i + `_tag`"
-              @click="filterTax(cat.id, 'categories')"
+              @click="
+                filterTax(cat.id, 'categories');
+                catSelected = cat.name;
+              "
             >
               {{ cat.name }}
               <div class="pLine"></div>
@@ -525,11 +528,6 @@ export default {
       border-radius: 3px;
       padding: 3px;
       transition: 1s;
-
-      &:hover {
-        background: rgb(82, 82, 82);
-        transition: 1s;
-      }
     }
   }
 }

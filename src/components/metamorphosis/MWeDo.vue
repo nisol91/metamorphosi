@@ -525,11 +525,6 @@ export default {
       border-radius: 3px;
       padding: 3px;
       transition: 1s;
-
-      &:hover {
-        background: rgb(82, 82, 82);
-        transition: 1s;
-      }
     }
   }
 }
