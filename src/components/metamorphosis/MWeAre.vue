@@ -120,6 +120,8 @@ export default {
 @media (max-width: 800px) {
   .weAreContBkg {
     font-size: 25px;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }
 // ##
