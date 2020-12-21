@@ -10,6 +10,13 @@
         <div class="weAreTitleText">we are</div>
         <div class="weAreText">we are content</div>
       </div>
+      <div class="weAreCont team">
+        <div class="weAreTitleText">team</div>
+        <div class="teamEl">
+          <div class="weAreText memberName">Filippo Tommasini:</div>
+          <div class="weAreText memberName">Nicola Solzi:</div>
+        </div>
+      </div>
       <div class="fotoOverlayWeAre"></div>
     </div>
   </div>
@@ -86,11 +93,23 @@ export default {
   flex-direction: column;
   z-index: 9900;
 }
+.teamEl {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 70%;
+}
 .weAreTitleText {
   font-size: 35px;
+  margin-bottom: 20px;
 }
 .weAreText {
   font-size: 15px;
+}
+.memberName {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 .weAreBox {
   min-height: 100vh;
