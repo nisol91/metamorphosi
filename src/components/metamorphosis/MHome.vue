@@ -5,7 +5,7 @@
       background: `${splash ? 'rgb(80, 80, 80)' : ''}`,
       backgroundImage: `url(${
         !splash
-          ? 'https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/home_1.jpg?alt=media&token=de609d6c-46a8-4f5f-8c0c-348f7c4996e7'
+          ? 'https://endorphinoutdoor.com/wp-content/uploads/2020/10/crinale_drone-1-scaled.jpg'
           : ''
       })`,
     }"
@@ -14,15 +14,12 @@
     <!-- <div v-if="splash" class="splash pulsate-fwd">METAMORPHOSI</div> -->
     <div v-if="splash" class="canvasBoxBabylon">
       <div class="splashText pulsate-fwd">METAMORPHOSI</div>
-      <Scene>
+      <!-- <Scene>
         <Property name="clearColor" color="#505050"></Property>
         <Camera
           type="arcRotate"
           :properties="{ position: $vector([cameraZoom, 0, 0]) }"
         ></Camera>
-        <!-- Standard Mesh component props-->
-        <!-- Properties prop object on Entity component-->
-        <!-- $vector() helper function-->
         <Entity :position="[0, 0, 0]">
           <Animation property="rotation.x" :duration="5">
             <Key frame="0%" :value="0"></Key>
@@ -47,7 +44,6 @@
             :duration="5"
             :end="Math.PI * 2"
           ></Animation>
-          <!-- Standard Light component props-->
           <PointLight diffuse="#F0F" :position="[0, 0, 4]"></PointLight>
         </Entity>
         <Entity>
@@ -56,7 +52,6 @@
             :duration="5"
             :end="Math.PI * 2"
           ></Animation>
-          <!-- Property components-->
           <PointLight>
             <property name="diffuse" color="#0FF"></property>
             <property name="position" :vector="[0, 0, 4]"></property>
@@ -68,19 +63,16 @@
             :duration="5"
             :end="Math.PI * 2"
           ></Animation>
-          <!-- Properties prop object on Entity component (set multiple values!)-->
-          <!-- $color() helper function-->
           <PointLight
             :properties="{
               diffuse: $color('#FF0'),
               specular: $color({ r: 1, g: 0, b: 0 }),
             }"
           >
-            <!-- Mix-and-match!-->
             <property name="position" :vector="[0, 4, 0]"></property>
           </PointLight>
         </Entity>
-      </Scene>
+      </Scene> -->
     </div>
 
     <!-- desktop tripartition -->
@@ -97,11 +89,12 @@
               mTripHidden: mTripDxHover,
               mShort: mTripDxHover,
               hide: pushedAbout,
+              pushingContents: pushedContents,
               pushingBlogOthers: pushedBlog,
             },
           ]"
           :style="{
-            backgroundImage: `url(${mTripSxHover ? img : ''})`,
+            backgroundImage: `url(${mTripSxHover ? img_sx : ''})`,
             backgroundSize: `cover`,
           }"
         >
@@ -109,9 +102,10 @@
             class="mTripText mTripTextSx"
             @mouseenter="mTripSxHover = true"
             @mouseleave="mTripSxHover = false"
+            @click="pushContents"
           >
             <div class="mLine mLineSx"></div>
-            CONTENTS
+            WE DO
           </div>
         </div>
         <div
@@ -123,6 +117,7 @@
               mTripCenterHidden_2: mTripSxHover,
               pushingAbout: pushedAbout,
               pushingBlogOthers: pushedBlog,
+              pushingContentsOthers: pushedContents,
             },
           ]"
         >
@@ -132,7 +127,7 @@
             @mouseleave="mTripCenterHover = false"
             @click="pushAbout"
           >
-            ABOUT
+            WE ARE
           </div>
           <div class="mLineBottom"></div>
         </div>
@@ -146,10 +141,11 @@
               mShort: mTripSxHover,
               hide: pushedAbout,
               pushingBlog: pushedBlog,
+              pushingContentsOthers: pushedContents,
             },
           ]"
           :style="{
-            backgroundImage: `url(${mTripDxHover ? img : ''})`,
+            backgroundImage: `url(${mTripDxHover ? img_dx : ''})`,
             backgroundSize: `cover`,
           }"
         >
@@ -159,7 +155,7 @@
             @mouseleave="mTripDxHover = false"
             @click="pushBlog"
           >
-            BLOG
+            WE TELL
             <div class="mLine mLineDx"></div>
           </div>
         </div>
@@ -168,9 +164,9 @@
       <!-- mobile tripartition -->
 
       <div class="mTripartitionMobile">
-        <div class="mTripMobile">ABOUT</div>
-        <div class="mTripMobile">CONTENTS</div>
-        <div class="mTripMobile" @click="pushBlog">BLOG</div>
+        <div class="mTripMobile" @click="pushAbout">WE ARE</div>
+        <div class="mTripMobile" @click="pushContents">WE DO</div>
+        <div class="mTripMobile" @click="pushBlog">WE TELL</div>
       </div>
     </div>
   </div>
@@ -187,13 +183,20 @@ export default {
       mTripSxHover: false,
       pushedAbout: false,
       pushedBlog: false,
+      pushedContents: false,
 
-      backgrounds: [
-        "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/t4.jpg?alt=media&token=65c4464d-b30d-4dd7-a30c-7c5506cd5350",
-        "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/t3.jpg?alt=media&token=fe69ab91-af45-4a09-9adc-047ad3c76994",
-        "https://firebasestorage.googleapis.com/v0/b/metamorphosi-7b2e1.appspot.com/o/home_2.jpg?alt=media&token=67c1662f-daf8-4521-80f2-caeecae6f923",
+      backgrounds_sx: [
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/wavesHunters-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/mare-monti-e-gabbiano-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/bracco-scaled.jpg",
       ],
-      img: null,
+      backgrounds_dx: [
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/10/DSCF2935-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/06/WORDPRESSIMG-1.gif",
+      ],
+      img_sx: null,
+      img_dx: null,
     };
   },
   created() {
@@ -211,7 +214,7 @@ export default {
       this.pushedAbout = true;
       setTimeout(() => {
         this.$router.push({
-          name: "mAbout",
+          name: "mWeAre",
           // params: { eventName: this.event.name },
         });
       }, 2000);
@@ -220,7 +223,16 @@ export default {
       this.pushedBlog = true;
       setTimeout(() => {
         this.$router.push({
-          name: "mBlog",
+          name: "mWeTell",
+          // params: { eventName: this.event.name },
+        });
+      }, 2000);
+    },
+    pushContents() {
+      this.pushedContents = true;
+      setTimeout(() => {
+        this.$router.push({
+          name: "mWeDo",
           // params: { eventName: this.event.name },
         });
       }, 2000);
@@ -232,8 +244,11 @@ export default {
     },
     backImgs() {
       setInterval(() => {
-        this.img = this.backgrounds[
-          Math.floor(Math.random() * this.backgrounds.length)
+        this.img_sx = this.backgrounds_sx[
+          Math.floor(Math.random() * this.backgrounds_sx.length)
+        ];
+        this.img_dx = this.backgrounds_dx[
+          Math.floor(Math.random() * this.backgrounds_dx.length)
         ];
       }, 1000);
     },
@@ -259,16 +274,15 @@ export default {
 </script>
 <style lang="scss">
 .splashText {
-  position: absolute;
-  top: 50vh;
-  left: calc(50vw - 115px);
   color: white;
   font-size: 30px;
-  width: 100px;
 }
 .canvasBoxBabylon {
   height: 60vh;
   width: 60vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   canvas {
     outline: none !important;
   }
@@ -387,11 +401,13 @@ export default {
     transition: 1s;
     width: 55vw !important;
   }
-  .pushingBlog {
+  .pushingBlog,
+  .pushingContents {
     width: 100vw !important;
     transition: 1s;
   }
-  .pushingBlogOthers {
+  .pushingBlogOthers,
+  .pushingContentsOthers {
     opacity: 0;
     width: 10px !important;
     transition: 1s;

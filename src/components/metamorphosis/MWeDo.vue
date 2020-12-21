@@ -92,21 +92,23 @@
         center-color="grey-8"
         class="q-ma-md"
       />
-      <div
-        class="fCat"
-        v-for="(cat, i) in categories"
-        :key="i + `_catz`"
-        @click="
-          filterTax(cat.id, 'categories');
-          catSelected = cat.name;
-        "
-        :class="[
-          {
-            catSelected: cat.name == catSelected,
-          },
-        ]"
-      >
-        {{ cat.name }}
+      <div class="fCats">
+        <div
+          class="fCat"
+          v-for="(cat, i) in categories"
+          :key="i + `_catz`"
+          @click="
+            filterTax(cat.id, 'categories');
+            catSelected = cat.name;
+          "
+          :class="[
+            {
+              catSelected: cat.name == catSelected,
+            },
+          ]"
+        >
+          {{ cat.name }}
+        </div>
       </div>
     </div>
   </div>
@@ -271,9 +273,13 @@ export default {
 
 .form-control {
   margin-top: 10px;
+  border-color: rgba(255, 255, 255, 0.383) !important;
+
   &:focus {
-    border-color: rgb(183, 205, 211) !important;
+    border-color: rgba(183, 205, 211, 0.383) !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .blogImage {
   transition: 1s;
@@ -293,7 +299,7 @@ export default {
 .mBlogBox {
   width: 100%;
   min-height: 100vh;
-  padding-top: 100px;
+  padding: 100px 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -319,6 +325,13 @@ export default {
   padding: 30px 0;
   .fTitle {
     font-size: 20px;
+  }
+  .fCats {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
   }
   .fCat {
     cursor: pointer;
@@ -491,6 +504,7 @@ export default {
   }
   .mBlogBox {
     flex-wrap: wrap;
+    flex-direction: column-reverse;
   }
   .blogPosts {
     width: 100%;
@@ -500,6 +514,23 @@ export default {
     width: 100%;
     height: auto;
     padding: 30px;
+    .fCats {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: row;
+    }
+    .fCat {
+      border: 1px solid lightgrey;
+      border-radius: 3px;
+      padding: 3px;
+      transition: 1s;
+
+      &:hover {
+        background: rgb(82, 82, 82);
+        transition: 1s;
+      }
+    }
   }
 }
 </style>

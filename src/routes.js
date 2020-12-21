@@ -10,9 +10,9 @@
 import App from "./App.vue";
 
 import MHome from "./components/metamorphosis/MHome.vue";
-import MAbout from "./components/metamorphosis/MAbout.vue";
-import MContents from "./components/metamorphosis/MContents.vue";
-import MBlog from "./components/metamorphosis/MBlog.vue";
+import MWeAre from "./components/metamorphosis/MWeAre.vue";
+import MWeDo from "./components/metamorphosis/MWeDo.vue";
+import MWeTell from "./components/metamorphosis/MWeTell.vue";
 import MShop from "./components/metamorphosis/MShop.vue";
 import MContacts from "./components/metamorphosis/MContacts.vue";
 import MBlogPost from "./components/metamorphosis/MBlogPost.vue";
@@ -60,9 +60,9 @@ const routes = [
         // }
     },
     {
-        path: "/m-about",
-        component: MAbout,
-        name: "mAbout",
+        path: "/m-we-are",
+        component: MWeAre,
+        name: "mWeAre",
         // protezione della rotta se non loggato
         // beforeEnter: (to, from, next) => {
         //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
@@ -70,17 +70,17 @@ const routes = [
         // }
     },
     {
-        path: "/m-contents",
-        component: MContents,
-        name: "mContents",
+        path: "/m-we-do",
+        component: MWeDo,
+        name: "mWeDo",
         // protezione della rotta se non loggato
-        beforeEnter: (to, from, next) => {
-            if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
-            else next()
-        }
+        // beforeEnter: (to, from, next) => {
+        //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
+        //     else next()
+        // }
     },
     {
-        path: "/m-blog/:id",
+        path: "/m-we-tell/:id",
         component: MBlogPost,
         name: "mBlogPost",
         // protezione della rotta se non loggato
@@ -90,9 +90,9 @@ const routes = [
         // }
     },
     {
-        path: "/m-blog",
-        component: MBlog,
-        name: "mBlog",
+        path: "/m-we-tell",
+        component: MWeTell,
+        name: "mWeTell",
         // protezione della rotta se non loggato
         // beforeEnter: (to, from, next) => {
         //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })

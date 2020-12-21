@@ -1,13 +1,16 @@
 <template>
-  <div class="contBox">
+  <div class="weAreBox">
     <div
-      class="mContBkg fade-in-home"
+      class="weAreContBkg fade-in-home"
       :style="{
         backgroundImage: `url(${bkgUrl})`,
       }"
     >
-      <div class="fotoOverlay"></div>
-      <div class="contactText">metamorphosistudio@gmail.com</div>
+      <div class="weAreCont">
+        <div class="weAreTitleText">we are</div>
+        <div class="weAreText">we are content</div>
+      </div>
+      <div class="fotoOverlayWeAre"></div>
     </div>
   </div>
 </template>
@@ -23,7 +26,7 @@ export default {
   created() {
     this.$store.commit("selectEl", "mContacts");
     setTimeout(() => {
-      this.$store.commit("toggleHomeMenuColor", false);
+      this.$store.commit("toggleHomeMenuColor", true);
     }, 2000);
     this.getBkg();
     // test of custom endpoint wp api
@@ -41,7 +44,7 @@ export default {
     },
     async getBkg() {
       var bkg = (
-        await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/media/2883`)
+        await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/media/2881`)
       ).data.source_url;
       this.bkgUrl = bkg;
       console.log(bkg);
@@ -51,7 +54,7 @@ export default {
 </script>
 <style lang="scss">
 @import "../../sass/_variables.scss";
-.mContBkg {
+.weAreContBkg {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +68,7 @@ export default {
   font-size: 50px;
   z-index: 9700;
 }
-.fotoOverlay {
+.fotoOverlayWeAre {
   z-index: 9800;
   width: 100%;
   height: 100%;
@@ -74,23 +77,35 @@ export default {
   left: 0;
   background-color: rgba(207, 207, 207, 0.233);
 }
-.contactText {
+.weAreCont {
+  width: 60%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   z-index: 9900;
 }
-.contBox {
+.weAreTitleText {
+  font-size: 35px;
+}
+.weAreText {
+  font-size: 15px;
+}
+.weAreBox {
   min-height: 100vh;
   width: 100%;
   background: $primary-background;
 }
 // ##
 @media (max-width: 800px) {
-  .mContBkg {
+  .weAreContBkg {
     font-size: 25px;
   }
 }
 // ##
 @media (max-width: 600px) {
-  .mContBkg {
+  .weAreContBkg {
     font-size: 15px;
   }
 }

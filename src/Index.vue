@@ -46,7 +46,7 @@
                 </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link :to="{ name: 'mAbout' }" class="menuEl">
+              <router-link :to="{ name: 'mWeAre' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mAbout.val }]"
@@ -56,11 +56,11 @@
                   :style="{ color: notHome ? 'black' : 'white' }"
                   @click="selectEl('mAbout')"
                 >
-                  ABOUT
+                  WE ARE
                 </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link :to="{ name: 'mContents' }" class="menuEl">
+              <router-link :to="{ name: 'mWeDo' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mContents.val }]"
@@ -70,11 +70,11 @@
                   :style="{ color: notHome ? 'black' : 'white' }"
                   @click="selectEl('mContents')"
                 >
-                  CONTENTS
+                  WE DO
                 </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link :to="{ name: 'mBlog' }" class="menuEl">
+              <router-link :to="{ name: 'mWeTell' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mBlog.val }]"
@@ -84,11 +84,11 @@
                   :style="{ color: notHome ? 'black' : 'white' }"
                   @click="selectEl('mBlog')"
                 >
-                  BLOG
+                  WE TELL
                 </div>
               </router-link>
               <div class="menuElDivider">/</div>
-              <router-link :to="{ name: 'mShop' }" class="menuEl">
+              <!-- <router-link :to="{ name: 'mShop' }" class="menuEl">
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mShop.val }]"
@@ -100,8 +100,8 @@
                 >
                   SHOP
                 </div>
-              </router-link>
-              <div class="menuElDivider">/</div>
+              </router-link> -->
+              <!-- <div class="menuElDivider">/</div> -->
               <router-link :to="{ name: 'mContacts' }" class="menuEl">
                 <div
                   class="menuLine"
@@ -115,9 +115,10 @@
                   CONTACTS
                 </div>
               </router-link>
-              <div class="menuElDivider">/</div>
+              <!-- <div class="menuElDivider">/</div> -->
 
-              <router-link
+              <!-- login -->
+              <!-- <router-link
                 v-if="!isLoggedIn"
                 :to="{ name: 'login' }"
                 class="menuEl"
@@ -133,9 +134,10 @@
                 >
                   Login
                 </div>
-              </router-link>
+              </router-link> -->
 
-              <router-link
+              <!-- logout -->
+              <!-- <router-link
                 v-if="isLoggedIn"
                 :to="{ name: 'mHome' }"
                 class="menuEl"
@@ -152,7 +154,9 @@
                 </div>
               </router-link>
               <div class="menuElDivider" v-if="isLoggedIn">/</div>
-
+              -->
+              <!-- settings -->
+              <!--
               <router-link
                 v-if="isLoggedIn"
                 :to="{ name: 'userProfile' }"
@@ -169,7 +173,7 @@
                 >
                   Settings
                 </div>
-              </router-link>
+              </router-link> -->
               <!--  -->
             </div>
             <div
@@ -206,19 +210,19 @@
 
         <!-- footer -->
         <div class="mFooter" v-if="notHome">
-          <div class="fTitle">Metamorphosi 2020</div>
           <div class="fBody">
             <div class="fbCol">
-              <div class="">sitemap</div>
-              <div class="">sitemap</div>
-              <div class="">sitemap</div>
-              <div class="">sitemap</div>
+              <div class="">logo</div>
+              <div class="">Metamorphosi 2020</div>
             </div>
+
             <div class="fbCol">
-              <div class="">sitemap</div>
-              <div class="">sitemap</div>
-              <div class="">sitemap</div>
-              <div class="">sitemap</div>
+              <div class="sitemapText">sitemap</div>
+              <div class="sitemapEl">home</div>
+              <div class="sitemapEl">weare</div>
+              <div class="sitemapEl">wedo</div>
+              <div class="sitemapEl">wetell</div>
+              <div class="sitemapEl">contacts</div>
             </div>
           </div>
         </div>
@@ -280,8 +284,6 @@ export default {
   },
   methods: {
     onClickOutsideSideBar() {
-      console.log("click");
-
       this.$store.commit("closeMenu");
     },
     include() {
@@ -336,16 +338,25 @@ export default {
 };
 </script>
 <style lang="scss">
+.sitemapText {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.sitemapEl {
+  cursor: pointer;
+}
 .fBody {
   width: 100%;
   height: 60%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 30px;
 }
 .mFooter {
   width: 100%;
-  height: 200px;
+  height: 250px;
   background: rgb(41, 41, 41);
   display: flex;
   justify-content: center;
@@ -431,15 +442,15 @@ export default {
 .menuOpen {
   position: fixed;
   top: 40px;
-  right: -300px;
+  right: -350px;
   transition: 0.5s;
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 350px;
 }
 .showMenu {
   transition: 0.5s;
-  right: 210px;
+  right: 100px;
 }
 .showMenuLong {
   right: 260px;
@@ -457,7 +468,7 @@ export default {
   transition: 1s;
 
   &:hover {
-    background: rgba(52, 55, 66, 0.356);
+    // background: rgba(52, 55, 66, 0.356);
     margin-right: 5px;
     transition: 0.5s;
   }
@@ -473,6 +484,10 @@ export default {
 @media (max-width: 1050px) {
   .mTop {
     background: rgba(255, 255, 255, 0.329);
+  }
+  .menuBkg {
+    background: rgba(167, 167, 167, 0.596);
+    transition: 1s;
   }
 }
 // ##
@@ -511,6 +526,23 @@ export default {
 }
 // ##
 @media (max-width: 400px) {
+  .mFooter {
+    height: 300px;
+  }
+  .fBody {
+    flex-direction: column;
+  }
+  .fbCol {
+    text-align: center;
+  }
+  .sitemapText {
+    margin-top: 20px;
+    font-size: 15px;
+  }
+  .sitemapEl {
+    font-size: 10px;
+    margin-top: 5px;
+  }
   .menuOpen {
     width: 200px;
   }
