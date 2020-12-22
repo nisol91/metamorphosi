@@ -44,7 +44,17 @@
       class="q-ma-md loaderWorks"
       v-if="!works"
     />
-    <div class="work" v-for="(work, i) in works" :key="i + `_work`">
+    <div
+      class="work"
+      v-for="(work, i) in works"
+      :key="i + `_work`"
+      @click="pushSingleWork(work.id)"
+      :class="[
+        {
+          pushedSingleWorkClass: pushedSingleWork,
+        },
+      ]"
+    >
       <v-img
         v-if="work.featured_media_url"
         :src="work.featured_media_url"
@@ -93,6 +103,7 @@ export default {
       adminCode: null,
       loaded: false,
       showByIndex: null,
+      pushedSingleWork: false,
     };
   },
   created() {
@@ -103,6 +114,15 @@ export default {
     }, 2000);
   },
   methods: {
+    pushSingleWork(workId) {
+      this.pushedSingleWork = true;
+      setTimeout(() => {
+        this.$router.push({
+          name: "mSingleWork",
+          params: { id: workId },
+        });
+      }, 2000);
+    },
     async getWorks() {
       this.loaded = false;
       try {
@@ -173,6 +193,10 @@ export default {
   -webkit-animation: fade-out 2s ease-out both;
   animation: fade-out 2s ease-out both;
 }
+.pushedSingleWorkClass {
+  opacity: 0;
+  transition: 3s;
+}
 .mWorksBox {
   width: 100vw;
   min-height: 100vh;
@@ -185,6 +209,7 @@ export default {
 .work {
   width: 100%;
   height: 300px;
+  cursor: pointer;
 }
 .workImage {
   width: 100%;

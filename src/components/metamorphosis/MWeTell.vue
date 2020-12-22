@@ -172,7 +172,9 @@ export default {
     async getPosts() {
       try {
         this.blogPosts = (
-          await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/posts`)
+          await axios.get(
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories_exclude=46,47,48,49`
+          )
         ).data;
         this.blogPostsFiltered = this.blogPosts;
       } catch (error) {
@@ -187,7 +189,7 @@ export default {
 
           var categoriesRaw = (
             await axios.get(
-              `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
+              `https://endorphinoutdoor.com/wp-json/wp/v2/categories?exclude=46,47,48,49`
             )
           ).data;
 
@@ -244,16 +246,6 @@ export default {
                 post["tagNames"].push({ name: tag.name, id: tag.id });
               }
             });
-          });
-        }
-        for (const [i, post] of posts.entries()) {
-          //  rimuovo i 'works' che non mi servono nel blog
-          post.catNames.forEach((postCat) => {
-            if (postCat.name === "Works") {
-              posts.splice(i, 1);
-              // console.log(i);
-              // post["catNames"].push({ name: "found" });
-            }
           });
         }
         this.blogPosts = posts;
