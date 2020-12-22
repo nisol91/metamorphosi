@@ -1,8 +1,8 @@
 <template>
   <div class="editorBox">
-    <div class="headerMediaBox" v-if="post">
+    <div class="headerMediaBox" v-if="post && post.featured_media_url">
       <v-img
-        v-if="post.featured_media_url && post"
+        v-if="post && post.featured_media_url"
         :src="post.featured_media_url"
         class="grey lighten-2 headerMedia"
         :aspect-ratio="16 / 9"
@@ -225,7 +225,7 @@ export default {
       try {
         var relatedPosts = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?cat=${this.categories[0].id}`
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?cat=${this.categories[0].id}&categories_exclude=46,47,48,49`
           )
         ).data;
 
@@ -243,7 +243,7 @@ export default {
             await axios.get(
               `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
             )
-          ).data.link;
+          ).data.source_url;
           post.categories.forEach((postCat) => {
             this.categories.forEach((cat) => {
               if (postCat === cat.id) {
@@ -320,7 +320,7 @@ export default {
           await axios.get(
             `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
           )
-        ).data.link;
+        ).data.source_url;
         post.categories.forEach((postCat) => {
           this.categories.forEach((cat) => {
             if (postCat === cat.id) {
@@ -336,8 +336,6 @@ export default {
           });
         });
         this.post = post;
-
-        // console.log(this.coordinates);
       } catch (error) {
         console.log(error);
       }
@@ -352,10 +350,10 @@ export default {
   top: -120px;
   left: 0px;
   width: 100vw !important;
-  height: 100vh !important;
+  height: 120vh !important;
 }
 .headerMediaBox {
-  height: 100vh !important;
+  height: 120vh !important;
 }
 .shareIcons {
   text-decoration: none !important;
