@@ -175,7 +175,6 @@ export default {
           await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/posts`)
         ).data;
         this.blogPostsFiltered = this.blogPosts;
-        // console.log(this.coordinates);
       } catch (error) {
         console.log(error);
       }
@@ -203,6 +202,8 @@ export default {
             temp["name"] = cat.name;
             temp["slug"] = cat.slug;
             categories.push(temp);
+            // if (cat.slug !== "works") {
+            // }
           });
           this.categories = categories;
           //
@@ -218,15 +219,18 @@ export default {
 
         // ---- aggiungo i fields aggiuntivi ai post di wp
         var posts = this.blogPosts;
-        for (const post of posts) {
+        for (const [i, post] of posts.entries()) {
           post["catNames"] = [];
           post["tagNames"] = [];
 
-          post["featured_media_url"] = (
-            await axios.get(
-              `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
-            )
-          ).data.link;
+          if (post.featured_media !== 0) {
+            post["featured_media_url"] = (
+              await axios.get(
+                `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
+              )
+            ).data.source_url;
+          }
+
           post.categories.forEach((postCat) => {
             this.categories.forEach((cat) => {
               if (postCat === cat.id) {
@@ -242,9 +246,18 @@ export default {
             });
           });
         }
+        for (const [i, post] of posts.entries()) {
+          //  rimuovo i 'works' che non mi servono nel blog
+          post.catNames.forEach((postCat) => {
+            if (postCat.name === "Works") {
+              posts.splice(i, 1);
+              // console.log(i);
+              // post["catNames"].push({ name: "found" });
+            }
+          });
+        }
         this.blogPosts = posts;
-
-        // console.log(this.coordinates);
+        this.blogPostsFiltered = posts;
       } catch (error) {
         console.log(error);
       }
