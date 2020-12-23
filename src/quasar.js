@@ -4,7 +4,11 @@ import './styles/quasar.scss'
 import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
 import '@quasar/extras/material-icons/material-icons.css'
-import { Quasar, Scroll, QSkeleton, QLinearProgress, QCircularProgress } from 'quasar'
+import {
+  Quasar, Scroll, QSkeleton, QLinearProgress, QCircularProgress, QCarousel,
+  QCarouselControl,
+  QCarouselSlide
+} from 'quasar'
 
 Vue.use(Quasar, {
   config: {
@@ -23,7 +27,11 @@ Vue.use(Quasar, {
   },
   plugins: {
   },
-  components: { QSkeleton, QLinearProgress, QCircularProgress },
+  components: {
+    QSkeleton, QLinearProgress, QCircularProgress, QCarousel,
+    QCarouselControl,
+    QCarouselSlide
+  },
   directives: {
     Scroll
   }
