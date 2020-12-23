@@ -98,7 +98,7 @@ export default {
       try {
         var relatedWorks = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories=46&exclude=${this.work.id}`
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories=46&exclude=${this.work.id}&per_page=3`
           )
         ).data;
         for (const work of relatedWorks) {
@@ -191,6 +191,16 @@ export default {
     top: -10px;
     background: #bec0c8;
     padding: 0 20px;
+  }
+}
+// ##
+@media (max-width: 700px) {
+  .relWorks {
+    flex-direction: column;
+    height: auto;
+    .relWork {
+      width: 80%;
+    }
   }
 }
 </style>

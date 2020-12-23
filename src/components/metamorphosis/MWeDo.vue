@@ -150,14 +150,14 @@ export default {
         }
 
         // add custom field
-        var acf = (
-          await axios.get(
-            `https://endorphinoutdoor.com/wp-json/acf/v3/posts/${work.id}`
-          )
-        ).data.acf;
-        work["acf"]["client_name"] = acf.client_name;
-        work["acf"]["year"] = acf.year;
-        work["acf"]["technologies"] = acf.technologies;
+        // var acf = (
+        //   await axios.get(
+        //     `https://endorphinoutdoor.com/wp-json/acf/v3/posts/${work.id}`
+        //   )
+        // ).data.acf;
+        // work["acf"]["client_name"] = acf.client_name;
+        // work["acf"]["year"] = acf.year;
+        // work["acf"]["technologies"] = acf.technologies;
       }
       this.works = works;
     },

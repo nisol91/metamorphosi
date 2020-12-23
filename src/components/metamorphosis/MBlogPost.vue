@@ -59,9 +59,10 @@
           <v-icon>mdi-twitter</v-icon>
         </ShareNetwork>
       </div>
-      <div class="postFooter relPosts">
+      <div class="relPostsTopBar">
         <div class="relTitle">RELATED POSTS</div>
-
+      </div>
+      <div class="relPosts">
         <q-circular-progress
           v-if="!relatedPosts"
           indeterminate
@@ -69,7 +70,7 @@
           :thickness="0.6"
           color="blue-grey-7"
           center-color="grey-8"
-          class="q-ma-md"
+          class="q-ma-md relPostProgress"
         />
         <div
           class="relPost"
@@ -225,7 +226,7 @@ export default {
       try {
         var relatedPosts = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?cat=${this.categories[0].id}&categories_exclude=46,47,48,49`
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?cat=${this.categories[0].id}&categories_exclude=46,47,48,49&per_page=4`
           )
         ).data;
 
@@ -412,8 +413,19 @@ export default {
   width: 100%;
   padding-top: 30px;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.relPosts::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.relPosts {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 .relPost {
-  width: 300px;
+  width: 100px;
   height: 80%;
   padding: 10px;
   margin: 10px;
@@ -424,6 +436,10 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  flex-shrink: 0;
+  flex-basis: 40%;
+  flex-grow: 0;
+
   .relPostImg {
     width: 60%;
     border-radius: 3px;
@@ -442,15 +458,12 @@ export default {
     }
   }
 }
-
-.relPosts {
+.relPostsTopBar {
+  width: 100%;
+  height: 10px;
+  border-top: 2px solid grey;
   position: relative;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  padding: 20px 0;
+
   .relTitle {
     position: absolute;
     left: 40px;
@@ -458,6 +471,22 @@ export default {
     background: #bec0c8;
     padding: 0 20px;
   }
+}
+.relPostProgress {
+  margin-left: 45vw !important;
+}
+.relPosts {
+  overflow-x: scroll;
+  overflow-y: auto;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  padding: 20px 0;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
 }
 .postShare {
   position: relative;
@@ -550,12 +579,10 @@ export default {
   height: 100%;
 }
 // ##
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .relPosts {
-    flex-direction: column;
-    height: auto;
     .relPost {
-      width: 80%;
+      flex-basis: 80%;
     }
   }
 }

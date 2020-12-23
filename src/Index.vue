@@ -218,11 +218,21 @@
 
             <div class="fbCol">
               <div class="sitemapText">sitemap</div>
-              <div class="sitemapEl">home</div>
-              <div class="sitemapEl">weare</div>
-              <div class="sitemapEl">wedo</div>
-              <div class="sitemapEl">wetell</div>
-              <div class="sitemapEl">contacts</div>
+              <router-link :to="{ name: 'mHome' }"
+                ><div class="sitemapEl">home</div></router-link
+              >
+              <router-link :to="{ name: 'mWeAre' }"
+                ><div class="sitemapEl">weare</div></router-link
+              >
+              <router-link :to="{ name: 'mWeDo' }"
+                ><div class="sitemapEl">wedo</div></router-link
+              >
+              <router-link :to="{ name: 'mWeTell' }"
+                ><div class="sitemapEl">wetell</div></router-link
+              >
+              <router-link :to="{ name: 'mContacts' }"
+                ><div class="sitemapEl">contacts</div></router-link
+              >
             </div>
           </div>
         </div>
@@ -345,6 +355,8 @@ export default {
 }
 .sitemapEl {
   cursor: pointer;
+  color: white !important;
+  text-decoration: none !important;
 }
 .fBody {
   width: 100%;
