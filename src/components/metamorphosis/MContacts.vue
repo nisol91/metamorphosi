@@ -1,6 +1,6 @@
 <template>
   <div class="contBox">
-    <div class="progressLoaderBkg" v-if="!bkgUrl">
+    <div class="progressLoaderBkg" v-if="!bkgUrlContacts">
       <q-circular-progress
         indeterminate
         size="75px"
@@ -10,11 +10,11 @@
         class="q-ma-md"
       />
     </div>
-    <div class="" v-if="bkgUrl">
+    <div class="" v-if="bkgUrlContacts">
       <div
         class="mContBkg fade-in-home"
         :style="{
-          backgroundImage: `url(${bkgUrl})`,
+          backgroundImage: `url(${bkgUrlContacts})`,
         }"
       >
         <div class="fotoOverlay"></div>
@@ -29,7 +29,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      bkgUrl: "",
+      bkgUrlContacts: null,
     };
   },
   created() {
@@ -37,7 +37,10 @@ export default {
     setTimeout(() => {
       this.$store.commit("toggleHomeMenuColor", false);
     }, 2000);
-    this.getBkg();
+    // i need it to fix a frontend bug when pushing the route from homepage
+    setTimeout(() => {
+      this.getBkg();
+    }, 2000);
     // test of custom endpoint wp api
     // this.getTest();
   },
@@ -55,7 +58,7 @@ export default {
       var bkg = (
         await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/media/2883`)
       ).data.source_url;
-      this.bkgUrl = bkg;
+      this.bkgUrlContacts = bkg;
       console.log(bkg);
     },
   },
