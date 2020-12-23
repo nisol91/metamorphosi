@@ -1,13 +1,25 @@
 <template>
   <div class="contBox">
-    <div
-      class="mContBkg fade-in-home"
-      :style="{
-        backgroundImage: `url(${bkgUrl})`,
-      }"
-    >
-      <div class="fotoOverlay"></div>
-      <div class="contactText">metamorphosistudio@gmail.com</div>
+    <div class="progressLoaderBkg" v-if="!bkgUrl">
+      <q-circular-progress
+        indeterminate
+        size="75px"
+        :thickness="0.6"
+        color="blue-grey-7"
+        center-color="grey-8"
+        class="q-ma-md"
+      />
+    </div>
+    <div class="" v-if="bkgUrl">
+      <div
+        class="mContBkg fade-in-home"
+        :style="{
+          backgroundImage: `url(${bkgUrl})`,
+        }"
+      >
+        <div class="fotoOverlay"></div>
+        <div class="contactText">metamorphosistudio@gmail.com</div>
+      </div>
     </div>
   </div>
 </template>
@@ -51,6 +63,7 @@ export default {
 </script>
 <style lang="scss">
 @import "../../sass/_variables.scss";
+
 .mContBkg {
   display: flex;
   justify-content: center;

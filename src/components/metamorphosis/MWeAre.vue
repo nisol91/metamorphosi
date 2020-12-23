@@ -1,23 +1,36 @@
 <template>
   <div class="weAreBox">
-    <div
-      class="weAreContBkg fade-in-home"
-      :style="{
-        backgroundImage: `url(${bkgUrl})`,
-      }"
-    >
-      <div class="weAreCont">
-        <div class="weAreTitleText">we are</div>
-        <div class="weAreText">we are content</div>
-      </div>
-      <div class="weAreCont team">
-        <div class="weAreTitleText">team</div>
-        <div class="teamEl">
-          <div class="weAreText memberName">Filippo Tommasini:</div>
-          <div class="weAreText memberName">Nicola Solzi:</div>
+    <div class="progressLoaderBkg" v-if="!bkgUrl">
+      <q-circular-progress
+        indeterminate
+        size="75px"
+        :thickness="0.6"
+        color="blue-grey-7"
+        center-color="grey-8"
+        class="q-ma-md"
+      />
+    </div>
+
+    <div class="" v-if="bkgUrl">
+      <div
+        class="weAreContBkg fade-in-home"
+        :style="{
+          backgroundImage: `url(${bkgUrl})`,
+        }"
+      >
+        <div class="weAreCont">
+          <div class="weAreTitleText">we are</div>
+          <div class="weAreText">we are content</div>
         </div>
+        <div class="weAreCont team">
+          <div class="weAreTitleText">team</div>
+          <div class="teamEl">
+            <div class="weAreText memberName">Filippo Tommasini:</div>
+            <div class="weAreText memberName">Nicola Solzi:</div>
+          </div>
+        </div>
+        <div class="fotoOverlayWeAre"></div>
       </div>
-      <div class="fotoOverlayWeAre"></div>
     </div>
   </div>
 </template>
@@ -61,6 +74,13 @@ export default {
 </script>
 <style lang="scss">
 @import "../../sass/_variables.scss";
+.progressLoaderBkg {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .weAreContBkg {
   display: flex;
   justify-content: center;
