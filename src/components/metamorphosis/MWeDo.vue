@@ -56,8 +56,8 @@
       ]"
     >
       <v-img
-        v-if="work.featured_media_url"
-        :src="work.featured_media_url"
+        v-if="work.featured_image_src"
+        :src="work.featured_image_src"
         class="grey lighten-2 workImage"
         :aspect-ratio="16 / 9"
         @mouseover="showByIndex = i"
@@ -141,14 +141,14 @@ export default {
     async getOtherFields(works) {
       // get other fields
       for (const work of works) {
-        if (work.featured_media !== 0) {
-          work["featured_media_url"] = (
-            await axios.get(
-              `https://endorphinoutdoor.com/wp-json/wp/v2/media/${work.featured_media}`
-            )
-          ).data.source_url;
-        }
-
+        // non piu necessario #######
+        // if (work.featured_media !== 0) {
+        //   work["featured_media_url"] = (
+        //     await axios.get(
+        //       `https://endorphinoutdoor.com/wp-json/wp/v2/media/${work.featured_media}`
+        //     )
+        //   ).data.source_url;
+        // }
         // add custom field
         // var acf = (
         //   await axios.get(

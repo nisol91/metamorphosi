@@ -35,8 +35,8 @@
           {{ work.title.rendered }}
         </div>
         <v-img
-          v-if="work.featured_media_url"
-          :src="work.featured_media_url"
+          v-if="work.featured_image_src"
+          :src="work.featured_image_src"
           class="grey lighten-2 relWorkImg"
           :aspect-ratio="16 / 9"
         >
@@ -101,15 +101,15 @@ export default {
             `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories=46&exclude=${this.work.id}&per_page=3`
           )
         ).data;
-        for (const work of relatedWorks) {
-          if (work.featured_media !== 0) {
-            work["featured_media_url"] = (
-              await axios.get(
-                `https://endorphinoutdoor.com/wp-json/wp/v2/media/${work.featured_media}`
-              )
-            ).data.source_url;
-          }
-        }
+        // for (const work of relatedWorks) {
+        //   if (work.featured_media !== 0) {
+        //     work["featured_media_url"] = (
+        //       await axios.get(
+        //         `https://endorphinoutdoor.com/wp-json/wp/v2/media/${work.featured_media}`
+        //       )
+        //     ).data.source_url;
+        //   }
+        // }
         this.relatedWorks = relatedWorks;
       } catch (error) {
         console.log(error);

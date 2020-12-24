@@ -1,9 +1,9 @@
 <template>
   <div class="editorBox">
-    <div class="headerMediaBox" v-if="post && post.featured_media_url">
+    <div class="headerMediaBox" v-if="post && post.featured_image_src">
       <v-img
-        v-if="post && post.featured_media_url"
-        :src="post.featured_media_url"
+        v-if="post && post.featured_image_src"
+        :src="post.featured_image_src"
         class="grey lighten-2 headerMedia"
         :aspect-ratio="16 / 9"
       >
@@ -81,8 +81,8 @@
             {{ post.title.rendered }}
           </div>
           <v-img
-            v-if="post.featured_media_url"
-            :src="post.featured_media_url"
+            v-if="post.featured_image_src"
+            :src="post.featured_image_src"
             class="grey lighten-2 relPostImg"
             :aspect-ratio="16 / 9"
           >
@@ -240,11 +240,11 @@ export default {
           post["catNames"] = [];
           post["tagNames"] = [];
 
-          post["featured_media_url"] = (
-            await axios.get(
-              `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
-            )
-          ).data.source_url;
+          // post["featured_media_url"] = (
+          //   await axios.get(
+          //     `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
+          //   )
+          // ).data.source_url;
           post.categories.forEach((postCat) => {
             this.categories.forEach((cat) => {
               if (postCat === cat.id) {

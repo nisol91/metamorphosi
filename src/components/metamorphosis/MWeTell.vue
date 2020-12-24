@@ -67,8 +67,8 @@
         </div>
         <div class="pDx">
           <v-img
-            v-if="post.featured_media_url"
-            :src="post.featured_media_url"
+            v-if="post.featured_image_src"
+            :src="post.featured_image_src"
             class="grey lighten-2 pMedia blogImage"
             :aspect-ratio="16 / 9"
           >
@@ -225,13 +225,13 @@ export default {
           post["catNames"] = [];
           post["tagNames"] = [];
 
-          if (post.featured_media !== 0) {
-            post["featured_media_url"] = (
-              await axios.get(
-                `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
-              )
-            ).data.source_url;
-          }
+          // if (post.featured_media !== 0) {
+          //   post["featured_media_url"] = (
+          //     await axios.get(
+          //       `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
+          //     )
+          //   ).data.source_url;
+          // }
 
           post.categories.forEach((postCat) => {
             this.categories.forEach((cat) => {
