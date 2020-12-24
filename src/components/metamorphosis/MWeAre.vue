@@ -94,7 +94,7 @@ export default {
   z-index: 8000;
   background-repeat: no-repeat;
   // background-attachment: fixed;
-  // background-position: center;
+  background-position: center;
   background-size: cover;
   font-size: 50px;
   z-index: 9700;
