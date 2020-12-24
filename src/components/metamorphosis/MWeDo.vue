@@ -72,6 +72,15 @@
           </v-row>
         </template>
         <div
+          class="workImageOverlay"
+          :class="[
+            {
+              'fade-out-worktitle': showByIndex !== i,
+              'fade-in': showByIndex === i,
+            },
+          ]"
+        ></div>
+        <div
           class="imgTitle"
           :class="[
             {
@@ -215,16 +224,18 @@ export default {
   width: 100%;
   max-height: 100%;
   transition: 1s;
-
   position: relative;
-  &:hover {
-    opacity: 0.9;
-    transition: 1s;
-  }
+}
+.workImageOverlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(51, 51, 51, 0.575);
 }
 .imgTitle {
   transition: 1s;
-  width: 300px;
   position: absolute;
   top: 80%;
   right: 12%;
@@ -277,7 +288,6 @@ export default {
   }
   .imgTitle {
     transition: 1s;
-    width: 200px;
     position: absolute;
     top: 80%;
     right: 8%;
