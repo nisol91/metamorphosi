@@ -1,6 +1,6 @@
 <template>
   <div class="contBox">
-    <div class="progressLoaderBkg" v-if="!bkgUrlContacts">
+    <div class="progressLoaderBkg" v-if="loading">
       <q-circular-progress
         indeterminate
         size="75px"
@@ -10,11 +10,11 @@
         class="q-ma-md"
       />
     </div>
-    <div class="" v-if="bkgUrlContacts">
+    <div class="contactsBox" v-if="!loading">
       <div
         class="mContBkg fade-in-home"
         :style="{
-          backgroundImage: `url(${bkgUrlContacts})`,
+          backgroundImage: `url(https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg)`,
         }"
       >
         <div class="fotoOverlay"></div>
@@ -29,7 +29,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      bkgUrlContacts: null,
+      loading: true,
     };
   },
   created() {
@@ -55,18 +55,17 @@ export default {
       console.log(res);
     },
     async getBkg() {
-      var bkg = (
-        await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/media/2883`)
-      ).data.source_url;
-      this.bkgUrlContacts = bkg;
-      console.log(bkg);
+      this.loading = false;
     },
   },
 };
 </script>
 <style lang="scss">
 @import "../../sass/_variables.scss";
-
+.contactsBox {
+  width: 100vw;
+  height: 100vh;
+}
 .mContBkg {
   display: flex;
   justify-content: center;
@@ -75,8 +74,8 @@ export default {
   position: relative;
   z-index: 8000;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  // background-attachment: fixed;
+  // background-position: center;
   background-size: cover;
   font-size: 50px;
   z-index: 9700;

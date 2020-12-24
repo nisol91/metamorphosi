@@ -164,9 +164,9 @@
       <!-- mobile tripartition -->
 
       <div class="mTripartitionMobile">
-        <div class="mTripMobile" @click="pushAbout">WE ARE</div>
-        <div class="mTripMobile" @click="pushContents">WE DO</div>
-        <div class="mTripMobile" @click="pushBlog">WE TELL</div>
+        <div class="mTripMobile" @click="pushAboutM">WE ARE</div>
+        <div class="mTripMobile" @click="pushContentsM">WE DO</div>
+        <div class="mTripMobile" @click="pushBlogM">WE TELL</div>
       </div>
     </div>
   </div>
@@ -210,6 +210,27 @@ export default {
     }, 2000);
   },
   methods: {
+    pushAboutM() {
+      this.pushedAbout = true;
+      this.$router.push({
+        name: "mWeAre",
+        // params: { eventName: this.event.name },
+      });
+    },
+    pushBlogM() {
+      this.pushedBlog = true;
+      this.$router.push({
+        name: "mWeTell",
+        // params: { eventName: this.event.name },
+      });
+    },
+    pushContentsM() {
+      this.pushedContents = true;
+      this.$router.push({
+        name: "mWeDo",
+        // params: { eventName: this.event.name },
+      });
+    },
     pushAbout() {
       this.pushedAbout = true;
       setTimeout(() => {

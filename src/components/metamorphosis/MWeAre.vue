@@ -11,11 +11,11 @@
       />
     </div>
 
-    <div class="" v-if="!loading">
+    <div class="weAreBox" v-if="!loading">
       <div
         class="weAreContBkg fade-in-home"
         :style="{
-          backgroundImage: `url(${bkgUrlWeAre})`,
+          backgroundImage: `url(https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli_1-copia-2-scaled.jpg)`,
         }"
       >
         <div class="weAreCont">
@@ -40,7 +40,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      bkgUrlWeAre: null,
       loading: true,
     };
   },
@@ -68,20 +67,17 @@ export default {
       console.log(res);
     },
     async getBkg() {
-      this.loading = true;
-      var bkg = (
-        await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/media/2882`)
-      ).data.source_url;
-      this.bkgUrlWeAre = bkg;
       this.loading = false;
-
-      console.log(bkg);
     },
   },
 };
 </script>
 <style lang="scss">
 @import "../../sass/_variables.scss";
+.weAreBox {
+  width: 100vw;
+  height: 100vh;
+}
 .progressLoaderBkg {
   height: 100vh;
   width: 100%;
@@ -97,8 +93,8 @@ export default {
   position: relative;
   z-index: 8000;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  // background-attachment: fixed;
+  // background-position: center;
   background-size: cover;
   font-size: 50px;
   z-index: 9700;
