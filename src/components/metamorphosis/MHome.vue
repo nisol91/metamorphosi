@@ -75,11 +75,11 @@
       </Scene> -->
     </div>
 
-    <!-- desktop tripartition -->
     <div v-if="!splash" class="mHome fade-in-home">
       <div class="mImgBackgroundOverlay"></div>
       <div v-if="menu" class="mBackgroundOverlay fade-in fade-out"></div>
 
+      <!-- desktop tripartition -->
       <div class="mTripartition">
         <div
           class="mTrip m1 mTripSx"

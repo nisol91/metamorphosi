@@ -159,7 +159,7 @@ export default {
   align-items: center;
   flex-direction: column;
   .relWorkImg {
-    width: 60%;
+    width: 100%;
     border-radius: 3px;
   }
   .relWorkTitle {
