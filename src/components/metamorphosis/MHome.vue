@@ -89,11 +89,14 @@
               pushingBlogOthers: pushedBlog,
             },
           ]"
-          :style="{
-            backgroundImage: `url(${mTripSxHover ? img_sx : ''})`,
-            backgroundSize: `cover`,
-          }"
         >
+          <q-img
+            v-if="img_sx && mTripSxHover"
+            :src="img_sx"
+            class="grey lighten-2 tripBackground"
+            :transition="fade"
+          >
+          </q-img>
           <div
             class="mTripText mTripTextSx"
             @mouseenter="mTripSxHover = true"
@@ -140,11 +143,14 @@
               pushingContentsOthers: pushedContents,
             },
           ]"
-          :style="{
-            backgroundImage: `url(${mTripDxHover ? img_dx : ''})`,
-            backgroundSize: `cover`,
-          }"
         >
+          <q-img
+            v-if="img_dx && mTripDxHover"
+            :src="img_dx"
+            class="grey lighten-2 tripBackground"
+            :transition="fade"
+          >
+          </q-img>
           <div
             class="mTripText mTripTextDx"
             @mouseenter="mTripDxHover = true"
@@ -214,10 +220,10 @@ export default {
     };
   },
   created() {
+    this.backImgs();
     console.log(window.innerWidth);
     this.$store.commit("isMetamorphosis", true);
     this.preloadImgs();
-    this.backImgs();
     this.$store.commit("selectEl", "mHome");
     setTimeout(() => {
       this.$store.commit("toggleHomeMenuColor", false);
@@ -423,6 +429,14 @@ export default {
     justify-content: center;
     align-items: flex-end;
     padding-bottom: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tripBackground {
+    height: 100vh;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
   }
   .mTripCenter {
     display: flex;
@@ -478,6 +492,8 @@ export default {
     transition: 1s;
   }
   .mTripText {
+    position: absolute;
+    bottom: 80px;
     color: white;
     font-weight: bold;
     font-size: 45px;
@@ -499,6 +515,8 @@ export default {
   .mTripTextSx {
     justify-content: flex-start;
     transition: 2s;
+    left: 0px;
+
     &:hover {
       .mLineSx {
         width: 300px;
@@ -509,6 +527,7 @@ export default {
   .mTripTextDx {
     justify-content: flex-end;
     transition: 2s;
+    right: 0px;
 
     &:hover {
       .mLineDx {
@@ -519,7 +538,6 @@ export default {
   }
 
   .mTripTextCenter {
-    padding-bottom: 60px;
     transition: 2s;
     &:hover {
       color: black;
