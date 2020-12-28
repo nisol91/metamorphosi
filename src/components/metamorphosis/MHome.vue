@@ -185,11 +185,7 @@ export default {
       pushedBlog: false,
       pushedContents: false,
 
-      backgrounds_sx: [
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/wavesHunters-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/mare-monti-e-gabbiano-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/bracco-scaled.jpg",
-      ],
+      backgrounds_sx: ["sx_1.jpg", "sx_2.jpg", "sx_3.jpg"],
       backgrounds_dx: [
         "https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg",
         "https://endorphinoutdoor.com/wp-content/uploads/2020/10/DSCF2935-scaled.jpg",
@@ -271,7 +267,7 @@ export default {
         this.img_dx = this.backgrounds_dx[
           Math.floor(Math.random() * this.backgrounds_dx.length)
         ];
-      }, 1000);
+      }, 1500);
     },
   },
   computed: {

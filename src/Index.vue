@@ -390,7 +390,7 @@ export default {
   transition: 1s;
 }
 .mTop {
-  width: 100vw;
+  width: 100%;
   height: 100px;
   transition: 1s;
   display: flex;
@@ -400,7 +400,7 @@ export default {
   top: 0px;
   z-index: 9800;
   .mTopEl {
-    width: 33%;
+    width: 33.3%;
     display: flex;
     align-items: center;
   }
@@ -481,7 +481,7 @@ export default {
 
   &:hover {
     // background: rgba(52, 55, 66, 0.356);
-    margin-right: 5px;
+    width: 60px;
     transition: 0.5s;
   }
   .mLineMenuCenterLine {
