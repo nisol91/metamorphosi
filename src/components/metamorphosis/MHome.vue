@@ -315,7 +315,7 @@ export default {
         }
         this.img_sx = this.backgrounds_sx[i];
         this.img_dx = this.backgrounds_dx[i];
-      }, 2000);
+      }, 4000);
     },
   },
   computed: {
@@ -433,7 +433,7 @@ export default {
     transition: 1s;
   }
   .mTripSx {
-    transition: 2s !important;
+    transition: 1s !important;
   }
   .mTripDx {
     transition: 1s;
@@ -463,7 +463,7 @@ export default {
   .mTripDxHover,
   .mTripSxHover {
     background: rgba(128, 128, 128, 0.404);
-    transition: 2s !important;
+    transition: 1s !important;
     width: 55vw !important;
   }
   .pushingBlog,
