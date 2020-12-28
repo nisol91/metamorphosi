@@ -166,9 +166,27 @@
       <!-- mobile tripartition -->
 
       <div class="mTripartitionMobile">
-        <div class="mTripMobile" @click="pushAboutM">WE ARE</div>
-        <div class="mTripMobile" @click="pushContentsM">WE DO</div>
-        <div class="mTripMobile" @click="pushBlogM">WE TELL</div>
+        <div
+          class="mTripMobile relative-position"
+          @click="pushAboutM"
+          v-ripple="{ early: true, color: 'grey' }"
+        >
+          WE ARE
+        </div>
+        <div
+          class="mTripMobile relative-position"
+          @click="pushContentsM"
+          v-ripple="{ early: true, color: 'grey' }"
+        >
+          WE DO
+        </div>
+        <div
+          class="mTripMobile relative-position"
+          @click="pushBlogM"
+          v-ripple="{ early: true, color: 'grey' }"
+        >
+          WE TELL
+        </div>
       </div>
     </div>
   </div>
@@ -658,6 +676,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 33%;
+    overflow: hidden;
   }
 }
 @media (max-width: 600px) {
