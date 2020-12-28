@@ -3,11 +3,7 @@
     class="mHomeBox fade-in-home"
     :style="{
       background: `${splash ? 'rgb(80, 80, 80)' : ''}`,
-      backgroundImage: `url(${
-        !splash
-          ? 'https://endorphinoutdoor.com/wp-content/uploads/2020/10/crinale_drone-1-scaled.jpg'
-          : ''
-      })`,
+      backgroundImage: `url(${!splash ? bkgImage : ''})`,
     }"
   >
     <!-- splash -->
@@ -184,13 +180,35 @@ export default {
       pushedAbout: false,
       pushedBlog: false,
       pushedContents: false,
-
-      backgrounds_sx: ["sx_1.jpg", "sx_2.jpg", "sx_3.jpg"],
-      backgrounds_dx: [
+      bkgImageUrl:
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/10/crinale_drone-1-scaled.jpg",
+      bkgImage: null,
+      backgrounds_sx_url: [
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_4.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_5.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_6.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/luna-2-mod-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/wavesHunters-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/mare-monti-e-gabbiano-scaled.jpg",
         "https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg",
         "https://endorphinoutdoor.com/wp-content/uploads/2020/10/DSCF2935-scaled.jpg",
         "https://endorphinoutdoor.com/wp-content/uploads/2020/06/WORDPRESSIMG-1.gif",
       ],
+
+      backgrounds_dx_url: [
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_4.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_5.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_6.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/luna-2-mod-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/wavesHunters-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/mare-monti-e-gabbiano-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/10/DSCF2935-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/06/WORDPRESSIMG-1.gif",
+      ],
+      backgrounds_sx: [],
+      backgrounds_dx: [],
+
       img_sx: null,
       img_dx: null,
     };
@@ -198,7 +216,7 @@ export default {
   created() {
     console.log(window.innerWidth);
     this.$store.commit("isMetamorphosis", true);
-    this.setSplash();
+    this.preloadImgs();
     this.backImgs();
     this.$store.commit("selectEl", "mHome");
     setTimeout(() => {
@@ -259,15 +277,45 @@ export default {
         this.splash = false;
       }, 4000);
     },
+    preloadImgs() {
+      for (const url of this.backgrounds_dx_url) {
+        var imgDx = new Image();
+        imgDx.src = url;
+        this.backgrounds_dx.push(imgDx.src);
+      }
+      for (const url of this.backgrounds_sx_url) {
+        var imgSx = new Image();
+        imgSx.src = url;
+        this.backgrounds_sx.push(imgSx.src);
+      }
+      var imgBkg = new Image();
+      imgBkg.src = this.bkgImageUrl;
+      this.bkgImage = imgBkg.src;
+
+      this.setSplash();
+    },
     backImgs() {
+      // random
+      // setInterval(() => {
+      //   this.img_sx = this.backgrounds_sx[
+      //     Math.floor(Math.random() * this.backgrounds_sx.length)
+      //   ];
+      //   this.img_dx = this.backgrounds_dx[
+      //     Math.floor(Math.random() * this.backgrounds_dx.length)
+      //   ];
+      // }, 4000);
+
+      // sequential
+      var i = 0;
+      this.img_sx = this.backgrounds_sx[i];
       setInterval(() => {
-        this.img_sx = this.backgrounds_sx[
-          Math.floor(Math.random() * this.backgrounds_sx.length)
-        ];
-        this.img_dx = this.backgrounds_dx[
-          Math.floor(Math.random() * this.backgrounds_dx.length)
-        ];
-      }, 1500);
+        i++;
+        if (i == this.backgrounds_sx.length) {
+          i = 0;
+        }
+        this.img_sx = this.backgrounds_sx[i];
+        this.img_dx = this.backgrounds_dx[i];
+      }, 2000);
     },
   },
   computed: {
@@ -385,7 +433,7 @@ export default {
     transition: 1s;
   }
   .mTripSx {
-    transition: 1s;
+    transition: 2s !important;
   }
   .mTripDx {
     transition: 1s;
@@ -415,7 +463,7 @@ export default {
   .mTripDxHover,
   .mTripSxHover {
     background: rgba(128, 128, 128, 0.404);
-    transition: 1s;
+    transition: 2s !important;
     width: 55vw !important;
   }
   .pushingBlog,
