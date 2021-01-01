@@ -110,6 +110,11 @@ export default {
         //     ).data.source_url;
         //   }
         // }
+        for (const [i, w] of relatedWorks.entries()) {
+          if (w.id === this.work.id) {
+            relatedWorks.splice(i, 1);
+          }
+        }
         this.relatedWorks = relatedWorks;
       } catch (error) {
         console.log(error);

@@ -231,6 +231,11 @@ export default {
         ).data;
 
         console.log(relatedPosts);
+        for (const [i, p] of relatedPosts.entries()) {
+          if (p.id === this.post.id) {
+            relatedPosts.splice(i, 1);
+          }
+        }
       } catch (error) {
         console.log(error);
       }
