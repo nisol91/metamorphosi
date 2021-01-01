@@ -90,6 +90,10 @@ const routes = [
         //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
         //     else next()
         // }
+        beforeEnter: (to, from, next) => {
+            window.scrollTo(0, 0);
+            next()
+        }
     },
     {
         path: "/m-we-tell/:id",
@@ -100,6 +104,11 @@ const routes = [
         //     if (to.name !== 'login' && localStorage.getItem("isLoggedIn") === "false") next({ name: 'home' })
         //     else next()
         // }
+        beforeEnter: (to, from, next) => {
+            window.scrollTo(0, 0);
+            next()
+
+        }
     },
     {
         path: "/m-we-tell",
