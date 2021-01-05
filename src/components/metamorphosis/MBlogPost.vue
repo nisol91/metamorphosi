@@ -551,6 +551,26 @@ export default {
 .wpCustomMarginSxImage {
   margin-left: 5px !important;
 }
+.wp-block-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .wp-block-button {
+    width: 30%;
+
+    .wp-block-button__link {
+      width: 100%;
+      background: rgba(75, 77, 102, 0.795);
+      border-radius: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none !important;
+    }
+  }
+}
 .postCategory {
   font-style: italic;
   width: 100%;
@@ -680,6 +700,9 @@ export default {
       max-width: 100% !important;
       height: auto !important;
     }
+  }
+  .wp-block-button {
+    width: 50% !important;
   }
 }
 // ##
