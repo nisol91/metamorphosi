@@ -426,16 +426,16 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
 }
 .pCat {
   background: $primary-color;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin: 3px 3px;
   overflow: hidden;
   position: relative;
   padding: 5px;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 10px;
 
   .pLine {
     opacity: 0;
@@ -468,11 +468,15 @@ export default {
   margin: 5px 0;
   flex-direction: row;
   justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
   .pTag {
     margin-right: 5px;
     overflow: hidden;
     position: relative;
     padding: 5px;
+    font-size: 10px;
+    width: auto;
     .pLine {
       height: 2px;
       width: 100%;

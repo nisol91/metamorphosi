@@ -508,13 +508,34 @@ export default {
     padding: 0 20px;
   }
 }
+.wp-block-cover {
+  background-size: cover;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-position: center;
+}
 .wp-block-columns {
   display: flex;
   justify-content: center;
+  width: 100%;
+}
+.wp-block-column {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
 .wp-block-image {
-  display: block;
   overflow: hidden;
+  margin: 10px !important;
+  text-align: center;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 .postCategory {
   font-style: italic;
@@ -552,6 +573,7 @@ export default {
 .aligncenter {
   text-align: center !important;
 }
+
 .postBox {
   width: 100%;
   padding: 20px;
@@ -588,6 +610,34 @@ export default {
   .relPosts {
     .relPost {
       flex-basis: 80%;
+    }
+  }
+}
+// ##
+@media (min-height: 1000px) {
+  .headerMediaBox {
+    height: 60vh !important;
+  }
+  .headerMedia {
+    position: absolute;
+    top: -120px;
+    left: 0px;
+    width: 100vw !important;
+    height: 60vh !important;
+  }
+}
+// ##
+@media (min-height: 800px) {
+  .wp-block-column {
+    width: 100%;
+  }
+  .wp-block-image {
+    overflow: hidden;
+    margin: 10px !important;
+    text-align: center;
+    img {
+      width: 100px !important;
+      height: auto !important;
     }
   }
 }

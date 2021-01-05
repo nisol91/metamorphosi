@@ -10,7 +10,23 @@
         class="q-ma-md"
       />
     </div>
-
+    <div class="headerMediaWorksBox" v-if="work && work.featured_image_src">
+      <v-parallax
+        v-if="work && work.featured_image_src"
+        :src="work.featured_image_src"
+        class="grey lighten-2 headerMediaWorks"
+        :aspect-ratio="16 / 9"
+      >
+        <template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row>
+        </template>
+      </v-parallax>
+    </div>
     <div class="singleWork">
       <div v-if="work" v-html="work.content.rendered"></div>
     </div>
@@ -135,8 +151,18 @@ export default {
 };
 </script>
 <style lang="scss">
+.headerMediaWorksBox {
+  height: 110vh !important;
+}
+.headerMediaWorks {
+  position: absolute;
+  top: -120px;
+  left: 0px;
+  width: 100vw !important;
+  height: 110vh !important;
+}
 .wBox {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -206,6 +232,19 @@ export default {
     .relWork {
       width: 80%;
     }
+  }
+}
+// ##
+@media (min-height: 1000px) {
+  .headerMediaWorksBox {
+    height: 60vh !important;
+  }
+  .headerMediaWorks {
+    position: absolute;
+    top: -120px;
+    left: 0px;
+    width: 100vw !important;
+    height: 60vh !important;
   }
 }
 </style>
