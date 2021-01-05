@@ -210,7 +210,7 @@ export default {
 
 .relWorks {
   position: relative;
-  height: 300px;
+  height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;

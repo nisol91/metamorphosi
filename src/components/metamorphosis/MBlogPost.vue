@@ -484,7 +484,7 @@ export default {
   overflow-x: scroll;
   overflow-y: auto;
   width: 100%;
-  height: 300px;
+  height: 350px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -527,6 +527,15 @@ export default {
   justify-content: center;
   flex-direction: column;
   width: 100%;
+}
+.post,
+.singleWork {
+  a {
+    text-decoration: underline !important;
+    &:hover {
+      font-weight: bold;
+    }
+  }
 }
 .wp-block-image {
   overflow: hidden;
@@ -636,7 +645,9 @@ export default {
     margin: 10px !important;
     text-align: center;
     img {
-      width: 100px !important;
+      // width: 100px !important;
+      // height: auto !important;
+      max-width: 100% !important;
       height: auto !important;
     }
   }
