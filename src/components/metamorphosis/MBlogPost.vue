@@ -609,7 +609,7 @@ export default {
   width: 100%;
   border-top: 2px solid rgba(128, 128, 128, 0.603);
   margin-top: 20px;
-  padding-top: 20px;
+  padding: 20px 20vw;
 }
 .editor {
   height: 100%;
@@ -636,13 +636,20 @@ export default {
   }
 }
 // ##
-@media (min-height: 800px) {
+@media (max-width: 1000px) {
+  .post {
+    padding: 20px 10vw;
+  }
+}
+
+// ##
+@media (max-width: 800px) {
   .wp-block-column {
     width: 100%;
   }
   .wp-block-image {
     overflow: hidden;
-    margin: 10px !important;
+    margin: 8px !important;
     text-align: center;
     img {
       // width: 100px !important;
