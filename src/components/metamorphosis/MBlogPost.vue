@@ -539,12 +539,17 @@ export default {
 }
 .wp-block-image {
   overflow: hidden;
-  margin: 10px !important;
   text-align: center;
   img {
     max-width: 100%;
     height: auto;
   }
+}
+.wpCustomMarginDxImage {
+  margin-right: 5px !important;
+}
+.wpCustomMarginSxImage {
+  margin-left: 5px !important;
 }
 .postCategory {
   font-style: italic;
@@ -581,6 +586,22 @@ export default {
 .has-text-align-center,
 .aligncenter {
   text-align: center !important;
+}
+
+.has-small-font-size {
+  font-size: 13px;
+}
+.has-normal-font-size {
+  font-size: 16px;
+}
+.has-medium-font-size {
+  font-size: 20px;
+}
+.has-large-font-size {
+  font-size: 36px;
+}
+.has-huge-font-size {
+  font-size: 42px;
 }
 
 .postBox {
@@ -638,7 +659,10 @@ export default {
 // ##
 @media (max-width: 1000px) {
   .post {
-    padding: 20px 10vw;
+    padding: 20px 0vw;
+  }
+  .postBox {
+    padding: 5px;
   }
 }
 
@@ -649,13 +673,23 @@ export default {
   }
   .wp-block-image {
     overflow: hidden;
-    margin: 8px !important;
     text-align: center;
     img {
       // width: 100px !important;
       // height: auto !important;
       max-width: 100% !important;
       height: auto !important;
+    }
+  }
+}
+// ##
+@media (max-width: 600px) {
+  .postTitle {
+    font-size: 30px;
+  }
+  .post {
+    h2 {
+      font-size: 50px !important;
     }
   }
 }
