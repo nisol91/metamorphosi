@@ -12,6 +12,7 @@
     </div>
     <div class="headerMediaWorksBox" v-if="work && work.featured_image_src">
       <v-parallax
+        height="1400"
         v-if="work && work.featured_image_src"
         :src="work.featured_image_src"
         class="grey lighten-2 headerMediaWorks"
@@ -152,14 +153,14 @@ export default {
 </script>
 <style lang="scss">
 .headerMediaWorksBox {
-  height: 110vh !important;
+  height: 120vh !important;
 }
 .headerMediaWorks {
   position: absolute;
   top: -120px;
   left: 0px;
   width: 100vw !important;
-  height: 110vh !important;
+  height: 120vh !important;
 }
 .wBox {
   width: 100%;
@@ -175,6 +176,7 @@ export default {
   margin: 20px;
   min-height: 80vh;
   width: 100%;
+  padding: 20px 20vw;
 }
 
 .relWork {
@@ -225,6 +227,15 @@ export default {
   }
 }
 // ##
+@media (max-width: 1000px) {
+  .singleWork {
+    padding: 20px 0vw;
+  }
+  .wBox {
+    padding: 10px 3px;
+  }
+}
+// ##
 @media (max-width: 700px) {
   .relWorks {
     flex-direction: column;
@@ -237,14 +248,20 @@ export default {
 // ##
 @media (min-height: 1000px) {
   .headerMediaWorksBox {
-    height: 60vh !important;
+    height: 80vh !important;
   }
   .headerMediaWorks {
     position: absolute;
     top: -120px;
     left: 0px;
     width: 100vw !important;
-    height: 60vh !important;
+    height: 80vh !important;
+  }
+}
+// ##
+@media (min-width: 1600px) {
+  .singleWork {
+    padding: 20px 30vw;
   }
 }
 </style>

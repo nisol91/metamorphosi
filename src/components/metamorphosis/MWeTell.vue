@@ -340,6 +340,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    flex-wrap: wrap;
   }
   .fCat {
     cursor: pointer;

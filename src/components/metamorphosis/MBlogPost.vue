@@ -666,14 +666,14 @@ export default {
 // ##
 @media (min-height: 1000px) {
   .headerMediaBox {
-    height: 60vh !important;
+    height: 100vh !important;
   }
   .headerMedia {
     position: absolute;
     top: -120px;
     left: 0px;
     width: 100vw !important;
-    height: 60vh !important;
+    height: 100vh !important;
   }
 }
 // ##
@@ -714,6 +714,12 @@ export default {
     h2 {
       font-size: 50px !important;
     }
+  }
+}
+// ##
+@media (min-width: 1600px) {
+  .post {
+    padding: 20px 30vw;
   }
 }
 </style>
