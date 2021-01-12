@@ -14,7 +14,7 @@
             <router-link class="menuEl" :to="{ name: 'mContacts' }">
               <div
                 class="mContText"
-                :style="{ color: notHome ? 'black' : 'white' }"
+                :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
               >
                 CONTACTS
               </div>
@@ -36,10 +36,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mHome.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('mHome')"
                 >
                   HOME
@@ -50,10 +50,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mAbout.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('mAbout')"
                 >
                   WE ARE
@@ -64,10 +64,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mContents.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('mContents')"
                 >
                   WE DO
@@ -78,10 +78,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mBlog.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('mBlog')"
                 >
                   WE TELL
@@ -92,10 +92,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mShop.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('mShop')"
                 >
                   SHOP
@@ -106,10 +106,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.mContacts.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('mContacts')"
                 >
                   CONTACTS
@@ -126,10 +126,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.login.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('login')"
                 >
                   Login
@@ -144,10 +144,10 @@
               >
                 <div
                   class="menuLine"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="logout"
                 >
                   Logout
@@ -165,10 +165,10 @@
                 <div
                   class="menuLine"
                   :class="[{ menuLineShow: menuEl.userProfile.val }]"
-                  :style="{ background: notHome ? 'black' : 'white' }"
+                  :style="{ background: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                 ></div>
                 <div
-                  :style="{ color: notHome ? 'black' : 'white' }"
+                  :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
                   @click="selectEl('userProfile')"
                 >
                   Settings
@@ -198,7 +198,7 @@
               v-if="menu"
               @click="toggleMenu"
               class="menuCross fade-in fade-out"
-              :style="{ color: notHome ? 'black' : 'white' }"
+              :style="{ color: notHome ? 'rgb(65, 65, 65)' : 'white' }"
               >mdi-close</v-icon
             >
           </div>
@@ -379,13 +379,13 @@ export default {
   color: white;
 }
 .colorBlack {
-  color: black !important;
+  color: rgb(65, 65, 65) !important;
 }
 .bkgBlack {
-  border-bottom: 2px solid black !important;
+  border-bottom: 2px solid rgb(65, 65, 65) !important;
 }
 .bkgBlack_2 {
-  border-top: 2px solid black !important;
+  border-top: 2px solid rgb(65, 65, 65) !important;
 }
 .menuBkg {
   background: rgba(167, 167, 167, 0.596);
@@ -456,11 +456,11 @@ export default {
 .menuOpen {
   position: fixed;
   top: 40px;
-  right: -350px;
+  right: -390px;
   transition: 0.5s;
   display: flex;
   justify-content: space-between;
-  width: 350px;
+  width: 380px;
 }
 .showMenu {
   transition: 0.5s;

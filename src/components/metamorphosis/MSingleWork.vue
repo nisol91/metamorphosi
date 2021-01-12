@@ -11,8 +11,8 @@
       />
     </div>
     <div class="headerMediaWorksBox" v-if="work && work.featured_image_src">
-      <v-parallax
-        height="1400"
+      <v-img
+        height="1000"
         v-if="work && work.featured_image_src"
         :src="work.featured_image_src"
         class="grey lighten-2 headerMediaWorks"
@@ -26,9 +26,9 @@
             ></v-progress-circular>
           </v-row>
         </template>
-      </v-parallax>
+      </v-img>
     </div>
-    <div class="singleWork">
+    <div class="singleWork" :class="[{ safariWork: isSafari }]">
       <div v-if="work" v-html="work.content.rendered"></div>
     </div>
     <div class="postFooter relWorks">
@@ -72,15 +72,21 @@
 </template>
 <script>
 import axios from "axios";
+import { Platform } from "quasar";
 
 export default {
   data() {
     return {
       work: null,
       relatedWorks: null,
+      isSafari: false,
     };
   },
   async created() {
+    console.log(Platform.is);
+    if (Platform.is.name === "safari") {
+      this.isSafari = true;
+    }
     await this.getWork();
     await this.getRelatedWorks();
 
@@ -152,15 +158,16 @@ export default {
 };
 </script>
 <style lang="scss">
+// molte regole del single work sono in comune con il blog post
 .headerMediaWorksBox {
-  height: 120vh !important;
+  height: 130vh !important;
 }
 .headerMediaWorks {
   position: absolute;
   top: -120px;
   left: 0px;
   width: 100vw !important;
-  height: 120vh !important;
+  height: 130vh !important;
 }
 .wBox {
   width: 100%;
@@ -177,6 +184,11 @@ export default {
   min-height: 80vh;
   width: 100%;
   padding: 20px 20vw;
+}
+.safariWork {
+  .wp-block-video {
+    height: 500px !important;
+  }
 }
 
 .relWork {
@@ -244,24 +256,35 @@ export default {
       width: 80%;
     }
   }
+  .headerMediaWorks {
+    img {
+      zoom: 50% !important;
+    }
+  }
 }
 // ##
 @media (min-height: 1000px) {
   .headerMediaWorksBox {
-    height: 80vh !important;
+    height: 100vh !important;
   }
   .headerMediaWorks {
     position: absolute;
     top: -120px;
     left: 0px;
     width: 100vw !important;
-    height: 80vh !important;
+    height: 100vh !important;
   }
 }
 // ##
 @media (min-width: 1600px) {
   .singleWork {
     padding: 20px 30vw;
+  }
+}
+// ##
+@media (min-width: 2800px) {
+  .singleWork {
+    padding: 20px 31vw;
   }
 }
 </style>

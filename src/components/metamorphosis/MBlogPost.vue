@@ -356,10 +356,10 @@ export default {
   top: -120px;
   left: 0px;
   width: 100vw !important;
-  height: 120vh !important;
+  height: 130vh !important;
 }
 .headerMediaBox {
-  height: 120vh !important;
+  height: 130vh !important;
 }
 .shareIcons {
   text-decoration: none !important;
@@ -508,6 +508,16 @@ export default {
     padding: 0 20px;
   }
 }
+.wp-block-video {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  video {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+}
+
 .wp-block-cover {
   background-size: cover;
   height: 800px;
