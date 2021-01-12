@@ -12,7 +12,6 @@
     </div>
     <div class="headerMediaWorksBox" v-if="work && work.featured_image_src">
       <v-img
-        height="1000"
         v-if="work && work.featured_image_src"
         :src="work.featured_image_src"
         class="grey lighten-2 headerMediaWorks"
@@ -164,7 +163,7 @@ export default {
 }
 .headerMediaWorks {
   position: absolute;
-  top: -120px;
+  top: -100px;
   left: 0px;
   width: 100vw !important;
   height: 130vh !important;
@@ -265,26 +264,26 @@ export default {
 // ##
 @media (min-height: 1000px) {
   .headerMediaWorksBox {
-    height: 100vh !important;
+    height: 130vh !important;
   }
   .headerMediaWorks {
     position: absolute;
-    top: -120px;
+    top: -100px;
     left: 0px;
     width: 100vw !important;
-    height: 100vh !important;
+    height: 130vh !important;
   }
 }
 // ##
 @media (min-width: 1600px) {
   .singleWork {
-    padding: 20px 30vw;
-  }
-}
-// ##
-@media (min-width: 2800px) {
-  .singleWork {
     padding: 20px 31vw;
   }
 }
+// ##
+// @media (min-width: 2800px) {
+//   .singleWork {
+//     padding: 20px 31vw;
+//   }
+// }
 </style>
