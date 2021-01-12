@@ -300,9 +300,12 @@ export default {
     flex-direction: column;
     height: 150px;
   }
+  .workCategorySelected {
+    height: 100vh;
+  }
   .wFi {
     width: 100%;
-    height: 50px;
+    height: 33.3%;
   }
   .imgTitle {
     transition: 1s;
