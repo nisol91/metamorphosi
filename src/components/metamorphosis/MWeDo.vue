@@ -1,6 +1,13 @@
 <template>
   <div class="mWorksBox">
-    <div class="wFilters">
+    <div
+      class="wFilters"
+      :class="[
+        {
+          workCategorySelected: !workCategorySelected,
+        },
+      ]"
+    >
       <div
         class="wFi"
         :class="[
@@ -42,56 +49,58 @@
       color="grey-8"
       track-color="blue-grey-14"
       class="q-ma-md loaderWorks"
-      v-if="!works"
+      v-if="!works && workCategorySelected"
     />
-    <div
-      class="work"
-      v-for="(work, i) in works"
-      :key="i + `_work`"
-      @click="pushSingleWork(work.id)"
-      :class="[
-        {
-          pushedSingleWorkClass: pushedSingleWork,
-        },
-      ]"
-    >
-      <v-img
-        v-if="work.featured_image_src"
-        :src="work.featured_image_src"
-        class="grey lighten-2 workImage"
-        :aspect-ratio="16 / 9"
-        @mouseover="showByIndex = i"
-        @mouseout="showByIndex = null"
+    <div class="worksSelectionContainer" v-if="workCategorySelected">
+      <div
+        class="work"
+        v-for="(work, i) in works"
+        :key="i + `_work`"
+        @click="pushSingleWork(work.id)"
+        :class="[
+          {
+            pushedSingleWorkClass: pushedSingleWork,
+          },
+        ]"
       >
-        <template v-slot:placeholder>
-          <v-row class="fill-height ma-0" align="center" justify="center">
-            <v-progress-circular
-              indeterminate
-              color="grey lighten-5"
-            ></v-progress-circular>
-          </v-row>
-        </template>
-        <div
-          class="workImageOverlay"
-          :class="[
-            {
-              'fade-out-worktitle': showByIndex !== i,
-              'fade-in': showByIndex === i,
-            },
-          ]"
-        ></div>
-        <div
-          class="imgTitle"
-          :class="[
-            {
-              'fade-out-worktitle': showByIndex !== i,
-              'fade-in': showByIndex === i,
-            },
-          ]"
+        <v-img
+          v-if="work.featured_image_src"
+          :src="work.featured_image_src"
+          class="grey lighten-2 workImage"
+          :aspect-ratio="16 / 9"
+          @mouseover="showByIndex = i"
+          @mouseout="showByIndex = null"
         >
-          {{ work.title.rendered }}
-        </div>
-      </v-img>
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+          <div
+            class="workImageOverlay"
+            :class="[
+              {
+                'fade-out-worktitle': showByIndex !== i,
+                'fade-in': showByIndex === i,
+              },
+            ]"
+          ></div>
+          <div
+            class="imgTitle"
+            :class="[
+              {
+                'fade-out-worktitle': showByIndex !== i,
+                'fade-in': showByIndex === i,
+              },
+            ]"
+          >
+            {{ work.title.rendered }}
+          </div>
+        </v-img>
+      </div>
     </div>
   </div>
 </template>
@@ -113,6 +122,7 @@ export default {
       loaded: false,
       showByIndex: null,
       pushedSingleWork: false,
+      workCategorySelected: false,
     };
   },
   created() {
@@ -185,6 +195,7 @@ export default {
         console.log(error);
       }
       this.loaded = true;
+      this.workCategorySelected = true;
     },
   },
   computed: {
@@ -205,6 +216,10 @@ export default {
 .pushedSingleWorkClass {
   opacity: 0;
   transition: 3s;
+}
+.worksSelectionContainer {
+  width: 100%;
+  height: 100%;
 }
 .mWorksBox {
   width: 100vw;
@@ -249,6 +264,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.workCategorySelected {
+  height: 100vh;
 }
 .wFi {
   width: calc(100vw / 3);
