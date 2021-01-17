@@ -51,7 +51,72 @@
       class="q-ma-md loaderWorks"
       v-if="!works && workCategorySelected"
     />
-    <div class="worksSelectionContainer" v-if="workCategorySelected">
+    <carousel
+      class="worksSelectionContainer"
+      :perPageCustom="[
+        [300, 1],
+        [500, 2],
+        [800, 2],
+        [1024, 3],
+      ]"
+      :navigationNextLabel="'▶'"
+      :navigationPrevLabel="'◀'"
+      :paginationSize="30"
+      :paginationPadding="15"
+      :paginationActiveColor="'#0F4F99'"
+      v-if="workCategorySelected"
+    >
+      <slide
+        class="work"
+        v-for="(work, i) in works"
+        :key="`work_${i}`"
+        :class="[
+          {
+            pushedSingleWorkClass: pushedSingleWork,
+          },
+        ]"
+      >
+        <v-img
+          v-if="work.featured_image_src"
+          :src="work.featured_image_src"
+          class="grey lighten-2 workImage"
+          :aspect-ratio="16 / 9"
+          @mouseover="showByIndex = i"
+          @mouseout="showByIndex = null"
+          @click="pushSingleWork(work.id)"
+        >
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+          <div
+            class="workImageOverlay"
+            :class="[
+              {
+                'fade-out-worktitle': showByIndex !== i,
+                'fade-in': showByIndex === i,
+              },
+            ]"
+          ></div>
+          <div
+            class="imgTitle"
+            :class="[
+              {
+                'fade-out-worktitle': showByIndex !== i,
+                'fade-in': showByIndex === i,
+              },
+            ]"
+          >
+            {{ work.title.rendered }}
+          </div>
+        </v-img>
+      </slide>
+    </carousel>
+    <div class="worksSelectionContainer" v-if="workCategorySelected && test">
       <div
         class="work"
         v-for="(work, i) in works"
@@ -110,11 +175,18 @@ import firebase from "firebase";
 import VueMoment from "vue-moment";
 import { mapState, mapGetters } from "vuex";
 import axios from "axios";
+import VueCarousel from "vue-carousel";
+import { Carousel, Slide } from "vue-carousel";
 import _ from "lodash";
 
 export default {
+  components: {
+    Carousel,
+    Slide,
+  },
   data() {
     return {
+      test: false,
       works: null,
       catSelected: "",
       env: process.env.VUE_APP_DB_ENV,
@@ -219,7 +291,7 @@ export default {
 }
 .worksSelectionContainer {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 .mWorksBox {
   width: 100vw;
@@ -232,12 +304,12 @@ export default {
 }
 .work {
   width: 100%;
-  height: 300px;
+  height: 80vh;
   cursor: pointer;
 }
 .workImage {
   width: 100%;
-  max-height: 100%;
+  height: 100%;
   transition: 1s;
   position: relative;
 }
@@ -294,7 +366,7 @@ export default {
 // ##
 @media (max-width: 650px) {
   .work {
-    height: 200px;
+    height: 60vh;
   }
   .wFilters {
     flex-direction: column;
@@ -320,7 +392,7 @@ export default {
 // ##
 @media (max-width: 400px) {
   .work {
-    height: 150px;
+    height: 50vh;
   }
 }
 </style>
