@@ -61,8 +61,8 @@
       ]"
       :navigationNextLabel="'▶'"
       :navigationPrevLabel="'◀'"
-      :paginationSize="30"
-      :paginationPadding="15"
+      :paginationSize="20"
+      :paginationPadding="5"
       :paginationActiveColor="'#0F4F99'"
       v-if="workCategorySelected"
     >
@@ -304,7 +304,7 @@ export default {
 }
 .work {
   width: 100%;
-  height: 80vh;
+  height: 70vh;
   cursor: pointer;
 }
 .workImage {
@@ -366,7 +366,7 @@ export default {
 // ##
 @media (max-width: 650px) {
   .work {
-    height: 60vh;
+    height: 40vh;
   }
   .wFilters {
     flex-direction: column;
@@ -392,7 +392,7 @@ export default {
 // ##
 @media (max-width: 400px) {
   .work {
-    height: 50vh;
+    height: 40vh;
   }
 }
 </style>
