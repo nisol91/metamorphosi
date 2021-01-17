@@ -365,6 +365,9 @@ export default {
 }
 // ##
 @media (max-width: 650px) {
+  .worksSelectionContainer {
+    height: 50vh;
+  }
   .work {
     height: 40vh;
   }
