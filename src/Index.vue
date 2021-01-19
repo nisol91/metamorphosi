@@ -21,7 +21,12 @@
             </router-link>
           </div>
           <router-link :to="{ name: 'mHome' }" class="mTopEl mLogo">
-            <div style="color: red">中文</div>
+            <div>
+              <img
+                class="logoImg"
+                :src="`https://endorphinoutdoor.com/wp-content/uploads/2021/01/logo_meta_1Tavola-da-disegno-1-e1611069123385.jpg`"
+              />
+            </div>
           </router-link>
           <div class="mTopEl mMenu" :class="[{ colorBlack: notHome }]">
             <div
@@ -407,6 +412,9 @@ export default {
     align-items: center;
   }
   .mLogo {
+    .logoImg {
+      width: 150px;
+    }
     justify-content: center;
     color: red;
     font-weight: bold;

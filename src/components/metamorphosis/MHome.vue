@@ -208,15 +208,13 @@ export default {
         "https://endorphinoutdoor.com/wp-content/uploads/2020/10/crinale_drone-1-scaled.jpg",
       bkgImage: null,
       backgrounds_sx_url: [
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_4.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_5.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_6.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/luna-2-mod-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/wavesHunters-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/mare-monti-e-gabbiano-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/10/DSCF2935-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/06/WORDPRESSIMG-1.gif",
+        "https://endorphinoutdoor.com/wp-content/uploads/2016/03/DSCF8041_full-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2016/03/dega_hoka_1.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/kask_azione_2_sito.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/rino_rains_3.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2016/03/DSCF8041_full-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/vega_3.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/anello_1-scaled.jpg",
       ],
 
       backgrounds_dx_url: [

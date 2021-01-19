@@ -182,7 +182,7 @@ export default {
   margin: 20px;
   min-height: 80vh;
   width: 100%;
-  padding: 20px 20vw;
+  padding: 20px 10vw;
 }
 .safariWork {
   .wp-block-video {
@@ -275,7 +275,7 @@ export default {
   }
 }
 // ##
-@media (min-width: 1600px) {
+@media (min-width: 1800px) {
   .singleWork {
     padding: 20px 31vw;
   }

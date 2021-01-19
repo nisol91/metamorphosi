@@ -9,6 +9,18 @@
       ]"
     >
       <div
+        class="wOverl"
+        :class="[
+          {
+            catSelectedWorks: 'photo_video' == catSelected,
+            wOverlShowSx: overlaySx,
+            wOverlShowCenter: overlayCenter,
+            wOverlShowDx: overlayDx,
+          },
+        ]"
+      ></div>
+
+      <div
         class="wFi"
         :class="[
           {
@@ -16,8 +28,18 @@
           },
         ]"
         @click="filterTax(48, 'categories', 'photo_video')"
+        :style="{
+          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://endorphinoutdoor.com/wp-content/uploads/2020/09/wavesHunters2-scaled.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }"
+        @mouseenter="
+          overlaySx = true;
+          overlayCenter = false;
+          overlayDx = false;
+        "
       >
-        PHOTO/VIDEO
+        <div class="wFiTitle">PHOTO/VIDEO</div>
       </div>
       <div
         class="wFi"
@@ -27,8 +49,18 @@
           },
         ]"
         @click="filterTax(47, 'categories', 'dev')"
+        :style="{
+          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://endorphinoutdoor.com/wp-content/uploads/2020/12/snowboarder_1.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }"
+        @mouseenter="
+          overlaySx = false;
+          overlayCenter = true;
+          overlayDx = false;
+        "
       >
-        DEV
+        WEB/MOBILE DEVELOPMENT
       </div>
       <div
         class="wFi"
@@ -38,6 +70,16 @@
           },
         ]"
         @click="filterTax(49, 'categories', 'graphics')"
+        :style="{
+          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://endorphinoutdoor.com/wp-content/uploads/2021/01/la-sportiva-copertina.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }"
+        @mouseenter="
+          overlaySx = false;
+          overlayCenter = false;
+          overlayDx = true;
+        "
       >
         GRAPHICS
       </div>
@@ -52,16 +94,24 @@
       v-if="!works && workCategorySelected"
     />
     <carousel
-      class="worksSelectionContainer"
+      :class="[
+        {
+          worksSelectionContainer: !isMobile,
+          worksSelectionContainerFullWidth: isMobile,
+        },
+      ]"
       :perPageCustom="[
         [300, 1],
         [500, 2],
         [800, 2],
         [1024, 3],
       ]"
+      :autoplay="true"
+      :autoplayTimeout="4000"
+      :navigationEnabled="true"
       :navigationNextLabel="'▶'"
       :navigationPrevLabel="'◀'"
-      :paginationSize="20"
+      :paginationSize="25"
       :paginationPadding="5"
       :paginationActiveColor="'#0F4F99'"
       v-if="workCategorySelected"
@@ -195,6 +245,9 @@ export default {
       showByIndex: null,
       pushedSingleWork: false,
       workCategorySelected: false,
+      overlaySx: false,
+      overlayCenter: false,
+      overlayDx: false,
     };
   },
   created() {
@@ -276,6 +329,14 @@ export default {
       userRole: "userRole",
       menuEl: "menuEl",
     }),
+    isMobile() {
+      console.log(window.innerHeight);
+      if (window.innerWidth < 800) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };
 </script>
@@ -290,17 +351,21 @@ export default {
   transition: 3s;
 }
 .worksSelectionContainer {
-  width: 100%;
-  height: 100vh;
+  width: 90%;
+  height: 100%;
+}
+.worksSelectionContainerFullWidth {
+  width: 100vw;
+  height: 100%;
 }
 .mWorksBox {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  padding: 100px 0;
+  padding: 100px 0 20px 0;
 }
 .work {
   width: 100%;
@@ -312,6 +377,9 @@ export default {
   height: 100%;
   transition: 1s;
   position: relative;
+  img {
+    zoom: 60%;
+  }
 }
 .workImageOverlay {
   width: 100%;
@@ -327,7 +395,7 @@ export default {
   top: 80%;
   right: 12%;
   text-align: right;
-  font-size: 27px;
+  font-size: 24px;
   color: white;
 }
 .wFilters {
@@ -336,11 +404,41 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  .wOverl {
+    z-index: 9150;
+
+    opacity: 0;
+    position: absolute;
+    width: 33.3%;
+    height: 100%;
+    // background: rgba(255, 255, 255, 0.5);
+    background: rgba(189, 189, 189, 0.5);
+    pointer-events: none;
+  }
+  .wOverlShowSx {
+    opacity: 1;
+    transition: 0.5s;
+    margin-right: 66.6%;
+  }
+  .wOverlShowCenter {
+    opacity: 1;
+    transition: 0.5s;
+  }
+  .wOverlShowDx {
+    opacity: 1;
+    transition: 0.5s;
+    margin-left: 66.6%;
+  }
 }
 .workCategorySelected {
   height: 100vh;
 }
 .wFi {
+  .wFiTitle {
+    z-index: 9200;
+  }
   width: calc(100vw / 3);
   height: 100%;
   border: 1px solid rgba(223, 223, 223, 0.63);
@@ -349,6 +447,11 @@ export default {
   align-items: center;
   cursor: pointer;
   transition: 1s;
+  z-index: 9100;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
 
   &:hover {
     background: rgba(182, 182, 182, 0.521);
@@ -365,11 +468,11 @@ export default {
 }
 // ##
 @media (max-width: 650px) {
-  .worksSelectionContainer {
-    height: 50vh;
-  }
   .work {
     height: 40vh;
+  }
+  .wOverl {
+    display: none !important;
   }
   .wFilters {
     flex-direction: column;
