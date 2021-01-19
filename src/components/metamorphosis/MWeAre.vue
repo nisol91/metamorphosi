@@ -11,18 +11,30 @@
       />
     </div>
 
-    <div class="weAreBox" v-if="!loading">
+    <div class="" v-if="!loading">
       <div
         class="weAreContBkg fade-in-home"
         :style="{
-          backgroundImage: `url(https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli_1-copia-2-scaled.jpg)`,
+          backgroundImage: `url(https://endorphinoutdoor.com/wp-content/uploads/2021/01/montagne-morbide.jpg)`,
         }"
       >
         <div class="weAreCont">
           <div class="weAreTitleText">we are</div>
-          <div class="weAreText">we are content</div>
+          <div class="weAreText">
+            <p>
+              METAMORPHOSI si propone come una Digital Agency che offre servizi
+              di:
+            </p>
+            <p>
+              fotografia, riprese video, grafiche ad hoc per pagine social o
+              siti aziendali.
+            </p>
+            <p>Sviluppo siti web, e-commerce e mobile app</p>
+            Per noi è fondamentale instaurare un rapporto di fiducia reciproca
+            con il cliente, capire e soddisfare qualsiasi sua esigenza.
+          </div>
         </div>
-        <div class="weAreCont team">
+        <div class="weAreCont team" v-if="test">
           <div class="weAreTitleText">team</div>
           <div class="teamEl">
             <div class="weAreText memberName">Filippo Tommasini:</div>
@@ -41,6 +53,7 @@ export default {
   data() {
     return {
       loading: true,
+      test: false,
     };
   },
   created() {
@@ -98,6 +111,7 @@ export default {
   background-size: cover;
   font-size: 50px;
   z-index: 9700;
+  padding-top: 40px;
 }
 .fotoOverlayWeAre {
   z-index: 9800;
@@ -110,6 +124,8 @@ export default {
 }
 .weAreCont {
   width: 60%;
+  padding: 0 10%;
+  text-align: center;
   height: auto;
   display: flex;
   justify-content: center;
@@ -129,7 +145,7 @@ export default {
   margin-bottom: 20px;
 }
 .weAreText {
-  font-size: 15px;
+  font-size: 20px;
 }
 .memberName {
   font-weight: bold;
@@ -147,11 +163,21 @@ export default {
     flex-direction: column;
     justify-content: space-around;
   }
+  .weAreCont {
+    width: 100%;
+    padding: 0 3%;
+  }
+  .weAreText {
+    font-size: 10px;
+  }
 }
 // ##
 @media (max-width: 600px) {
   .weAreContBkg {
     font-size: 15px;
+  }
+  .weAreContBkg {
+    padding-top: 80px;
   }
 }
 </style>

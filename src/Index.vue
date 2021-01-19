@@ -219,8 +219,13 @@
         <div class="mFooter" v-if="notHome">
           <div class="fBody">
             <div class="fbCol">
-              <div class="">logo</div>
-              <div class="">Metamorphosi 2020</div>
+              <div class="metaFooter">
+                <img
+                  class="logoImgFooter"
+                  :src="`https://endorphinoutdoor.com/wp-content/uploads/2021/01/Senza-titolo-1-Recuperato-e1611066754719.png`"
+                />
+              </div>
+              <div class="metaFooter">Metamorphosi 2020</div>
             </div>
 
             <div class="fbCol">
@@ -425,6 +430,7 @@ export default {
       text-decoration: none !important;
     }
   }
+
   .mCont {
     justify-content: flex-start;
     font-weight: bold;
@@ -502,6 +508,14 @@ export default {
     border-bottom: 2px solid white;
   }
 }
+.logoImgFooter {
+  width: 80px;
+}
+.metaFooter {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+}
 // ##
 @media (max-width: 1050px) {
   .mTop {
@@ -548,6 +562,11 @@ export default {
 }
 // ##
 @media (max-width: 400px) {
+  .mLogo {
+    .logoImg {
+      width: 100px !important;
+    }
+  }
   .mFooter {
     height: 300px;
   }
