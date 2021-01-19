@@ -475,13 +475,16 @@ export default {
 // ##
 @media (max-width: 950px) {
   .wFi {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  .imgTitle {
+    font-size: 18px;
   }
 }
 // ##
 @media (max-width: 650px) {
   .work {
-    height: 40vh;
+    height: 70vh;
   }
   .wOverl {
     display: none !important;
@@ -503,14 +506,14 @@ export default {
     top: 80%;
     right: 8%;
     text-align: right;
-    font-size: 16px;
+    font-size: 14px;
     color: white;
   }
 }
 // ##
 @media (max-width: 400px) {
   .work {
-    height: 40vh;
+    height: 60vh;
   }
 }
 </style>

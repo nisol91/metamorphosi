@@ -561,10 +561,18 @@ export default {
   }
 }
 // ##
-@media (max-width: 400px) {
+@media (max-width: 600px) {
   .mLogo {
     .logoImg {
       width: 100px !important;
+    }
+  }
+}
+// ##
+@media (max-width: 400px) {
+  .mLogo {
+    .logoImg {
+      width: 80px !important;
     }
   }
   .mFooter {

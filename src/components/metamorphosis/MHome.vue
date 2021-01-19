@@ -480,7 +480,7 @@ export default {
     transition: 1s;
   }
   .mTripCenterHover {
-    background: white;
+    background: rgba(255, 255, 255, 0);
     transition: 1s;
     width: 60vw !important;
     position: relative;

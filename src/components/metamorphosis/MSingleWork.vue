@@ -1,6 +1,6 @@
 <template>
   <div class="wBox">
-    <div v-if="!work" class="">
+    <div v-if="!work" class="loaderBox">
       <q-circular-progress
         indeterminate
         size="75px"
@@ -10,6 +10,7 @@
         class="q-ma-md"
       />
     </div>
+
     <div
       class="headerMediaWorksBox"
       v-if="work && work.featured_image_src && !work.categories.includes(47)"
@@ -30,7 +31,15 @@
         </template>
       </v-img>
     </div>
-    <div class="singleWork" :class="[{ safariWork: isSafari }]">
+    <div
+      class="singleWork"
+      :class="[
+        {
+          safariWork: isSafari,
+          morePaddingTop: work && work.categories.includes(47),
+        },
+      ]"
+    >
       <div v-if="work" v-html="work.content.rendered"></div>
     </div>
     <div class="postFooter relWorks">
@@ -165,6 +174,14 @@ export default {
 .headerMediaWorksBox {
   height: 130vh !important;
 }
+.loaderBox {
+  width: 100%;
+  height: 100vh !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .headerMediaWorks {
   position: absolute;
   top: -100px;
@@ -187,6 +204,9 @@ export default {
   min-height: 80vh;
   width: 100%;
   padding: 20px 10vw;
+}
+.morePaddingTop {
+  padding-top: 120px !important;
 }
 .safariWork {
   .wp-block-video {
@@ -246,8 +266,12 @@ export default {
   .singleWork {
     padding: 20px 0vw;
   }
+
   .wBox {
     padding: 10px 3px;
+  }
+  .morePaddingTop {
+    padding-top: 120px !important;
   }
 }
 // ##
@@ -282,6 +306,9 @@ export default {
 @media (min-width: 1800px) {
   .singleWork {
     padding: 20px 31vw;
+  }
+  .morePaddingTop {
+    padding-top: 120px !important;
   }
 }
 // ##
