@@ -10,7 +10,10 @@
         class="q-ma-md"
       />
     </div>
-    <div class="headerMediaWorksBox" v-if="work && work.featured_image_src">
+    <div
+      class="headerMediaWorksBox"
+      v-if="work && work.featured_image_src && !work.categories.includes(47)"
+    >
       <v-img
         v-if="work && work.featured_image_src"
         :src="work.featured_image_src"
@@ -88,6 +91,7 @@ export default {
     }
     await this.getWork();
     await this.getRelatedWorks();
+    console.log(this.work);
 
     this.url = process.env.VUE_APP_URL + this.$route.fullPath;
     setTimeout(() => {

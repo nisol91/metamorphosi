@@ -25,6 +25,7 @@
         :class="[
           {
             catSelectedWorks: 'photo_video' == catSelected,
+            wFiSmaller: workCategorySelected,
           },
         ]"
         @click="filterTax(48, 'categories', 'photo_video')"
@@ -46,6 +47,7 @@
         :class="[
           {
             catSelectedWorks: 'dev' == catSelected,
+            wFiSmaller: workCategorySelected,
           },
         ]"
         @click="filterTax(47, 'categories', 'dev')"
@@ -67,6 +69,7 @@
         :class="[
           {
             catSelectedWorks: 'graphics' == catSelected,
+            wFiSmaller: workCategorySelected,
           },
         ]"
         @click="filterTax(49, 'categories', 'graphics')"
@@ -458,6 +461,9 @@ export default {
     transition: 1s;
   }
 }
+.wFiSmaller {
+  font-size: 20px !important;
+}
 .loaderWorks {
   margin-top: 30vh !important;
 }
@@ -465,6 +471,12 @@ export default {
   background: $primary-color;
   transition: 1s;
   padding: 3px;
+}
+// ##
+@media (max-width: 950px) {
+  .wFi {
+    font-size: 20px;
+  }
 }
 // ##
 @media (max-width: 650px) {

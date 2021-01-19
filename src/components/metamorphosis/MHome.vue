@@ -94,7 +94,7 @@
             v-if="img_sx && mTripSxHover"
             :src="img_sx"
             class="grey lighten-2 tripBackground"
-            :transition="fade"
+            :transition="`fade`"
           >
           </q-img>
           <div
@@ -126,6 +126,12 @@
             @mouseleave="mTripCenterHover = false"
             @click="pushAbout"
           >
+            <video class="homeVideo" autoplay muted loop id="myVideo">
+              <source
+                :src="`https://endorphinoutdoor.com/wp-content/uploads/2020/12/maglioncino2.mov`"
+                type="video/mp4"
+              />
+            </video>
             WE ARE
           </div>
           <div class="mLineBottom"></div>
@@ -148,7 +154,7 @@
             v-if="img_dx && mTripDxHover"
             :src="img_dx"
             class="grey lighten-2 tripBackground"
-            :transition="fade"
+            :transition="`fade`"
           >
           </q-img>
           <div
@@ -218,15 +224,13 @@ export default {
       ],
 
       backgrounds_dx_url: [
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_4.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_5.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/12/sx_6.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/luna-2-mod-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/wavesHunters-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/mare-monti-e-gabbiano-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/10/DSCF2935-scaled.jpg",
-        "https://endorphinoutdoor.com/wp-content/uploads/2020/06/WORDPRESSIMG-1.gif",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/Schermata-2020-09-28-alle-16.33.00.png",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/ThePill39_ENG_articolo-3.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2020/09/Schermata-2020-09-28-alle-16.37.39.png",
+        "https://endorphinoutdoor.com/wp-content/uploads/2021/01/DJI_0015-2.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2021/01/DSCF9374.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2021/01/drone_pradaccio-scaled.jpg",
+        "https://endorphinoutdoor.com/wp-content/uploads/2021/01/DSCF9315.jpg",
       ],
       backgrounds_sx: [],
       backgrounds_dx: [],
