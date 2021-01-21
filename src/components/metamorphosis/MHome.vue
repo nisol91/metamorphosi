@@ -180,25 +180,25 @@
 
       <div class="mTripartitionMobile">
         <div
-          class="mTripMobile relative-position"
+          class="mTripMobile relative-position slide-in-left_1"
           @click="pushAboutM"
           v-ripple="{ early: true, color: 'grey' }"
         >
-          WE ARE
+          <div>WE ARE</div>
         </div>
         <div
-          class="mTripMobile relative-position"
+          class="mTripMobile relative-position slide-in-left_2"
           @click="pushContentsM"
           v-ripple="{ early: true, color: 'grey' }"
         >
-          WE DO
+          <div>WE DO</div>
         </div>
         <div
-          class="mTripMobile relative-position"
+          class="mTripMobile relative-position slide-in-left_3"
           @click="pushBlogM"
           v-ripple="{ early: true, color: 'grey' }"
         >
-          WE TELL
+          <div>WE TELL</div>
         </div>
       </div>
     </div>
@@ -371,6 +371,21 @@ export default {
 };
 </script>
 <style lang="scss">
+.slide-in-left_1 {
+  -webkit-animation: slide-in-left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.slide-in-left_2 {
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.slide-in-left_3 {
+  -webkit-animation: slide-in-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
 .splashText {
   color: white;
   font-size: 30px;
