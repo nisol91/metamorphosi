@@ -372,19 +372,19 @@ export default {
 </script>
 <style lang="scss">
 .slide-in-left_1 {
-  -webkit-animation: slide-in-left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  animation: slide-in-left 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-.slide-in-left_2 {
-  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-.slide-in-left_3 {
   -webkit-animation: slide-in-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
   animation: slide-in-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.slide-in-left_2 {
+  -webkit-animation: slide-in-left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.slide-in-left_3 {
+  -webkit-animation: slide-in-left 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .splashText {
   color: white;
