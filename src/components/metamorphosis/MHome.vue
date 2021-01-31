@@ -308,7 +308,7 @@ export default {
     setSplash() {
       setTimeout(() => {
         this.splash = false;
-      }, 4000);
+      }, 2000);
     },
     preloadImgs() {
       for (const url of this.backgrounds_dx_url) {

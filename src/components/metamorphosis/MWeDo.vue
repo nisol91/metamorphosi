@@ -116,7 +116,7 @@
       :navigationPrevLabel="'◀'"
       :paginationSize="25"
       :paginationPadding="5"
-      :paginationActiveColor="'#0F4F99'"
+      :paginationActiveColor="'#323238'"
       v-if="workCategorySelected"
     >
       <slide
