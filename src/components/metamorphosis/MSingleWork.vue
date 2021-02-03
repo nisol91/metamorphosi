@@ -172,7 +172,7 @@ export default {
 <style lang="scss">
 // molte regole del single work sono in comune con il blog post
 .headerMediaWorksBox {
-  height: 130vh !important;
+  height: 120vh !important;
 }
 .loaderBox {
   width: 100%;
@@ -292,7 +292,7 @@ export default {
 // ##
 @media (min-height: 1000px) {
   .headerMediaWorksBox {
-    height: 130vh !important;
+    height: 120vh !important;
   }
   .headerMediaWorks {
     position: absolute;
