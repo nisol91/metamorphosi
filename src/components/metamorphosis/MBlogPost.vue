@@ -555,6 +555,9 @@ export default {
     height: auto;
   }
 }
+.wpMarginAll {
+  margin: 5px !important;
+}
 .wpCustomMarginDxImage {
   margin-right: 5px !important;
 }

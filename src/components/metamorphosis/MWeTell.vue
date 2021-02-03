@@ -18,7 +18,7 @@
           @keyup="searchEvent(searchValue)"
         />
       </div>
-
+      <div v-if="blogPostsFiltered">Coming soon....</div>
       <div
         class="blogPost"
         v-for="(post, i) in blogPostsFiltered"

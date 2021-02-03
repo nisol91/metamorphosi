@@ -18,7 +18,7 @@
         }"
       >
         <div class="fotoOverlay"></div>
-        <div class="contactText">metamorphosistudio@gmail.com</div>
+        <div class="contactText">metamorphosistudio.main@gmail.com</div>
       </div>
     </div>
   </div>

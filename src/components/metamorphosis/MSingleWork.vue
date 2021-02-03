@@ -171,8 +171,11 @@ export default {
 </script>
 <style lang="scss">
 // molte regole del single work sono in comune con il blog post
+iframe {
+  max-width: 100% !important;
+}
 .headerMediaWorksBox {
-  height: 120vh !important;
+  height: 125vh !important;
 }
 .loaderBox {
   width: 100%;
@@ -292,7 +295,7 @@ export default {
 // ##
 @media (min-height: 1000px) {
   .headerMediaWorksBox {
-    height: 120vh !important;
+    height: 125vh !important;
   }
   .headerMediaWorks {
     position: absolute;
