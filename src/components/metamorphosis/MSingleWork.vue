@@ -306,7 +306,7 @@ iframe {
   }
 }
 // ##
-@media (min-width: 1800px) {
+@media (min-width: 1500px) {
   .singleWork {
     padding: 20px 31vw;
   }

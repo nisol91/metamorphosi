@@ -43,7 +43,7 @@
         <div class="wFiTitle">PHOTO/VIDEO</div>
       </div>
       <div
-        class="wFi"
+        class="wFi wFiDevCenterCorrectionWidth"
         :class="[
           {
             catSelectedWorks: 'dev' == catSelected,
@@ -395,11 +395,12 @@ export default {
 .imgTitle {
   transition: 1s;
   position: absolute;
-  top: 80%;
-  right: 12%;
+  top: 50%;
   text-align: right;
   font-size: 24px;
   color: white;
+  width: 100%;
+  text-align: center;
 }
 .wFilters {
   width: 100%;
@@ -414,7 +415,7 @@ export default {
 
     opacity: 0;
     position: absolute;
-    width: 33.3%;
+    width: 36.7%;
     height: 100%;
     // background: rgba(255, 255, 255, 0.5);
     background: rgba(189, 189, 189, 0.5);
@@ -428,6 +429,7 @@ export default {
   .wOverlShowCenter {
     opacity: 1;
     transition: 0.5s;
+    width: 30.1%;
   }
   .wOverlShowDx {
     opacity: 1;
@@ -442,9 +444,9 @@ export default {
   .wFiTitle {
     z-index: 9200;
   }
-  width: calc(100vw / 3);
+  width: 35vw;
   height: 100%;
-  border: 1px solid rgba(223, 223, 223, 0.63);
+  border: 0.1px solid rgba(139, 139, 139, 0.63);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -460,6 +462,9 @@ export default {
     background: rgba(182, 182, 182, 0.521);
     transition: 1s;
   }
+}
+.wFiDevCenterCorrectionWidth {
+  width: 30.1vw;
 }
 .wFiSmaller {
   font-size: 20px !important;
