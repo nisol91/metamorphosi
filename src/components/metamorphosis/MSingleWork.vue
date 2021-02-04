@@ -94,13 +94,13 @@ export default {
     };
   },
   async created() {
-    console.log(Platform.is);
+    // console.log(Platform.is);
     if (Platform.is.name === "safari") {
       this.isSafari = true;
     }
     await this.getWork();
     await this.getRelatedWorks();
-    console.log(this.work);
+    // console.log(this.work);
 
     this.url = process.env.VUE_APP_URL + this.$route.fullPath;
     setTimeout(() => {

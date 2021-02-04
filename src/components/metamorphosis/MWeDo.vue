@@ -333,7 +333,7 @@ export default {
       menuEl: "menuEl",
     }),
     isMobile() {
-      console.log(window.innerHeight);
+      // console.log(window.innerHeight);
       if (window.innerWidth < 800) {
         return true;
       } else {

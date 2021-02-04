@@ -77,7 +77,7 @@ export default {
           `https://endorphinoutdoor.com/wp-json/customendpoint/v1/latest-posts/3`
         )
       ).data;
-      console.log(res);
+      // console.log(res);
     },
     async getBkg() {
       this.loading = false;

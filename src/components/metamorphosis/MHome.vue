@@ -248,7 +248,7 @@ export default {
   },
   created() {
     this.backImgs();
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
     this.$store.commit("isMetamorphosis", true);
     this.preloadImgs();
     this.$store.commit("selectEl", "mHome");

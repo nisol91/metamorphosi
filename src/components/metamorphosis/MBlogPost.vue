@@ -200,7 +200,7 @@ export default {
           post: this.post.id,
         }
       );
-      console.log(commentPost);
+      // console.log(commentPost);
     },
     async getComments() {
       var comments = (
@@ -208,7 +208,7 @@ export default {
           `https://endorphinoutdoor.com/wp-json/wp/v2/comments?post=${this.post.id}`
         )
       ).data;
-      console.log(comments);
+      // console.log(comments);
       this.comments = comments;
     },
     pushPost(id) {
@@ -230,7 +230,7 @@ export default {
           )
         ).data;
 
-        console.log(relatedPosts);
+        // console.log(relatedPosts);
         for (const [i, p] of relatedPosts.entries()) {
           if (p.id === this.post.id) {
             relatedPosts.splice(i, 1);

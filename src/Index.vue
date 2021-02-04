@@ -287,8 +287,8 @@ export default {
   },
   async created() {
     this.loaded = false;
-    console.log(process.env.NODE_ENV);
-    console.log(process.env.VUE_APP_DB_ENV);
+    // console.log(process.env.NODE_ENV);
+    // console.log(process.env.VUE_APP_DB_ENV);
 
     // carico l utente firebase dopo il refresh
     this.$store.dispatch("loadFirebaseUserAfterRefresh");
@@ -316,7 +316,7 @@ export default {
     },
     // menu
     selectEl(value) {
-      console.log("select el");
+      // console.log("select el");
       this.$store.commit("selectEl", value);
     },
     toggleMenu() {
@@ -331,9 +331,9 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(this.$route);
+      // console.log(this.$route);
       var value = this.$route.name;
-      console.log("select el");
+      // console.log("select el");
       var menu = this.menuEl;
       for (const el in menu) {
         if (menu[el].slug.includes(value)) {
