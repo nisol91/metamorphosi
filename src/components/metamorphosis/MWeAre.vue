@@ -19,22 +19,35 @@
         }"
       >
         <div class="weAreCont">
-          <div class="weAreTitleText">we are</div>
-          <div class="weAreText">
+          <div class="weAreTitleText slide-in-left_1">we are</div>
+          <div class="weAreText slide-in-left_2">
             <p>
               METAMORPHOSI si propone come una Digital Agency che offre servizi
               di:
             </p>
             <p>
               fotografia, riprese video, grafiche ad hoc per pagine social o
-              siti aziendali.
+              siti aziendali, sviluppo siti web, e-commerce, mobile app, SEO e
+              comunicazione
             </p>
-            <p>Sviluppo siti web, e-commerce e mobile app</p>
-            Per noi è fondamentale instaurare un rapporto di fiducia reciproca
-            con il cliente, capire e soddisfare qualsiasi sua esigenza.
+            <p>
+              L’obbiettivo è quello di curare il brand in tutte le sue parti,
+              con particolare attenzione alle esigenze del cliente moderno e una
+              scelta accurata nei collaboratori
+            </p>
+          </div>
+          <div class="cardBoxWeAre slide-in-left_3">
+            <div
+              class="cardWeAre"
+              v-for="(card, i) in cards"
+              :key="i + `_cards`"
+            >
+              <img class="weAreCardImg" :src="card.icon" alt="" />
+              <div>{{ card.name }}</div>
+            </div>
           </div>
         </div>
-        <div class="weAreCont team" v-if="test">
+        <div class="weAreCont team" v-if="weAreCont">
           <div class="weAreTitleText">team</div>
           <div class="teamEl">
             <div class="weAreText memberName">Filippo Tommasini:</div>
@@ -53,7 +66,34 @@ export default {
   data() {
     return {
       loading: true,
-      test: false,
+      weAreCont: false,
+      cards: [
+        {
+          name: "grafica",
+          icon:
+            "https://endorphinoutdoor.com/wp-content/uploads/2021/02/illustration-copia.png",
+        },
+        {
+          name: "sviluppo app",
+          icon:
+            "https://endorphinoutdoor.com/wp-content/uploads/2021/02/website-1.png",
+        },
+        {
+          name: "SEO",
+          icon:
+            "https://endorphinoutdoor.com/wp-content/uploads/2021/02/analysis-copia.png",
+        },
+        {
+          name: "foto",
+          icon:
+            "https://endorphinoutdoor.com/wp-content/uploads/2021/02/camera-copia.png",
+        },
+        {
+          name: "video",
+          icon:
+            "https://endorphinoutdoor.com/wp-content/uploads/2021/02/video-1.png",
+        },
+      ],
     };
   },
   created() {
@@ -88,8 +128,34 @@ export default {
 <style lang="scss">
 @import "../../sass/_variables.scss";
 .weAreBox {
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  background: $primary-background;
+}
+.cardBoxWeAre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20% 0;
+  width: 60vw;
+  .cardWeAre {
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(211, 211, 211);
+    background: rgb(59, 59, 59);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    height: 150px;
+    width: 350px;
+    font-size: 20px;
+  }
+  .weAreCardImg {
+    max-width: 50px;
+  }
 }
 .progressLoaderBkg {
   height: 100vh;
@@ -101,7 +167,7 @@ export default {
 .weAreContBkg {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100vh;
   position: relative;
   z-index: 8000;
@@ -111,7 +177,7 @@ export default {
   background-size: cover;
   font-size: 50px;
   z-index: 9700;
-  padding-top: 40px;
+  padding-top: 200px;
 }
 .fotoOverlayWeAre {
   z-index: 9800;
@@ -151,10 +217,12 @@ export default {
   font-weight: bold;
   margin-bottom: 10px;
 }
-.weAreBox {
-  min-height: 100vh;
-  width: 100%;
-  background: $primary-background;
+// ##
+@media (max-width: 1100px) {
+  .weAreBox,
+  .weAreContBkg {
+    height: 200vh;
+  }
 }
 // ##
 @media (max-width: 800px) {
@@ -177,7 +245,18 @@ export default {
     font-size: 15px;
   }
   .weAreContBkg {
-    padding-top: 80px;
+    padding-top: 200px;
+  }
+  .weAreBox,
+  .weAreContBkg {
+    height: 230vh;
+  }
+}
+// ##
+@media (min-height: 600px) and (max-height: 1100px) {
+  .weAreBox,
+  .weAreContBkg {
+    height: 200vh;
   }
 }
 </style>

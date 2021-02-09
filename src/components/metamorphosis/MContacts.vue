@@ -91,6 +91,7 @@ export default {
 }
 .contactText {
   z-index: 9900;
+  color: rgb(189, 189, 189);
 }
 .contBox {
   min-height: 100vh;
