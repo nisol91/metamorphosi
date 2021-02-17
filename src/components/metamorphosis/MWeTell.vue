@@ -173,7 +173,7 @@ export default {
       try {
         this.blogPosts = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories_exclude=46,47,48,49`
+            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?categories_exclude=46,47,48,49,57`
           )
         ).data;
         this.blogPostsFiltered = this.blogPosts;
@@ -189,7 +189,7 @@ export default {
 
           var categoriesRaw = (
             await axios.get(
-              `https://endorphinoutdoor.com/wp-json/wp/v2/categories?exclude=46,47,48,49`
+              `https://endorphinoutdoor.com/wp-json/wp/v2/categories?exclude=46,47,48,49,57`
             )
           ).data;
 
