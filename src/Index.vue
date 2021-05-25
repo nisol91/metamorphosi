@@ -24,7 +24,7 @@
             <div>
               <img
                 class="logoImg"
-                :src="`https://endorphinoutdoor.com/wp-content/uploads/2021/02/logo_meta_grigio.png`"
+                :src="`https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/logo_meta_grigio.png`"
               />
             </div>
           </router-link>
@@ -222,7 +222,7 @@
               <div class="metaFooter">
                 <img
                   class="logoImgFooter"
-                  :src="`https://endorphinoutdoor.com/wp-content/uploads/2021/01/Senza-titolo-1-Recuperato-e1611066754719.png`"
+                  :src="`https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/Senza-titolo-1-Recuperato-e1611066754719.png`"
                 />
               </div>
               <div class="metaFooter">Metamorphosi 2020</div>

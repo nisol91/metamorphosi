@@ -193,7 +193,7 @@ export default {
   methods: {
     async addComment() {
       var commentPost = await axios.post(
-        `https://endorphinoutdoor.com/wp-json/wp/v2/comments`,
+        `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/comments`,
         {
           author_name: this.form.name,
           content: this.form.content,
@@ -205,7 +205,7 @@ export default {
     async getComments() {
       var comments = (
         await axios.get(
-          `https://endorphinoutdoor.com/wp-json/wp/v2/comments?post=${this.post.id}`
+          `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/comments?post=${this.post.id}`
         )
       ).data;
       // console.log(comments);
@@ -226,7 +226,7 @@ export default {
       try {
         var relatedPosts = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/posts?cat=${this.categories[0].id}&categories_exclude=46,47,48,49&per_page=4`
+            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?cat=${this.categories[0].id}&categories_exclude=46,47,48,49&per_page=4`
           )
         ).data;
 
@@ -247,7 +247,7 @@ export default {
 
           // post["featured_media_url"] = (
           //   await axios.get(
-          //     `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
+          //     `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/media/${post.featured_media}`
           //   )
           // ).data.source_url;
           post.categories.forEach((postCat) => {
@@ -276,7 +276,7 @@ export default {
       try {
         var post = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/posts/${this.$route.params.id}`
+            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts/${this.$route.params.id}`
           )
         ).data;
         // console.log(this.coordinates);
@@ -290,12 +290,14 @@ export default {
 
           var categoriesRaw = (
             await axios.get(
-              `https://endorphinoutdoor.com/wp-json/wp/v2/categories`
+              `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/categories`
             )
           ).data;
 
           var tagsRaw = (
-            await axios.get(`https://endorphinoutdoor.com/wp-json/wp/v2/tags`)
+            await axios.get(
+              `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/tags`
+            )
           ).data;
 
           // ---- aggiungo i fields aggiuntivi ai post di wp
@@ -324,7 +326,7 @@ export default {
 
         post["featured_media_url"] = (
           await axios.get(
-            `https://endorphinoutdoor.com/wp-json/wp/v2/media/${post.featured_media}`
+            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/media/${post.featured_media}`
           )
         ).data.source_url;
         post.categories.forEach((postCat) => {
