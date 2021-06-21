@@ -275,7 +275,7 @@ export default {
       try {
         var works = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46`
+            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46`,
           )
         ).data;
         // await this.getOtherFields(works);
