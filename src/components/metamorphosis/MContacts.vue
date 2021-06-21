@@ -14,7 +14,7 @@
       <div
         class="mContBkg fade-in-home"
         :style="{
-          backgroundImage: `url(https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg)`,
+          backgroundImage: `url(https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/09/cavalli-corsa-scaled.jpg)`,
         }"
       >
         <div class="fotoOverlay"></div>
@@ -49,7 +49,7 @@ export default {
       // test of custom endpoint wp api
       var res = (
         await axios.get(
-          `https://endorphinoutdoor.com/endorphin/wp-json/customendpoint/v1/latest-posts/3`
+          `https://www.endorphinoutdoor.com/endorphin/wp-json/customendpoint/v1/latest-posts/3`
         )
       ).data;
       // console.log(res);

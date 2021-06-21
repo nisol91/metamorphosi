@@ -129,7 +129,7 @@
             id="myVideo"
           >
             <source
-              :src="`https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/metamorphosi.mov`"
+              :src="`https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/metamorphosi.mov`"
               type="video/mp4"
             />
           </video>
@@ -218,26 +218,26 @@ export default {
       pushedBlog: false,
       pushedContents: false,
       bkgImageUrl:
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/10/crinale_drone-1-scaled.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/10/crinale_drone-1-scaled.jpg",
       bkgImage: null,
       backgrounds_sx_url: [
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2016/03/DSCF8041_full-scaled.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2016/03/dega_hoka_1.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/09/kask_azione_2_sito.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/rino_rains_3.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2016/03/DSCF8041_full-scaled.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/vega_3.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/anello_1-scaled.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2016/03/DSCF8041_full-scaled.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2016/03/dega_hoka_1.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/09/kask_azione_2_sito.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/rino_rains_3.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2016/03/DSCF8041_full-scaled.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/vega_3.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/anello_1-scaled.jpg",
       ],
 
       backgrounds_dx_url: [
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DJI_0015-2.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9374.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/drone_pradaccio-scaled.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9315.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9355.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9473.jpg",
-        "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/drone_pradaccio-scaled.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DJI_0015-2.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9374.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/drone_pradaccio-scaled.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9315.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9355.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/DSCF9473.jpg",
+        "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/drone_pradaccio-scaled.jpg",
       ],
       backgrounds_sx: [],
       backgrounds_dx: [],

@@ -15,7 +15,7 @@
       <div
         class="weAreContBkg fade-in-home"
         :style="{
-          backgroundImage: `url(https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/montagne-morbide.jpg)`,
+          backgroundImage: `url(https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/montagne-morbide.jpg)`,
         }"
       >
         <div class="weAreCont">
@@ -71,27 +71,27 @@ export default {
         {
           name: "grafica",
           icon:
-            "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/illustration-copia.png",
+            "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/illustration-copia.png",
         },
         {
           name: "sviluppo app",
           icon:
-            "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/website-1.png",
+            "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/website-1.png",
         },
         {
           name: "SEO",
           icon:
-            "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/analysis-copia.png",
+            "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/analysis-copia.png",
         },
         {
           name: "foto",
           icon:
-            "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/camera-copia.png",
+            "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/camera-copia.png",
         },
         {
           name: "video",
           icon:
-            "https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/video-1.png",
+            "https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/02/video-1.png",
         },
       ],
     };
@@ -114,7 +114,7 @@ export default {
       // test of custom endpoint wp api
       var res = (
         await axios.get(
-          `https://endorphinoutdoor.com/endorphin/wp-json/customendpoint/v1/latest-posts/3`
+          `https://www.endorphinoutdoor.com/endorphin/wp-json/customendpoint/v1/latest-posts/3`
         )
       ).data;
       // console.log(res);

@@ -112,13 +112,13 @@ export default {
       try {
         var work = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts/${this.$route.params.id}`
+            `https://www.endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts/${this.$route.params.id}`
           )
         ).data;
         // add custom field
         var acf = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/acf/v3/posts/${work.id}`
+            `https://www.endorphinoutdoor.com/endorphin/wp-json/acf/v3/posts/${work.id}`
           )
         ).data.acf;
         work["acf"]["client_name"] = acf.client_name;
@@ -133,14 +133,14 @@ export default {
       try {
         var relatedWorks = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46&exclude=${this.work.id}&per_page=3`
+            `https://www.endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46&exclude=${this.work.id}&per_page=3`
           )
         ).data;
         // for (const work of relatedWorks) {
         //   if (work.featured_media !== 0) {
         //     work["featured_media_url"] = (
         //       await axios.get(
-        //         `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/media/${work.featured_media}`
+        //         `https://www.endorphinoutdoor.com/endorphin/wp-json/wp/v2/media/${work.featured_media}`
         //       )
         //     ).data.source_url;
         //   }

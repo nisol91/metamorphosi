@@ -30,7 +30,7 @@
         ]"
         @click="filterTax(48, 'categories', 'photo_video')"
         :style="{
-          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/09/wavesHunters2-scaled.jpg)`,
+          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/09/wavesHunters2-scaled.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }"
@@ -52,7 +52,7 @@
         ]"
         @click="filterTax(47, 'categories', 'dev')"
         :style="{
-          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/snowboarder_1.jpg)`,
+          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2020/12/snowboarder_1.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }"
@@ -74,7 +74,7 @@
         ]"
         @click="filterTax(49, 'categories', 'graphics')"
         :style="{
-          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/la-sportiva-copertina.jpg)`,
+          backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(https://www.endorphinoutdoor.com/endorphin/wp-content/uploads/2021/01/la-sportiva-copertina.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }"
@@ -275,7 +275,7 @@ export default {
       try {
         var works = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46`,
+            `https://www.endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46`,
           )
         ).data;
         // await this.getOtherFields(works);
@@ -292,14 +292,14 @@ export default {
         // if (work.featured_media !== 0) {
         //   work["featured_media_url"] = (
         //     await axios.get(
-        //       `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/media/${work.featured_media}`
+        //       `https://www.endorphinoutdoor.com/endorphin/wp-json/wp/v2/media/${work.featured_media}`
         //     )
         //   ).data.source_url;
         // }
         // add custom field
         // var acf = (
         //   await axios.get(
-        //     `https://endorphinoutdoor.com/endorphin/wp-json/acf/v3/posts/${work.id}`
+        //     `https://www.endorphinoutdoor.com/endorphin/wp-json/acf/v3/posts/${work.id}`
         //   )
         // ).data.acf;
         // work["acf"]["client_name"] = acf.client_name;
@@ -315,7 +315,7 @@ export default {
       try {
         var works = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?${type}=${tax}`
+            `https://www.endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?${type}=${tax}`
           )
         ).data;
         await this.getOtherFields(works);
