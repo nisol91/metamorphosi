@@ -271,14 +271,20 @@ export default {
       }, 2000);
     },
     async getWorks() {
+      console.log('prendo lavori');
       this.loaded = false;
       try {
         var works = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46`
+            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?categories=46`,
+            {
+              headers: {
+                'Access-Control-Allow-Origin': '*',
+              },
+            }
           )
         ).data;
-        await this.getOtherFields(works);
+        // await this.getOtherFields(works);
       } catch (error) {
         console.log(error);
       }
@@ -315,7 +321,12 @@ export default {
       try {
         var works = (
           await axios.get(
-            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?${type}=${tax}`
+            `https://endorphinoutdoor.com/endorphin/wp-json/wp/v2/posts?${type}=${tax}`,
+                 {
+              headers: {
+                'Access-Control-Allow-Origin': '*',
+              },
+            }
           )
         ).data;
         await this.getOtherFields(works);
